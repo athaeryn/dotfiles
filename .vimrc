@@ -1,3 +1,5 @@
+" Mostly stolen from Dan Menssen
+
 " FIRST, install pathogen via
 " mkdir -p ~/.vim/autoload ~/.vim/bundle
 " curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pathogen.vim
