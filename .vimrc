@@ -41,7 +41,7 @@
 " git clone https://github.com/tpope/vim-repeat.git ~/.vim/bundle/repeat
 
 " Surround plugin to add 'surrounding' as a vim context ('s') via
-" git clone https://github.com/tpope/vim-surround.vim !/.vim/bundle/surround
+" git clone https://github.com/tpope/vim-surround.git ~/.vim/bundle/surround
 
 " Syntastic syntax checker installed via
 " git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
