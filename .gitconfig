@@ -1,0 +1,6 @@
+[user]
+	name = Mike Anderson
+	email = athaeryn@me.com
+[alias]
+	st = status
+	ci = commit
