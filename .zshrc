@@ -60,7 +60,7 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/bin:/usr/local/sbin:/Users/mike/.rvm/gems/ruby-1.9.2-p320/bin:/Users/mike/.rvm/gems/ruby-1.9.2-p320@global/bin:/Users/mike/.rvm/rubies/ruby-1.9.2-p320/bin:/Users/mike/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/mike/bin
+export PATH=/usr/local/bin:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin
 
 function collapse_pwd {
     echo $(pwd | sed -e "s,^$HOME,~,")
@@ -85,6 +85,8 @@ function prowl {
     /usr/local/bin/growlnotify -p Emergency "Task" -m "Done"
 }
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM 
+
 PROMPT='
 %{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
 %{$reset_color%}$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
@@ -99,6 +101,6 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 export VISUAL=vim
 export EDITOR=vim
-export HOSTSPATH=/Users/mike/git/buildhosts
+export HOSTSPATH=~/git/buildhosts
 export LSCOLORS=gxfxcxdxbxegedabagacad
 #export JAVA_HOME=$(/usr/libexec/java_home)
