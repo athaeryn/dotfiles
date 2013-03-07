@@ -77,7 +77,10 @@ function virtualenv_info {
 }
 
 function tsk_status {
-    cat ~/bin/tsk/status.txt 
+    if [ -e ~/bin/tsk/status.txt ];
+    then
+        cat ~/bin/tsk/status.txt 
+    fi
 }
 
 function prowl {
