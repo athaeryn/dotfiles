@@ -49,6 +49,12 @@
 " Indent Guides installed via
 " git clone https://github.com/nathanaelkane/vim-indent-guides.git ~/.vim/bundle/vim-indent-guides
 
+" NERDTree installed via
+" git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
+
+" NERDCommenter installed via
+" git clone https://github.com/scrooloose/nerdcommenter.git ~/.vim/bundle/nerdcommenter
+
 " Need to create directory for undo files
 " mkdir -p ~/.vim/undo
 
@@ -349,6 +355,7 @@ autocmd BufReadPost *
     \   exe "normal g`\"" |
     \ endif
 
+" Display line numbers
 set number
 
 " For quick .vimrc hacking.
