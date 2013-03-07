@@ -87,8 +87,7 @@ function prowl {
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM 
 
-PROMPT='
-%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
+PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
 %{$reset_color%}$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
 
 RPROMPT='%{$fg[white]%}$(tsk_status)%{$reset_color%}'
