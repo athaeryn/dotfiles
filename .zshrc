@@ -83,6 +83,10 @@ function tsk_status {
     fi
 }
 
+function vd {
+    git diff $@ | view -
+}
+
 function prowl {
     $@
     /usr/local/bin/growlnotify -p Emergency "Task" -m "Done"
