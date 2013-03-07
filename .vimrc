@@ -1,60 +1,6 @@
 " Mostly stolen from Dan Menssen
 
-" FIRST, install pathogen via
-" mkdir -p ~/.vim/autoload ~/.vim/bundle
-" curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pathogen.vim
-
-" 'Solarized' Color Scheme installed via
-" git clone https://github.com/altercation/vim-colors-solarized.git ~/.vim/bundle/solarized
-" 
-" NOTE
-" Must also install solarized theme for Lion Terminal.app (or other terminal)
-" for this to look right at all when running vim from a terminal
-" https://github.com/tomislav/osx-lion-terminal.app-colors-solarized
-"
-" Other Solarized profiles can be found at
-" http://ethanschoonover.com/solarized
-
-" Markdown support installed via
-" git clone https://github.com/hallison/vim-markdown.git ~/.vim/bundle/markdown
-
-" CtrlP fuzzy file finder extension installed via
-" git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp
-
-" vim-commentary
-" git clone git://github.com/tpope/vim-commentary.git ~/.vim/bundle/vim-commentary
-
-" Ack extension
-" Install from macports via (or look up another method)
-" sudo port install p5-app-ack
-"
-" Then install vim extension via
-" git clone https://github.com/mileszs/ack.vim.git ~/.vim/bundle/ack
-
-" Define :Bclose to close a buffer without closing a window using
-" the first script on
-" http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
-" and placing it in
-" ~/.vim/bundle/bclose/plugin/bclose.vim
-
-" Repeat plugin to repeat plugin actions via
-" git clone https://github.com/tpope/vim-repeat.git ~/.vim/bundle/repeat
-
-" Surround plugin to add 'surrounding' as a vim context ('s') via
-" git clone https://github.com/tpope/vim-surround.git ~/.vim/bundle/surround
-
-" Syntastic syntax checker installed via
-" git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
-
-" Indent Guides installed via
-" git clone https://github.com/nathanaelkane/vim-indent-guides.git ~/.vim/bundle/vim-indent-guides
-
-" NERDTree installed via
-" git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
-
-" Need to create directory for undo files
-" mkdir -p ~/.vim/undo
-
+" Run the viminstall.sh script. Doo it.
 
 " CUSTOM CONFIGURATION
 
