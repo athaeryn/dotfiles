@@ -52,9 +52,6 @@
 " NERDTree installed via
 " git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 
-" NERDCommenter installed via
-" git clone https://github.com/scrooloose/nerdcommenter.git ~/.vim/bundle/nerdcommenter
-
 " Need to create directory for undo files
 " mkdir -p ~/.vim/undo
 
@@ -224,7 +221,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
 let g:ctrlp_max_files = 100000
 
 " CtrlP should ignore dot files
-let g:ctrlp_dotfiles = 0
+" let g:ctrlp_dotfiles = 0
 
 " CtrlP shouldn't remember the last input
 let g:ctrlp_persistent_input = 0
@@ -238,7 +235,7 @@ set wildignore+=*/app/cache/*
 set wildignore+=*/build/*
 
 " Enable syntastic error signs in the line number column
-let g:syntastic_enable_signs = 1
+" let g:syntastic_enable_signs = 1
 
 
 " Shrink inactive splits to 10 rows and 20 cols
@@ -389,8 +386,4 @@ vnoremap k gk
 
 map <leader>t :NERDTreeToggle<cr>
 
-function! Tsk()
-    return system('cat ~/bin/tsk/status.txt')
-endfunction
-
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P\ %{Tsk()}
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
