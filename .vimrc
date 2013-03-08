@@ -333,3 +333,8 @@ vnoremap k gk
 map <leader>t :NERDTreeToggle<cr>
 
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+nmap <silent> <C-n> :tabnext<CR>
+nmap <silent> <C-p> :tabprev<CR>
+imap <silent> <C-n> <esc><C-n> 
+imap <silent> <C-p> <esc><C-p> 
