@@ -17,6 +17,8 @@ alias tsk="ruby ~/bin/tsk.rb"
 alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 # Spelling helpers
 alias gerp="grep"
+#Sassfix (temporary, I hope...)
+alias sassfix="rvm use 1.9.3 && rvm use 2.0.0"
 
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
