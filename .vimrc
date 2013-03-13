@@ -209,7 +209,10 @@ nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 
 " Use leader-s to automatically enter search-and-replace when in visual
-vnoremap <leader>s :s/\v
+" vnoremap <leader>s :s/\v
+"
+" Sort! :D
+vnoremap <leader>s :sort
 
 " Clear highlighted search
 nnoremap <enter> :noh<cr>
@@ -338,3 +341,8 @@ nmap <silent> <C-n> :tabnext<CR>
 nmap <silent> <C-p> :tabprev<CR>
 imap <silent> <C-n> <esc><C-n> 
 imap <silent> <C-p> <esc><C-p> 
+
+" Gimme tab completion on .css-class-names and stuff
+set iskeyword+=-
+
+" 
