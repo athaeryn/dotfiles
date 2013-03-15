@@ -212,7 +212,7 @@ nnoremap <leader>y "+y
 " vnoremap <leader>s :s/\v
 "
 " Sort! :D
-vnoremap <leader>s :sort
+vnoremap <leader>s :sort<cr>
 
 " Clear highlighted search
 nnoremap <enter> :noh<cr>
