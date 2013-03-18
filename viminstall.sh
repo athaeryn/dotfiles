@@ -15,8 +15,8 @@ git clone https://github.com/nathanaelkane/vim-indent-guides.git
 git clone https://github.com/scrooloose/nerdcommenter.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/scrooloose/syntastic.git
-git clone https://github.com/tpope/vim-ragtag.git 
-git clone https://github.com/tpope/vim-repeat.git 
+git clone https://github.com/tpope/vim-ragtag.git
+git clone https://github.com/tpope/vim-repeat.git
 git clone https://github.com/tpope/vim-surround.git
 mkdir -p ~/.vim/undo
 mkdir -p ~/.vim/backup
