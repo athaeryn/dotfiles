@@ -310,8 +310,10 @@ noremap \v :vsplit ~/.vimrc<cr>
 " jj leaves insert mode
 inoremap jj <ESC>
 
-" set list
-" set listchars=tab:>.,trail:.,extends:#,nbsp:.
+set list
+" set listchars=tab:\ \ ,trail:.
+set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
+nnoremap <leader>l :setl nolist!<cr>
 
 vnoremap < <gv
 vnoremap > >v
@@ -344,5 +346,3 @@ imap <silent> <C-p> <esc><C-p>
 
 " Gimme tab completion on .css-class-names and stuff
 set iskeyword+=-
-
-" 
