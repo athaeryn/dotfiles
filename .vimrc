@@ -310,7 +310,7 @@ noremap \v :vsplit ~/.vimrc<cr>
 " jj leaves insert mode
 inoremap jj <ESC>
 
-set list
+set nolist
 " set listchars=tab:\ \ ,trail:.
 set listchars=nbsp:¬,eol:¶,tab:>-,extends:»,precedes:«,trail:•
 nnoremap <leader>l :setl nolist!<cr>
