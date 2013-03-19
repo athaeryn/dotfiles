@@ -346,3 +346,6 @@ imap <silent> <C-p> <esc><C-p>
 
 " Gimme tab completion on .css-class-names and stuff
 set iskeyword+=-
+
+" For editing crontab
+au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
