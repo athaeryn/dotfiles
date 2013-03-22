@@ -17,6 +17,8 @@ alias tsk="ruby ~/bin/tsk.rb"
 alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 # Spelling helpers
 alias gerp="grep"
+# always load gource config ~/.gource
+alias gource="gource --load-config ~/.gourcerc"
 
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
