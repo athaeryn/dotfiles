@@ -17,9 +17,6 @@ alias tsk="ruby ~/bin/tsk.rb"
 alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 # Spelling helpers
 alias gerp="grep"
-# always load gource config ~/.gource
-alias gource="gource --load-config ~/.gourcerc"
-
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
@@ -81,3 +78,13 @@ export HOSTSPATH=~/git/buildhosts
 export LSCOLORS=gxfxcxdxbxegedabagacad
 #export JAVA_HOME=$(/usr/libexec/java_home)
 export NODE_PATH=/usr/local/lib/node
+
+# Gource-related #
+function dimensions_for_gource {
+    ruby -e 'puts `system_profiler SPDisplaysDataType | grep Resolution`.lines[0][22..-1].tr(" ", "")'
+}
+# always load gource config ~/.gource
+alias gource="gource --load-config ~/.gourcerc"
+_D=$(dimensions_for_gource)
+alias gourcefull="gource --load-config ~/.gourcerc -f -$_D"
+
