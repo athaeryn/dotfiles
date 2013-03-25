@@ -349,3 +349,7 @@ set iskeyword+=-
 
 " For editing crontab
 au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+
+" Horizontal scrolling
+map <C-L> 20zl
+map <C-H> 20zh
