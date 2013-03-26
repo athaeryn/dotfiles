@@ -312,8 +312,10 @@ inoremap jj <ESC>
 
 set nolist
 " set listchars=tab:\ \ ,trail:.
-set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:•
+set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:◊
 nnoremap <leader>l :setl nolist!<cr>
+
+:highlight SpecialKey ctermfg=red ctermbg=white
 
 vnoremap < <gv
 vnoremap > >v
