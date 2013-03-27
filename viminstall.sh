@@ -8,7 +8,7 @@ cd ~/.vim/bundle
 git clone git://github.com/tpope/vim-commentary.git
 git clone git@github.com:Raimondi/delimitMate.git
 git clone https://github.com/altercation/vim-colors-solarized.git
-git clone https://github.com/hallison/vim-markdown.git
+git clone https://github.com/athaeryn/vim-markdown.git
 git clone https://github.com/kien/ctrlp.vim.git
 git clone https://github.com/mileszs/ack.vim.git
 git clone https://github.com/nathanaelkane/vim-indent-guides.git
