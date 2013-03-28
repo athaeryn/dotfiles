@@ -355,3 +355,6 @@ au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 " Horizontal scrolling
 " map <C-L> 20zl
 " map <C-H> 20zh
+
+" Convert Markdown to HTML
+nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
