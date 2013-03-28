@@ -11,7 +11,8 @@
 
     # Basic little helpers 
     ci = commit
-    st = status
+    st = status -s
+    stl = status
     br = branch 
     ci = commit
     cl = clone
@@ -23,13 +24,14 @@
     diff = diff --word-diff
     ls = ls-files
 
+    mrnf = merge --no-ff
+
     r = reset
     r1 = reset HEAD^
     r2 = reset HEAD^^
     rh = reset --hard
     rh1 = reset HEAD^ --hard
     rh2 = reset HEAD^^ --hard
-    st = status -s
 
     # Handy: search
     f = "!git ls-files | grep -i"
