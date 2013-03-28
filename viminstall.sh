@@ -5,7 +5,9 @@ curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pa
 mkdir -p ~/.vim/bundle/bclose/plugin
 cp bclose.vim ~/.vim/bundle/bclose/plugin/bclose.vim
 cd ~/.vim/bundle
+git clone git://github.com/tpope/vim-characterize.git
 git clone git://github.com/tpope/vim-commentary.git
+git clone git://github.com/tpope/vim-unimpaired.git
 git clone git@github.com:Raimondi/delimitMate.git
 git clone https://github.com/altercation/vim-colors-solarized.git
 git clone https://github.com/athaeryn/vim-markdown.git
