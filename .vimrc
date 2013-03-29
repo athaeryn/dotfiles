@@ -234,7 +234,7 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
 " Shortcut to close a buffer without closing the window
-nnoremap <silent> <leader>d :Bclose<cr> 
+nnoremap <silent> <leader>d :Bclose<cr>
 
 " Set CtrlP map to ctrl-f because it's easier to hit
 let g:ctrlp_map = '<c-f>'
@@ -343,8 +343,8 @@ set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
 nmap <silent> <C-n> :tabnext<CR>
 nmap <silent> <C-p> :tabprev<CR>
-imap <silent> <C-n> <esc><C-n> 
-imap <silent> <C-p> <esc><C-p> 
+imap <silent> <C-n> <esc><C-n>
+imap <silent> <C-p> <esc><C-p>
 
 " Gimme tab completion on .css-class-names and stuff
 set iskeyword+=-
@@ -358,3 +358,8 @@ au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
 " Convert Markdown to HTML
 nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
+
+" Set fold method to indent
+set foldmethod=indent
+" Don't fold by default
+set nofoldenable
