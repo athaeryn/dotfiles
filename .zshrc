@@ -13,7 +13,6 @@ ZSH_THEME="robbyrussell"
 alias zshconfig="vim ~/.zshrc ; source ~/.zshrc"
 alias datsass="sass --watch main.scss:main.css"
 alias lgrep="l | grep"
-alias tsk="ruby ~/bin/tsk.rb"
 alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 # Spelling helpers
 alias gerp="grep"
