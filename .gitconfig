@@ -5,15 +5,15 @@
     # Many of these stolen from here: http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/
     # So look there for documentation
     # This also could use some cleaning up...
-    
-    # Spit out this list 
+
+    # Spit out this list
     la = !git config -l | grep alias | cut -c 7-
 
-    # Basic little helpers 
+    # Basic little helpers
     ci = commit
     st = status -s
     stl = status
-    br = branch 
+    br = branch
     ci = commit
     cl = clone
     co = checkout
@@ -64,10 +64,9 @@
     lg1 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     lg2 = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(bold white)— %an%C(reset)' --abbrev-commit
     lg = !"git lg1"
-    
 
 [push]
-    default = tracking 
+    default = tracking
 [core]
     autocrlf = input
 [color]
