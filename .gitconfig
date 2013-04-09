@@ -19,6 +19,7 @@
     co = checkout
     co = checkout
     cp = cherry-pick
+    d = diff
     dc = diff --cached
     dlc = diff --cached HEAD^
     diff = diff --word-diff
