@@ -1,6 +1,7 @@
-" Mostly stolen from Dan Menssen
+" Mostly stolen from Dan Menssen.
+" Some things from http://amix.dk/vim/vimrc.html
 
-" Run the viminstall.sh script. Doo it.
+" Run the viminstall.rb script. Doo it.
 
 " CUSTOM CONFIGURATION
 
@@ -42,6 +43,8 @@ command! FixColors call FixColors()
 
 " Colors, solarized theme.  See above for note.
 syntax enable
+set term=xterm-256color
+let g:solarized_termtrans = 1
 set background=dark
 colorscheme solarized
 
@@ -80,6 +83,7 @@ set scrolloff=5
 
 " Turn on auto-indentation, for better or worse
 set autoindent
+set smartindent
 
 " Do not beep.
 set visualbell
@@ -198,6 +202,10 @@ set winheight=999
 
 " Change the leader key to comma
 let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
 
 " Open a file in the same directory as the current file
 " (Stolen from Gary Bernhardt)
@@ -208,9 +216,6 @@ map <leader>e :edit %%
 nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 
-" Use leader-s to automatically enter search-and-replace when in visual
-" vnoremap <leader>s :s/\v
-"
 " Sort! :D
 vnoremap <leader>s :sort<cr>
 
@@ -337,24 +342,34 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-map <leader>t :NERDTreeToggle<cr>
+" Toggle NERDTree
+nnoremap <leader>t :NERDTreeToggle<cr>
 
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" Colors for status line (User1: filename, User2: flags)
+hi User1  ctermbg=black  ctermfg=white  guibg=black  guifg=white
+hi User2  ctermbg=black  ctermfg=red    guibg=black  guifg=red
 
-nmap <silent> <C-n> :tabnext<CR>
-nmap <silent> <C-p> :tabprev<CR>
-imap <silent> <C-n> <esc><C-n>
-imap <silent> <C-p> <esc><C-p>
+" STATUSLINE
+set statusline=                              " Clear the statusline
+set statusline+=[%n]\                        " Buffer number
+set statusline+=%{HasPaste()}                " Are we in paste mode?
+set statusline+=%1*\                         " User1 highlight
+set statusline+=%<%f\                        " File name
+set statusline+=%2*                          " Back to default highlight
+set statusline+=%h%m%r\                      " Flags (help, modified, read-only)
+set statusline+=%*\                          " Back to default highlight
+set statusline+=[%{strlen(&ft)?&ft:'none'},  " Filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " Encoding
+set statusline+=%{&fileformat}]\             " File format
+set statusline+=%=                           " Right align the rest
+set statusline+=%-14.(%l,%c%V%)              " Cursor line, column
+set statusline+=\ %P                         " Percent through file
 
 " Gimme tab completion on .css-class-names and stuff
 set iskeyword+=-
 
 " For editing crontab
 au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
-
-" Horizontal scrolling
-" map <C-L> 20zl
-" map <C-H> 20zh
 
 " Convert Markdown to HTML
 nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
@@ -366,3 +381,31 @@ set nofoldenable
 
 " Insert spaces in Normal mode
 :nnoremap <space> i<space><esc>l
+
+" Don't redraw while executing macros.
+set lazyredraw
+
+" Mappings for working with tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+"Tab exit"... Easier to hit than <leader>tc
+map <leader>te :tabclose<cr>
+" Tab navigation
+nmap <silent> <C-n> :tabnext<CR>
+nmap <silent> <C-p> :tabprev<CR>
+imap <silent> <C-n> <esc><C-n>
+imap <silent> <C-p> <esc><C-p>
+
+" Toggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Toggle paste mode
+map <leader>pp :set paste!<cr>
+
+" Check is paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE! '
+    en
+    return ''
+endfunction
