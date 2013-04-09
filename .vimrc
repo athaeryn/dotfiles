@@ -346,17 +346,18 @@ vnoremap k gk
 nnoremap <leader>t :NERDTreeToggle<cr>
 
 " Colors for status line (User1: filename, User2: flags)
-hi User1  ctermbg=black  ctermfg=white  guibg=black  guifg=white
+hi User1  ctermbg=grey   ctermfg=black   guibg=black  guifg=white
 hi User2  ctermbg=black  ctermfg=red    guibg=black  guifg=red
 
 " STATUSLINE
 set statusline=                              " Clear the statusline
 set statusline+=[%n]\                        " Buffer number
-set statusline+=%{HasPaste()}                " Are we in paste mode?
+set statusline+=%2*                          " Back to default highlight
+set statusline+=\ %{HasPaste()}\             " Are we in paste mode?
 set statusline+=%1*\                         " User1 highlight
 set statusline+=%<%f\                        " File name
 set statusline+=%2*                          " Back to default highlight
-set statusline+=%h%m%r\                      " Flags (help, modified, read-only)
+set statusline+=\ %h%m%r\                    " Flags (help, modified, read-only)
 set statusline+=%*\                          " Back to default highlight
 set statusline+=[%{strlen(&ft)?&ft:'none'},  " Filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " Encoding
@@ -405,7 +406,17 @@ map <leader>pp :set paste!<cr>
 " Check is paste mode is enabled
 function! HasPaste()
     if &paste
-        return 'PASTE MODE! '
+        return 'PASTE MODE!'
     en
     return ''
+endfunction
+
+" Map F12 to revert (like Photoshop)
+map <f12> :call Revert()<cr>
+
+function Revert ()
+    if confirm("Revert?", "&Yes\n&No", 2) == 1
+        edit!
+    endif
+    return
 endfunction
