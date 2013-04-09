@@ -363,3 +363,6 @@ nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
 set foldmethod=indent
 " Don't fold by default
 set nofoldenable
+
+" Insert spaces in Normal mode
+:nnoremap <space> i<space><esc>l
