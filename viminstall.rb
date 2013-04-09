@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
 plugins = {
+    "NrrwRgn" => "git@github.com:chrisbra/NrrwRgn.git",
     "ack.vim" => "https://github.com/mileszs/ack.vim.git",
     "ctrlp.vim" => "https://github.com/kien/ctrlp.vim.git",
     "delimitMate" => "git@github.com:Raimondi/delimitMate.git",
     "nerdcommenter" => "https://github.com/scrooloose/nerdcommenter.git",
     "nerdtree" => "https://github.com/scrooloose/nerdtree.git",
     "syntastic" => "https://github.com/scrooloose/syntastic.git",
+    "tabular" => "git://github.com/godlygeek/tabular.git",
     "vim-characterize" => "git://github.com/tpope/vim-characterize.git",
     "vim-colors-solarized" => "https://github.com/altercation/vim-colors-solarized.git",
     "vim-commentary" => "git://github.com/tpope/vim-commentary.git",
