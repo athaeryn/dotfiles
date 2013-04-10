@@ -166,7 +166,7 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
 let g:ctrlp_max_files = 100000
 
 " CtrlP should ignore dot files
-" let g:ctrlp_dotfiles = 0
+let g:ctrlp_dotfiles = 1
 
 " CtrlP shouldn't remember the last input
 let g:ctrlp_persistent_input = 0
