@@ -11,11 +11,6 @@ set shell=zsh
 " Disable silly vi-compatibility
 set nocompatible
 
-" Turn off the MacVim toolbar
-if has("gui_running")
-    set guioptions=-t
-endif
-
 " Enable filetype plugins
 filetype plugin indent on
 
@@ -77,7 +72,7 @@ set hidden
 " All other encodings are bad
 set encoding=utf-8
 
-" Force showing three extra lines above and below cursor (so you're never
+" Force showing five extra lines above and below cursor (so you're never
 " typing on the last line of the window)
 set scrolloff=5
 
@@ -111,7 +106,7 @@ set showcmd
 set wildmenu
 set wildmode=longest,list
 
-" Write a temporary backup file before trying to save a file.  I think this is
+" Write a temporary backup file before trying to save a file. I think this is
 " the default, but anyway
 set writebackup
 
@@ -342,20 +337,16 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" Toggle NERDTree
-nnoremap <leader>t :NERDTreeToggle<cr>
-
 " Colors for status line (User1: filename, User2: flags)
-hi StatusLine ctermbg=0 ctermfg=11
-hi User1  ctermbg=14   ctermfg=8
-hi User2  ctermbg=0  ctermfg=1
-"hi User2  ctermbg=black  ctermfg=red    guibg=black  guifg=red
+hi StatusLine   ctermbg=8    ctermfg=12
+hi User1        ctermbg=14   ctermfg=8
+hi User2        ctermbg=0    ctermfg=1
 
 " STATUSLINE
 set statusline=                              " Clear the statusline
 set statusline+=[%n]                         " Buffer number
 set statusline+=%2*                          " Back to default highlight
-set statusline+=%{HasPaste()}                " Are we in paste mode?
+set statusline+=\ %(%{HasPaste()}\ %)        " Are we in paste mode?
 set statusline+=%1*                          " User1 highlight
 set statusline+=\ %<%f\                      " File name
 set statusline+=%2*                          " Back to default highlight
@@ -399,18 +390,13 @@ nmap <silent> <C-p> :tabprev<CR>
 imap <silent> <C-n> <esc><C-n>
 imap <silent> <C-p> <esc><C-p>
 
-" Toggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Toggle paste mode
-map <leader>pp :set paste!<cr>
 
 " Check is paste mode is enabled
 function! HasPaste()
     if &paste
-        return ' PASTE MODE! '
+        return '[PASTE MODE]'
     en
-    return ' '
+    return ''
 endfunction
 
 " Map F12 to revert (like Photoshop)
@@ -422,3 +408,15 @@ function! Revert ()
     endif
     return
 endfunction
+
+
+"""" TOGGLES """"
+
+" Toggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Toggle paste mode
+map <leader>pp :set paste!<cr>
+
+" Toggle NERDTree
+nnoremap <leader>t :NERDTreeToggle<cr>
