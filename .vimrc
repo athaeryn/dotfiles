@@ -183,6 +183,7 @@ set wildignore+=*/build/*
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
+let g:syntastic_loc_list_height = 5
 
 
 " Shrink inactive splits to 10 rows and 20 cols
@@ -200,9 +201,6 @@ set winheight=999
 " Change the leader key to comma
 let mapleader = ","
 let g:mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
 
 " Open a file in the same directory as the current file
 " (Stolen from Gary Bernhardt)
@@ -339,27 +337,31 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
+
+
+"""" STATUSLINE
+
 " Colors for status line (User1: filename, User2: flags)
 hi StatusLine   ctermbg=8    ctermfg=12
 hi User1        ctermbg=14   ctermfg=8
 hi User2        ctermbg=0    ctermfg=1
 
-" STATUSLINE
-set statusline=                              " Clear the statusline
-set statusline+=[%n]                         " Buffer number
-set statusline+=%2*                          " Back to default highlight
-set statusline+=\ %(%{HasPaste()}\ %)        " Are we in paste mode?
-set statusline+=%1*                          " User1 highlight
-set statusline+=\ %<%f\                      " File name
-set statusline+=%2*                          " Back to default highlight
-set statusline+=\ %(%m%h%r\ %)               " Flags (help, modified, read-only)
-set statusline+=%*\                          " Back to default highlight
-set statusline+=[%{strlen(&ft)?&ft:'none'},  " Filetype
-set statusline+=%{strlen(&fenc)?&fenc:&enc}, " Encoding
-set statusline+=%{&fileformat}]              " File format
-set statusline+=%=                           " Right align the rest
-set statusline+=%-14.(%l,%c%V%)              " Cursor line, column
-set statusline+=\ %P                         " Percent through file
+set statusline=                               " Clear the statusline
+set statusline+=[%n]                          " Buffer number
+set statusline+=%2*                           " Back to default highlight
+set statusline+=\ %(%{HasPaste()}\ %)         " Are we in paste mode?
+set statusline+=%1*                           " User1 highlight
+set statusline+=\ %f\                         " File name
+set statusline+=%2*                           " Back to default highlight
+set statusline+=\ %(%m%h%r\ %)                " Flags (help, modified, read-only)
+set statusline+=%*\                           " Back to default highlight
+set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
+set statusline+=%{&fileformat}]               " File format
+set statusline+=%=                            " Right align the rest
+set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
+set statusline+=\ %P                          " Percent through file
+
 
 " Gimme tab completion on .css-class-names and stuff
 set iskeyword+=-
@@ -392,17 +394,20 @@ nmap <silent> <C-p> :tabprev<CR>
 imap <silent> <C-n> <esc><C-n>
 imap <silent> <C-p> <esc><C-p>
 
+" Map F12 to revert (like Photoshop)
+map <f12> :call Revert()<cr>
 
-" Check is paste mode is enabled
+
+
+"""" FUNCTIONS
+
+" Check if paste mode is enabled
 function! HasPaste()
     if &paste
         return '[PASTE MODE]'
     en
     return ''
 endfunction
-
-" Map F12 to revert (like Photoshop)
-map <f12> :call Revert()<cr>
 
 function! Revert ()
     if confirm("Revert?", "&Yes\n&No", 2) == 1
@@ -412,7 +417,8 @@ function! Revert ()
 endfunction
 
 
-"""" TOGGLES """"
+
+"""" TOGGLES
 
 " Toggle spell checking
 map <leader>ss :setlocal spell!<cr>
@@ -422,3 +428,4 @@ map <leader>pp :set paste!<cr>
 
 " Toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<cr>
+
