@@ -310,7 +310,7 @@ autocmd BufReadPost *
 set number
 
 " For quick .vimrc hacking.
-noremap \v :vsplit ~/.vimrc<cr>
+noremap \v :tabnew ~/.vimrc<cr>
 
 " jj leaves insert mode
 inoremap jj <ESC>
@@ -351,7 +351,7 @@ hi User2  ctermbg=black  ctermfg=red    guibg=black  guifg=red
 
 " STATUSLINE
 set statusline=                              " Clear the statusline
-set statusline+=[%n]\                        " Buffer number
+set statusline+=[%n]                         " Buffer number
 set statusline+=%2*                          " Back to default highlight
 set statusline+=\ %{HasPaste()}\             " Are we in paste mode?
 set statusline+=%1*\                         " User1 highlight
