@@ -342,9 +342,10 @@ vnoremap k gk
 """" STATUSLINE
 
 " Colors for status line (User1: filename, User2: flags)
-hi StatusLine   ctermbg=8    ctermfg=12
-hi User1        ctermbg=14   ctermfg=8
-hi User2        ctermbg=0    ctermfg=1
+hi StatusLine     ctermbg=8    ctermfg=12
+hi StatusLineNC   ctermbg=8    ctermfg=10
+hi User1          ctermbg=14   ctermfg=8
+hi User2          ctermbg=0    ctermfg=1
 
 set statusline=                               " Clear the statusline
 set statusline+=[%n]                          " Buffer number
