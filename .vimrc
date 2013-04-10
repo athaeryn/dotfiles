@@ -128,7 +128,7 @@ set smartcase
 
 " Adds the /g option to replace all occurences by default instead
 " of just the first.  Using /g turns this off.
-set gdefault
+"set gdefault
 
 " Make searches perform/highlight automatically while you type
 set incsearch
