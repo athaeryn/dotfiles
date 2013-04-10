@@ -180,7 +180,9 @@ set wildignore+=*/app/cache/*
 set wildignore+=*/build/*
 
 " Enable syntastic error signs in the line number column
-" let g:syntastic_enable_signs = 1
+let g:syntastic_enable_signs = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
 
 
 " Shrink inactive splits to 10 rows and 20 cols
