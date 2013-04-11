@@ -48,6 +48,8 @@ plugins.each do |plugin, repo|
     installed = before.include? plugin
     if installed
         print "found.\n"
+        print "Updating...\n"
+        system("cd #{plugin} ; git pull")
     else
         print "not found.\nInstalling... "
         system("git clone #{repo}")
