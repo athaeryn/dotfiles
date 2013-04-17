@@ -1,0 +1,29 @@
+#compdef vimanage
+
+# http://askql.wordpress.com/2011/01/11/zsh-writing-own-completion/
+
+_vimanage() {
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+
+    _arguments \
+        '1: :->cmd' \
+        '*: :->city'
+
+    case $state in
+    cmd)
+        _arguments '1: :(add list remove update)'
+        ;;
+    *)
+        case $words[2] in
+        remove)
+            compadd "$@" $(vimanage list --managed-only) 
+        ;;
+        update)
+            compadd "$@" $(vimanage list --managed-only) 
+        ;;
+        esac
+    esac
+}
+
+_vimanage "$@"
