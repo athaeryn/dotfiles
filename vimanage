@@ -147,7 +147,7 @@ class Vimanage
             if command[0] == "--managed-only"
                 list_plugins "managed" 
             else
-                list_plugins
+                list_plugins "all"
             end
         when "remove"
             if command.size > 0
