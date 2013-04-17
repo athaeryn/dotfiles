@@ -67,8 +67,8 @@ class Vimanage
             response = `curl -sI #{repo}`
             if response.include?('200 OK') && which.match(/\w+\/\w+/)
                 puts "Adding #{which}..."
-                @plugins << which
                 install_plugin which
+                @plugins << which
             else
                 puts "#{repo} is not a repository."
             end
@@ -78,8 +78,8 @@ class Vimanage
     def remove_plugin which
         if @plugins.include? which
             puts "Removing #{which}..."
-            @plugins.delete which
             uninstall_plugin which
+            @plugins.delete which
         else
             puts "#{which} is not installed."
         end
