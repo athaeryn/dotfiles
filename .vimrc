@@ -430,3 +430,4 @@ map <leader>pp :set paste!<cr>
 " Toggle NERDTree
 nnoremap <leader>t :NERDTreeToggle<cr>
 
+map Q gq
