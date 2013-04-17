@@ -87,3 +87,15 @@ alias gource="gource --load-config ~/.gourcerc"
 _D=$(dimensions_for_gource)
 alias gourcefull="gource --load-config ~/.gourcerc -f -$_D"
 
+# COMPLETION SETTINGS
+# for custom autocompletions
+fpath=(~/.zsh/completions $fpath)
+
+# compsys init
+autoload -U compinit
+compinit
+
+# Show completion menu when there is more that one option
+zstyle ':completion:*' menu select=2
+zstyle ':completion:*:descriptions' format "%B%d%b"
+
