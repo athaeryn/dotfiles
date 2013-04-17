@@ -130,9 +130,9 @@ class Vimanage
         end
     end
 
-    def list_plugins
+    def list_plugins managed
         not_vimanaged = @installed - plugin_names
-        if not_vimanaged.size > 0
+        if not_vimanaged.size > 0 && managed != "managed"
             puts @plugins
             puts "\n## Not managed ##"
             puts not_vimanaged
@@ -144,7 +144,11 @@ class Vimanage
     def parse_command command
         case command.shift
         when "list"
-            list_plugins
+            if command[0] == "--managed-only"
+                list_plugins "managed" 
+            else
+                list_plugins
+            end
         when "remove"
             if command.size > 0
                 remove_plugin command[0]
