@@ -97,5 +97,4 @@ compinit
 
 # Show completion menu when there is more that one option
 zstyle ':completion:*' menu select=2
-zstyle ':completion:*:descriptions' format "%B%d%b"
 
