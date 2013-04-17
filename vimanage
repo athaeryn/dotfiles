@@ -1,59 +1,169 @@
 #!/usr/bin/env ruby
 
-plugins = {
-    "NrrwRgn"              => "git@github.com:chrisbra/NrrwRgn.git",
-    "ack.vim"              => "https://github.com/mileszs/ack.vim.git",
-    "ctrlp.vim"            => "https://github.com/kien/ctrlp.vim.git",
-    "delimitMate"          => "git@github.com:Raimondi/delimitMate.git",
-    "nerdcommenter"        => "https://github.com/scrooloose/nerdcommenter.git",
-    "nerdtree"             => "https://github.com/scrooloose/nerdtree.git",
-    "syntastic"            => "https://github.com/scrooloose/syntastic.git",
-    "tabular"              => "git://github.com/godlygeek/tabular.git",
-    "vim-characterize"     => "git://github.com/tpope/vim-characterize.git",
-    "vim-colors-solarized" => "https://github.com/altercation/vim-colors-solarized.git",
-    "vim-commentary"       => "git://github.com/tpope/vim-commentary.git",
-    "vim-cucumber"         => "git@github.com:tpope/vim-cucumber.git",
-    "vim-indent-guides"    => "https://github.com/nathanaelkane/vim-indent-guides.git",
-    "vim-markdown"         => "https://github.com/athaeryn/vim-markdown.git",
-    "vim-ragtag"           => "https://github.com/tpope/vim-ragtag.git",
-    "vim-repeat"           => "https://github.com/tpope/vim-repeat.git",
-    "vim-surround"         => "https://github.com/tpope/vim-surround.git",
-    "vim-unimpaired"       => "git://github.com/tpope/vim-unimpaired.git"
-}
+require 'yaml'
 
-puts "Getting ready..."
+class Vimanage
+    def initialize command
+        initial_setup
 
-`mkdir -p ~/.vim/autoload ~/.vim/bundle`
-`mkdir -p ~/.vim/bundle/bclose/plugin`
+        @file_path = get_file_path
 
-print "Installing Bclose script... "
-`cp bclose.vim ~/.vim/bundle/bclose/plugin/bclose.vim`
-print "done.\n"
+        @files = {
+            "plugins" => "vimanage-plugins"
+        }
 
-# pathogen
-print "Checking for Pathogen... "
-pathogen = File.exist?( File.expand_path "~/.vim/autoload/pathogen.vim")
-if pathogen
-    print "pathogen already installed.\n"
-else
-    print "Pathogen not found, installing...\n"
-    system("curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pathogen.vim")
-    puts "done."
-end
+        @files.keys.each do |key|
+            @files[key] = @file_path + @files[key]
+        end
 
-puts "Checking plugins"
-Dir.chdir(File.expand_path "~/.vim/bundle")
-before = Dir.entries '.'
-plugins.each do |plugin, repo|
-    print "Checking for #{plugin}... "
-    installed = before.include? plugin
-    if installed
-        print "found.\n"
-        print "Updating...\n"
-        system("cd #{plugin} ; git pull")
-    else
-        print "not found.\nInstalling... "
-        system("git clone #{repo}")
-        print "done!\n"
+        @plugins = load_plugins
+
+        Dir.chdir(File.expand_path "~/.vim/bundle")
+        @installed = Dir.glob '*'
+
+        parse_command command if command.size > 0
+    end
+
+    def initial_setup
+        system("mkdir -p ~/.vim/autoload ~/.vim/bundle")
+        system("mkdir -p ~/.vim/bundle/bclose/plugin")
+
+        #Check for Bclose
+        unless File.exist?(File.expand_path('~/.vim/bundle/bclose/plugin/bclose.vim'))
+            print "Bclose script not found. Installing... "
+            system("cp #{@file_path}bclose.vim ~/.vim/bundle/bclose/plugin/bclose.vim")
+            print "done.\n"
+        end
+
+        #Check for pathogen
+        unless File.exist?(File.expand_path "~/.vim/autoload/pathogen.vim")
+            print "Pathogen not found. Installing...\n"
+            system("curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pathogen.vim")
+            puts "done."
+        end
+    end
+
+    def get_file_path
+        filename = File.symlink?(__FILE__) ? File.readlink(__FILE__) : __FILE__
+        File.dirname(filename) + "/"
+    end
+
+    def load_plugins
+        YAML.load_file(@files["plugins"]) || []
+    end
+
+    def save_plugins
+        File.open(@files["plugins"], "w") do |f|
+            f.write(YAML.dump(@plugins.sort))
+        end
+    end
+
+    def add_plugin which
+        if @plugins.include? which
+            puts "You already have #{which}."
+        else
+            repo = "https://github.com/#{which}"
+            #Check to see if this is actually a repo
+            response = `curl -sI #{repo}`
+            if response.include?('200 OK') && which.match(/\w+\/\w+/)
+                puts "Adding #{which}..."
+                @plugins << which
+                install_plugin which
+            else
+                puts "#{repo} is not a repository."
+            end
+        end
+    end
+
+    def remove_plugin which
+        if @plugins.include? which
+            puts "Removing #{which}..."
+            @plugins.delete which
+            uninstall_plugin which
+        else
+            puts "#{which} is not installed."
+        end
+    end
+
+    def bundle_path which
+        "~/.vim/bundle/#{which.split('/')[1]}"
+    end
+
+    def install_plugin which
+        unless @installed.include? which
+            puts "Installing #{which}..."
+            system("git clone https://github.com/#{which}.git #{bundle_path which}")
+            puts
+        end
+    end
+
+    def uninstall_plugin which
+        if @installed.include? which.split('/')[1]
+            puts "Uninstalling #{which}..."
+            system("rm -rf #{bundle_path which}")
+            puts
+        else
+            puts "#{which} is not installed!"
+        end
+    end
+
+    def update_plugin which
+        if which === true
+            puts "Updating all plugins.\n\n"
+            @plugins.each do |plugin|
+                update_plugin plugin
+                puts
+            end
+        else
+            if @plugins.include? which
+                puts "Updating #{which}..."
+                system("cd #{bundle_path which} ; git pull ")
+            else
+                puts "#{which} is not installed."
+            end
+        end
+    end
+
+    def plugin_names
+        @plugins.map do |p|
+            p.split('/')[1]
+        end
+    end
+
+    def list_plugins
+        not_vimanaged = @installed - plugin_names
+        if not_vimanaged.size > 0
+            puts @plugins
+            puts "\n## Not managed ##"
+            puts not_vimanaged
+        else
+            puts @plugins
+        end
+    end
+
+    def parse_command command
+        case command.shift
+        when "list"
+            list_plugins
+        when "remove"
+            if command.size > 0
+                remove_plugin command[0]
+                save_plugins
+            else
+                puts "Remove what?"
+            end
+        when "add"
+            if command.size > 0
+                add_plugin command[0]
+                save_plugins
+            else
+                puts "Add what?"
+            end
+        when "update"
+            # true means update erytang
+            update_plugin(command.size == 0 ? true : command[0])
+        end
     end
 end
+
+Vimanage.new ARGV
