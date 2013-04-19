@@ -1,6 +1,4 @@
-dotfiles
-========
+# My dotfiles
 
-My dotfiles.
-
-Link things into home directory. Run viminstall.sh.
+- Link things where they should go.
+- Run vimanage.
