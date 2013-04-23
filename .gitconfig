@@ -70,6 +70,7 @@
     default = tracking
 [core]
     autocrlf = input
+	excludesfile = /Users/manderson/.gitignore_global
 [color]
     ui = true
 [color "status"]
