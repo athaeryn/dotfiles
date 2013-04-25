@@ -8,6 +8,7 @@
 - mhinz/vim-startify
 - mileszs/ack.vim
 - nathanaelkane/vim-indent-guides
+- paradigm/TextObjectify
 - scrooloose/nerdcommenter
 - scrooloose/nerdtree
 - scrooloose/syntastic
