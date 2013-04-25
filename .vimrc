@@ -431,3 +431,9 @@ map <leader>pp :set paste!<cr>
 nnoremap <leader>t :NERDTreeToggle<cr>
 
 map Q gq
+
+map <leader>sn :SyntasticToggleMode<cr>
+
+
+" Improve session saving.
+set sessionoptions=blank,curdir,folds,help,tabpages,winpos
