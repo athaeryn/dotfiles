@@ -428,7 +428,7 @@ map <leader>ss :setlocal spell!<cr>
 map <leader>pp :set paste!<cr>
 
 " Toggle NERDTree
-nnoremap <leader>t :NERDTreeToggle<cr>
+nnoremap <leader>r :NERDTreeToggle<cr>
 
 map Q gq
 
