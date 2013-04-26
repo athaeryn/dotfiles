@@ -437,3 +437,5 @@ map <leader>sn :SyntasticToggleMode<cr>
 
 " Improve session saving.
 set sessionoptions=blank,curdir,folds,help,tabpages,winpos
+
+let g:startify_bookmarks = [ '~/.vimrc' ]
