@@ -98,3 +98,4 @@ compinit
 # Show completion menu when there is more that one option
 zstyle ':completion:*' menu select=2
 
+zstyle :omz:plugins:ssh-agent agent-forwarding on
