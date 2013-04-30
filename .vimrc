@@ -438,4 +438,15 @@ map <leader>sn :SyntasticToggleMode<cr>
 " Improve session saving.
 set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
-let g:startify_bookmarks = [ '~/.vimrc' ]
+
+" Startify options.
+let g:startify_bookmarks = ['~/.vimrc', '~/.zshrc', '/usr/local/etc/nginx/nginx.conf']
+let g:startify_skiplist = ['.vimrc', '.zshrc', 'nginx.conf', 'COMMIT_EDITMSG', '/usr/local/Cellar/vim']
+
+hi StartifyBracket  ctermfg=12
+hi StartifyFile     ctermfg=15
+hi StartifyNumber   ctermfg=3
+hi StartifyPath     ctermfg=12
+hi StartifySlash    ctermfg=10
+hi StartifySpecial  ctermfg=10
+
