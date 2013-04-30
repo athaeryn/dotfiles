@@ -520,8 +520,8 @@
     map <leader>e :edit %%
 
     " Copy and paste from system clipboard
-    nnoremap <leader>p "+p
-    nnoremap <leader>y "+y
+    map <leader>p "+p
+    map <leader>y "+y
 
     " Sort! :D
     vnoremap <leader>s :sort<cr>
