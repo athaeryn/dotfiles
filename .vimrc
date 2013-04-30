@@ -1,59 +1,8 @@
-" TABLE OF CONTENTS {{
-    " NOTES
-    " PATHOGEN
-    " OPTIONS
-        " 1 important
-        " 2 moving around, searching and patterns
-        " 3 tags
-        " 4 displaying text
-        " 5 syntax, highlighting and spelling
-        " 6 multiple windows
-            " statusline
-        " 7 multiple tab pages
-        " 8 terminal
-        " 9 using the mouse
-        " 10 printing
-        " 11 messages and info
-        " 12 selecting text
-        " 13 editing text
-        " 14 tabs and indenting
-        " 15 folding
-            " NeatFoldText()
-        " 16 diff mode
-        " 17 mapping
-        " 18 reading and writing files
-        " 19 the swap file
-        " 20 command line editing
-        " 21 executing external command
-        " 22 running make and jumping to errors
-        " 23 language specific
-        " 24 multi-byte characters
-        " 25 various
-    " AUTOCOMMANDS
-        " Markdown
-    " FUNCTIONS
-    " HIGHLIGHTS
-        " Startify
-        " StatusLine
-    " MAPPINGS
-        " Splits
-        " Tabs
-        " Toggles
-    " PLUGINS
-        " CtrlP
-        " Solarized
-        " Startify
-        " Syntastic
-"}}
-
 " NOTES {{
     " A bit stolen from Dan Menssen. (https://github.com/menssen)
     " Some things from http://amix.dk/vim/vimrc.html
 
     " Run vimanage to install plugins.
-
-    " I'm grouping things according to the layout of :options.
-    " see http://dougireton.com/blog/2013/02/23/layout-your-vimrc-like-a-boss
 
     " Disable vi-compatibility right off the bat
     set nocompatible
@@ -66,15 +15,20 @@
     filetype plugin indent on
     " Pathogen Bundle Manager
     call pathogen#infect()
+    set term=$TERM
 
 "}}
 
-" OPTIONS {{
+        hi StartifyBracket  ctermfg=12
+        hi StartifyFile     ctermfg=15
+        hi StartifyNumber   ctermfg=3
+        hi StartifyPath     ctermfg=12
+        hi StartifySlash    ctermfg=10
+        hi StartifySpecial  ctermfg=10
 
-    " 1 important {{
-    "}}
+    " listchars
+    hi SpecialKey ctermfg=red ctermbg=white
 
-    " 2 moving around, searching and patterns {{
 
         " Searches should be case insensitive...
         set ignorecase
@@ -85,12 +39,7 @@
         set incsearch
         set showmatch
 
-    "}}
 
-    " 3 tags {{
-    "}}
-
-    " 4 displaying text {{
 
         " Force showing five extra lines above and below cursor
         set scrolloff=5
@@ -120,9 +69,6 @@
         " which are:
         set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:.
 
-    "}}
-
-    " 5 syntax, highlighting and spelling {{
 
         set background=dark
 
@@ -135,10 +81,6 @@
         " Display a colored column at 81 characters
         " (This means text appearing on top of the line is BAD)
         set colorcolumn=81
-
-    "}}
-
-    " 6 multiple windows {{
 
         " Don't unload a buffer when no longer shown in a window
         set hidden
@@ -154,7 +96,12 @@
         set winminheight=10
         set winheight=999
 
-        " statusline {{
+            " (User1: filename, User2: flags)
+            hi StatusLine     ctermbg=8    ctermfg=12
+            hi StatusLineNC   ctermbg=8    ctermfg=10
+            hi User1          ctermbg=14   ctermfg=8
+            hi User2          ctermbg=0    ctermfg=1
+
             set statusline=                               " Clear the statusline
             set statusline+=[%n]                          " Buffer number
             set statusline+=%2*                           " Back to default highlight
@@ -170,30 +117,11 @@
             set statusline+=%=                            " Right align the rest
             set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
             set statusline+=\ %P                          " Percent through file
-        "}}
-    "}}
-
-    " 7 multiple tab pages {{
-    "}}
-
-    " 8 terminal {{
-
-        set term=$TERM
-
-    "}}
-
-    " 9 using the mouse {{
 
         " Enable mouse support in terminals that can handle it (iTerm can,
         " Terminal.app can't)
         set mouse=a
 
-    "}}
-
-    " 10 printing {{
-    "}}
-
-    " 11 messages and info {{
 
         " Do not beep.
         set visualbell
@@ -207,19 +135,9 @@
         " display the current mode in the status line
         set showmode
 
-    "}}
-
-    " 12 selecting text {{
-    "}}
-
-    " 13 editing text {{
 
         " Make backspace also delete indents d line endings
         set backspace=indent,eol,start
-
-    "}}
-
-    " 14 tabs and indenting {{
 
         " Turn on auto-indentation, for better or worse
         set autoindent
@@ -231,10 +149,6 @@
         set softtabstop=4
         set expandtab
 
-    "}}
-
-    " 15 folding {{
-
         " Set fold method to indent
         set foldmethod=indent
 
@@ -242,7 +156,6 @@
         set nofoldenable
 
 
-        " NeatFoldText() {{
             " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
             function! NeatFoldText()
                 let foldstartchar = matchstr(&foldmarker, '..')
@@ -256,17 +169,7 @@
                 return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
             endfunction
             set foldtext=NeatFoldText()
-        "}}
 
-    "}}
-
-    " 16 diff mode {{
-    "}}
-
-    " 17 mapping {{
-    "}}
-
-    " 18 reading and writing files {{
 
         " Kill some security exploits and also modelines are a dumb idea
         set modelines=0
@@ -277,9 +180,6 @@
         " Reload a file that is modified from the outside
         set autoread
 
-    "}}
-
-    " 19 the swap file {{
 
         " Stop littering .swp files everywhere.
         set noswapfile
@@ -287,9 +187,6 @@
         " Put swapfiles in the backup directory
         set directory=~/.vim/backup
 
-    "}}
-
-    " 20 command line editing {{
 
         " Keep a really long command/search history
         set history=1000
@@ -303,46 +200,24 @@
         set undofile
         set undodir=~/.vim/undo
 
-    "}}
-
-    " 21 executing external commands {{
-
         " Use zsh
         set shell=zsh
 
-    "}}
-
-    " 22 running make and jumping to errors {{
-    "}}
-
-    " 23 language specific {{
 
         " Gimme tab completion on .css-class-names and stuff
         set iskeyword+=-
 
-    "}}
-
-    " 24 multi-byte characters {{
-
         " All other encodings are bad
         set encoding=utf-8
-
-    "}}
-
-    " 25 various {{
 
         " Improve session saving.
         set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
-    "}}
 
     " Prevent Vim from clobbering the scrollback buffer. See
     " http://www.shallowsky.com/linux/noaltscreen.html
     " via Gary Bernhardt
     set t_ti= t_te=
-"}}
-
-" AUTOCOMMANDS {{
 
     " Files should open with cursor at same line as when closed
     " From vim docs, via Gary Bernhardt
@@ -370,8 +245,6 @@
         autocmd FileType txt set showbreak=
 
     "}}
-
-"}}
 
 " FUNCTIONS {{
 
@@ -415,33 +288,8 @@
 
 "}}
 
-" HIGHLIGHTS {{
 
-    "Startify {{
-        hi StartifyBracket  ctermfg=12
-        hi StartifyFile     ctermfg=15
-        hi StartifyNumber   ctermfg=3
-        hi StartifyPath     ctermfg=12
-        hi StartifySlash    ctermfg=10
-        hi StartifySpecial  ctermfg=10
-    "}}
-
-    "Statusline {{
-        " (User1: filename, User2: flags)
-        hi StatusLine     ctermbg=8    ctermfg=12
-        hi StatusLineNC   ctermbg=8    ctermfg=10
-        hi User1          ctermbg=14   ctermfg=8
-        hi User2          ctermbg=0    ctermfg=1
-    "}}
-
-    " listchars
-    hi SpecialKey ctermfg=red ctermbg=white
-
-"}}
-
-" MAPPINGS {{
-
-    " Splits {{
+    " Splits
         " Shortcuts for creating splits
         nnoremap <leader>v <C-w>v<C-w>l<C-w>L
         nnoremap <leader>h <C-w>s<C-w>j
@@ -451,9 +299,8 @@
         nnoremap <c-j> <c-w>j
         nnoremap <c-k> <c-w>k
         nnoremap <c-l> <c-w>l
-    "}}
 
-    " Tabs {{
+    " Tabs
         " new tab
         map <leader>tn :tabnew<cr>
         " 'solo' tab
@@ -461,16 +308,14 @@
         " 'exit'
         map <leader>te :tabclose<cr>
 
-        " Navigation {{
+        " Navigation
             nmap <silent> <C-n> :tabnext<CR>
             nmap <silent> <C-p> :tabprev<CR>
             imap <silent> <C-n> <esc><C-n>
             imap <silent> <C-p> <esc><C-p>
-        "}}
 
-    "}}
 
-    " Toggles {{
+    " Toggles
         " ...spell checking
         map <leader>ss :setlocal spell!<cr>
 
@@ -488,7 +333,6 @@
 
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>
-    "}}
 
     " Change the leader key to comma
     let mapleader = ","
@@ -572,9 +416,6 @@
 
     " Convert Markdown to HTML
     nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
-"}}
-
-" PLUGINS {{
 
     " CtrlP {{
         " Increase CtrlP file limit from 10,000 to 100,000
@@ -639,5 +480,4 @@
         let g:syntastic_loc_list_height = 5
     "}}
 
-"}}
 
