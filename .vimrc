@@ -104,7 +104,7 @@
     set list
 
     " which are:
-    set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:.
+    set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 
     " highlight all matches for the last used search pattern.
     set hlsearch
