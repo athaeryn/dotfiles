@@ -53,10 +53,10 @@
             hi StartifySpecial  ctermfg=2
 
             " (User1: filename, User2: flags)
-            hi StatusLine     ctermbg=0    ctermfg=12
-            hi StatusLineNC   ctermbg=0    ctermfg=10
-            hi User1          ctermbg=14   ctermfg=0
-            hi User2          ctermbg=0    ctermfg=9
+            hi StatusLine    ctermfg=12  ctermbg=0
+            hi StatusLineNC  ctermfg=10  ctermbg=0
+            hi User1         ctermfg=0   ctermbg=8
+            hi User2         ctermfg=9   ctermbg=0
 
             " listchars
             hi SpecialKey ctermfg=red ctermbg=white
