@@ -2,34 +2,89 @@
     " A bit stolen from Dan Menssen. (https://github.com/menssen)
     " Some things from http://amix.dk/vim/vimrc.html
 
+    " I've tried to keep things somewhat logically grouped with folds.
+
     " Run vimanage to install plugins.
 
-    " Disable vi-compatibility right off the bat
+    " Disable vi-compatibility right off the bat.
     set nocompatible
 "}}
 
+" Settings {{
 
-" PATHOGEN {{
+    " Environment {{
 
-    " Enable filetype plugins
-    filetype plugin indent on
-    " Pathogen Bundle Manager
-    call pathogen#infect()
-    set term=$TERM
+        " Use zsh
+        set shell=zsh
 
-"}}
+        " All other encodings are bad
+        set encoding=utf-8
 
-        hi StartifyBracket  ctermfg=12
-        hi StartifyFile     ctermfg=15
-        hi StartifyNumber   ctermfg=3
-        hi StartifyPath     ctermfg=12
-        hi StartifySlash    ctermfg=10
-        hi StartifySpecial  ctermfg=10
+        " Prevent Vim from clobbering the scrollback buffer. See
+        " http://www.shallowsky.com/linux/noaltscreen.html
+        " via Gary Bernhardt
+        set t_ti= t_te=
 
-    " listchars
-    hi SpecialKey ctermfg=red ctermbg=white
+        " Enable filetype plugins
+        filetype plugin indent on
 
+        " Pathogen Bundle Manager
+        call pathogen#infect()
+        set term=$TERM
 
+    "}}
+
+    " Colorscheme {{
+
+        " Solarized {{
+            " Function to activate degraded colors for 256 color terminals without
+            " solarized scheme
+            function! FixColors()
+                if g:solarized_termcolors == 256
+                    let g:solarized_termcolors = 16
+                else
+                    let g:solarized_termcolors = 256
+                endif
+                colorscheme solarized
+                set background=dark
+            endfunction
+            command! FixColors call FixColors()
+
+            " Colors, solarized theme. See above for note.
+                syntax enable
+                let g:solarized_termtrans = 1
+                colorscheme solarized
+                set background=dark
+
+                " Set indent guide colors to sane values for solarized
+                let g:indent_guides_auto_colors = 0
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8 guibg=#002b36
+                autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
+        "}}
+
+        " Highlights {{
+            " Startify
+            hi StartifyBracket  ctermfg=12
+            hi StartifyFile     ctermfg=15
+            hi StartifyNumber   ctermfg=3
+            hi StartifyPath     ctermfg=12
+            hi StartifySlash    ctermfg=10
+            hi StartifySpecial  ctermfg=10
+
+            " (User1: filename, User2: flags)
+            hi StatusLine     ctermbg=8    ctermfg=12
+            hi StatusLineNC   ctermbg=8    ctermfg=10
+            hi User1          ctermbg=14   ctermfg=8
+            hi User2          ctermbg=0    ctermfg=1
+
+            " listchars
+            hi SpecialKey ctermfg=red ctermbg=white
+
+        "}}
+
+    "}}
+
+    " Search {{
         " Searches should be case insensitive...
         set ignorecase
         " ...unless there is a capital letter
@@ -38,90 +93,90 @@
         " Google... err... Vim Instant
         set incsearch
         set showmatch
+    "}}
 
 
+    " Force showing five extra lines above and below cursor
+    set scrolloff=5
 
-        " Force showing five extra lines above and below cursor
-        set scrolloff=5
+    " Don't wrap text, but add characters indicating hidden parts of a line
+    " and change horizontal scrolling to be sane
+    set nowrap
+    set sidescroll=1
+    set sidescrolloff=1
+    set listchars=extends:>,precedes:<
 
-        " Don't wrap text, but add characters indicating hidden parts of a line
-        " and change horizontal scrolling to be sane
-        set nowrap
-        set sidescroll=1
-        set sidescrolloff=1
-        set listchars=extends:>,precedes:<
+    " Display line numbers
+    set number
 
-        " Display line numbers
-        set number
+    " Make command line 2 lines tall
+    set cmdheight=2
 
-        " Make command line 2 lines tall
-        set cmdheight=2
+    " If wrapping is enabled, mark wrapped lines
+    set showbreak=\ ->\ 
 
-        " If wrapping is enabled, mark wrapped lines
-        set showbreak=\ ->\ 
+    " Don't redraw while executing macros
+    set lazyredraw
 
-        " Don't redraw while executing macros
-        set lazyredraw
+    " show listchars
+    set list
 
-        " show listchars
-        set list
+    " which are:
+    set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:.
 
-        " which are:
-        set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:.
+    " highlight all matches for the last used search pattern.
+    set hlsearch
 
+    " Highlight the line the cursor is in
+    set cursorline
 
-        set background=dark
+    " Display a colored column at 81 characters
+    " (This means text appearing on top of the line is BAD)
+    set colorcolumn=81
 
-        " highlight all matches for the last used search pattern.
-        set hlsearch
+    " Don't unload a buffer when no longer shown in a window
+    set hidden
 
-        " Highlight the line the cursor is in
-        set cursorline
+    " Always show the status line above the command line
+    set laststatus=2
 
-        " Display a colored column at 81 characters
-        " (This means text appearing on top of the line is BAD)
-        set colorcolumn=81
+    " Shrink inactive splits to 10 rows and 20 cols
+    set winwidth=20
+    set winminwidth=20
+    set winwidth=120
+    set winheight=10
+    set winminheight=10
+    set winheight=999
 
-        " Don't unload a buffer when no longer shown in a window
-        set hidden
+    " Statusline {{
 
-        " Always show the status line above the command line
-        set laststatus=2
+        set statusline=                               " Clear the statusline
+        set statusline+=[%n]                          " Buffer number
+        set statusline+=%2*                           " Back to default highlight
+        set statusline+=\ %(%{HasPaste()}\ %)         " Are we in paste mode?
+        set statusline+=%1*                           " User1 highlight
+        set statusline+=\ %f\                         " File name
+        set statusline+=%2*                           " Back to default highlight
+        set statusline+=\ %(%m%h%r\ %)                " Flags (help, modified, read-only)
+        set statusline+=%*\                           " Back to default highlight
+        set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
+        set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
+        set statusline+=%{&fileformat}]               " File format
+        set statusline+=%=                            " Right align the rest
+        set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
+        set statusline+=\ %P                          " Percent through file
 
-        " Shrink inactive splits to 10 rows and 20 cols
-        set winwidth=20
-        set winminwidth=20
-        set winwidth=120
-        set winheight=10
-        set winminheight=10
-        set winheight=999
+    "}}
 
-            " (User1: filename, User2: flags)
-            hi StatusLine     ctermbg=8    ctermfg=12
-            hi StatusLineNC   ctermbg=8    ctermfg=10
-            hi User1          ctermbg=14   ctermfg=8
-            hi User2          ctermbg=0    ctermfg=1
-
-            set statusline=                               " Clear the statusline
-            set statusline+=[%n]                          " Buffer number
-            set statusline+=%2*                           " Back to default highlight
-            set statusline+=\ %(%{HasPaste()}\ %)         " Are we in paste mode?
-            set statusline+=%1*                           " User1 highlight
-            set statusline+=\ %f\                         " File name
-            set statusline+=%2*                           " Back to default highlight
-            set statusline+=\ %(%m%h%r\ %)                " Flags (help, modified, read-only)
-            set statusline+=%*\                           " Back to default highlight
-            set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
-            set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
-            set statusline+=%{&fileformat}]               " File format
-            set statusline+=%=                            " Right align the rest
-            set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
-            set statusline+=\ %P                          " Percent through file
+    " Mouse {{
 
         " Enable mouse support in terminals that can handle it (iTerm can,
         " Terminal.app can't)
         set mouse=a
 
+    "}}
+
+    " Info {{
 
         " Do not beep.
         set visualbell
@@ -135,9 +190,14 @@
         " display the current mode in the status line
         set showmode
 
+    "}}
 
-        " Make backspace also delete indents d line endings
-        set backspace=indent,eol,start
+
+
+    " Make backspace also delete indents d line endings
+    set backspace=indent,eol,start
+
+    " Indentation {{
 
         " Turn on auto-indentation, for better or worse
         set autoindent
@@ -149,82 +209,76 @@
         set softtabstop=4
         set expandtab
 
+    "}}
+
+    " Folding {{
+
         " Set fold method to indent
         set foldmethod=indent
 
         " Don't fold by default
         set nofoldenable
 
+        " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+        function! NeatFoldText()
+            let foldstartchar = matchstr(&foldmarker, '..')
+            let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*' . foldstartchar . '\d*\s*', '', 'g') . ' '
+            let lines_count = v:foldend - v:foldstart + 1
+            let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+            let foldchar = matchstr(&fillchars, 'fold:\zs.')
+            let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+            let foldtextend = lines_count_text . repeat(foldchar, 8)
+            let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+            return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+        endfunction
+        set foldtext=NeatFoldText()
 
-            " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
-            function! NeatFoldText()
-                let foldstartchar = matchstr(&foldmarker, '..')
-                let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*' . foldstartchar . '\d*\s*', '', 'g') . ' '
-                let lines_count = v:foldend - v:foldstart + 1
-                let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-                let foldchar = matchstr(&fillchars, 'fold:\zs.')
-                let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-                let foldtextend = lines_count_text . repeat(foldchar, 8)
-                let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-                return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-            endfunction
-            set foldtext=NeatFoldText()
-
-
-        " Kill some security exploits and also modelines are a dumb idea
-        set modelines=0
-
-        " Where to put backup files
-        set backupdir=~/.vim/backup
-
-        " Reload a file that is modified from the outside
-        set autoread
+    "}}
 
 
-        " Stop littering .swp files everywhere.
-        set noswapfile
+    " Kill some security exploits and also modelines are a dumb idea
+    set modelines=0
 
-        " Put swapfiles in the backup directory
-        set directory=~/.vim/backup
+    " Where to put backup files
+    set backupdir=~/.vim/backup
 
+    " Reload a file that is modified from the outside
+    set autoread
 
-        " Keep a really long command/search history
-        set history=1000
+    " Stop littering .swp files everywhere.
+    set noswapfile
 
-        " Make tab completion a lot smarter (this mostly makes it work like zsh)
-        set wildmode=longest,list
-        set wildmenu
+    " Put swapfiles in the backup directory
+    set directory=~/.vim/backup
 
-        " Stores undo info in a file so that it persists after vim closes
-        " Need to have ~/.vim/undo
-        set undofile
-        set undodir=~/.vim/undo
+    " Keep a really long command/search history
+    set history=1000
 
-        " Use zsh
-        set shell=zsh
+    " Make tab completion a lot smarter (this mostly makes it work like zsh)
+    set wildmode=longest,list
+    set wildmenu
 
+    " Stores undo info in a file so that it persists after vim closes
+    " Need to have ~/.vim/undo
+    set undofile
+    set undodir=~/.vim/undo
 
-        " Gimme tab completion on .css-class-names and stuff
-        set iskeyword+=-
+    " Gimme tab completion on .css-class-names and stuff
+    set iskeyword+=-
 
-        " All other encodings are bad
-        set encoding=utf-8
+    " Improve session saving.
+    set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
-        " Improve session saving.
-        set sessionoptions=blank,curdir,folds,help,tabpages,winpos
+"}}
 
-
-    " Prevent Vim from clobbering the scrollback buffer. See
-    " http://www.shallowsky.com/linux/noaltscreen.html
-    " via Gary Bernhardt
-    set t_ti= t_te=
+" Autocommands {{
 
     " Files should open with cursor at same line as when closed
     " From vim docs, via Gary Bernhardt
     autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \   exe "normal g`\"" |
+                \ endif
 
     " For editing crontab
     au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
@@ -233,6 +287,7 @@
     autocmd BufNewFile,BufRead .vimrc set foldmethod=marker foldmarker={{,}}
 
     " Markdown {{
+
         " Make all text files markdown
         autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
 
@@ -246,7 +301,9 @@
 
     "}}
 
-" FUNCTIONS {{
+"}}
+
+" Functions {{
 
     " Rename Current File (Stolen from Gary Bernhardt)
     function! RenameFile()
@@ -288,8 +345,14 @@
 
 "}}
 
+" Mappings {{
 
-    " Splits
+    " Change the leader key to comma
+    let mapleader = ","
+    let g:mapleader = ","
+
+    " Splits {{
+
         " Shortcuts for creating splits
         nnoremap <leader>v <C-w>v<C-w>l<C-w>L
         nnoremap <leader>h <C-w>s<C-w>j
@@ -300,7 +363,10 @@
         nnoremap <c-k> <c-w>k
         nnoremap <c-l> <c-w>l
 
-    " Tabs
+    "}}
+
+    " Tabs {{
+
         " new tab
         map <leader>tn :tabnew<cr>
         " 'solo' tab
@@ -309,13 +375,15 @@
         map <leader>te :tabclose<cr>
 
         " Navigation
-            nmap <silent> <C-n> :tabnext<CR>
-            nmap <silent> <C-p> :tabprev<CR>
-            imap <silent> <C-n> <esc><C-n>
-            imap <silent> <C-p> <esc><C-p>
+        nmap <silent> <C-n> :tabnext<CR>
+        nmap <silent> <C-p> :tabprev<CR>
+        imap <silent> <C-n> <esc><C-n>
+        imap <silent> <C-p> <esc><C-p>
 
+    "}}
 
-    " Toggles
+    " Toggles {{
+
         " ...spell checking
         map <leader>ss :setlocal spell!<cr>
 
@@ -334,9 +402,7 @@
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>
 
-    " Change the leader key to comma
-    let mapleader = ","
-    let g:mapleader = ","
+    "}}
 
     " Shortcut to close a buffer without closing the window
     nnoremap <silent> <leader>d :Bclose<cr>
@@ -417,7 +483,18 @@
     " Convert Markdown to HTML
     nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
 
+    " Set CtrlP map to ctrl-f because it's easier to hit
+    let g:ctrlp_map = '<c-f>'
+
+    " Map <leader>f to open CtrlP in buffer mode
+    nnoremap <silent> <leader>f :CtrlPBuffer<cr>
+
+"}}
+
+" Plugins {{
+
     " CtrlP {{
+
         " Increase CtrlP file limit from 10,000 to 100,000
         let g:ctrlp_max_files = 100000
 
@@ -435,49 +512,24 @@
         " And the build directory (xcode)
         set wildignore+=*/build/*
 
-        " Set CtrlP map to ctrl-f because it's easier to hit
-        let g:ctrlp_map = '<c-f>'
-
-        " Map <leader>f to open CtrlP in buffer mode
-        nnoremap <silent> <leader>f :CtrlPBuffer<cr>
-    "}}
-
-    " Solarized {{
-        " Function to activate degraded colors for 256 color terminals without
-        " solarized scheme
-        function! FixColors()
-            if g:solarized_termcolors == 256
-                let g:solarized_termcolors = 16
-            else
-                let g:solarized_termcolors = 256
-            endif
-            colorscheme solarized
-            set background=dark
-        endfunction
-        command! FixColors call FixColors()
-
-        " Colors, solarized theme. See above for note.
-        syntax enable
-        let g:solarized_termtrans = 1
-        colorscheme solarized
-
-        " Set indent guide colors to sane values for solarized
-        let g:indent_guides_auto_colors = 0
-        autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8 guibg=#002b36
-        autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
     "}}
 
     " Startify {{
+
         let g:startify_bookmarks = ['~/.vimrc', '~/.zshrc', '/usr/local/etc/nginx/nginx.conf']
         let g:startify_skiplist = ['.vimrc', '.zshrc', 'nginx.conf', 'COMMIT_EDITMSG', '/usr/local/Cellar/vim']
+
     "}}
 
     " Syntastic {{
+
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
         let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
         let g:syntastic_loc_list_height = 5
+
     "}}
 
+"}}
 
