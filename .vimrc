@@ -471,6 +471,9 @@
     " Map <leader>f to open CtrlP in buffer mode
     nnoremap <silent> <leader>f :CtrlPBuffer<cr>
 
+    " Repeat the last :! command
+    nnoremap <c-c> :!!<cr>
+
 "}}
 
 " Plugins {{
