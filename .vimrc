@@ -502,7 +502,7 @@
     " Startify {{
 
         let g:startify_bookmarks = ['~/.vimrc', '~/.zshrc', '/usr/local/etc/nginx/nginx.conf']
-        let g:startify_skiplist = ['.vimrc', '.zshrc', 'nginx.conf', 'COMMIT_EDITMSG', '/usr/local/Cellar/vim']
+        let g:startify_skiplist = ['COMMIT_EDITMSG', '/usr/local/Cellar/vim']
 
     "}}
 
