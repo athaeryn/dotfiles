@@ -1,4 +1,5 @@
 " NOTES {{
+
     " A bit stolen from Dan Menssen. (https://github.com/menssen)
     " Some things from http://amix.dk/vim/vimrc.html
 
@@ -8,6 +9,7 @@
 
     " Disable vi-compatibility right off the bat.
     set nocompatible
+
 "}}
 
 " Settings {{
@@ -36,46 +38,25 @@
 
     " Colorscheme {{
 
-        " Solarized {{
-            " Function to activate degraded colors for 256 color terminals without
-            " solarized scheme
-            function! FixColors()
-                if g:solarized_termcolors == 256
-                    let g:solarized_termcolors = 16
-                else
-                    let g:solarized_termcolors = 256
-                endif
-                colorscheme solarized
-                set background=dark
-            endfunction
-            command! FixColors call FixColors()
-
-            " Colors, solarized theme. See above for note.
-                syntax enable
-                let g:solarized_termtrans = 1
-                colorscheme solarized
-                set background=dark
-
-                " Set indent guide colors to sane values for solarized
-                let g:indent_guides_auto_colors = 0
-                autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=8 guibg=#002b36
-                autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=0 guibg=#073642
-        "}}
+        let g:hybrid_use_Xresources = 1
+        colorscheme hybrid
+        syntax enable
 
         " Highlights {{
+
             " Startify
-            hi StartifyBracket  ctermfg=12
+            hi StartifyBracket  ctermfg=8
             hi StartifyFile     ctermfg=15
-            hi StartifyNumber   ctermfg=3
+            hi StartifyNumber   ctermfg=11
             hi StartifyPath     ctermfg=12
-            hi StartifySlash    ctermfg=10
-            hi StartifySpecial  ctermfg=10
+            hi StartifySlash    ctermfg=7
+            hi StartifySpecial  ctermfg=2
 
             " (User1: filename, User2: flags)
-            hi StatusLine     ctermbg=8    ctermfg=12
-            hi StatusLineNC   ctermbg=8    ctermfg=10
-            hi User1          ctermbg=14   ctermfg=8
-            hi User2          ctermbg=0    ctermfg=1
+            hi StatusLine     ctermbg=0    ctermfg=12
+            hi StatusLineNC   ctermbg=0    ctermfg=10
+            hi User1          ctermbg=14   ctermfg=0
+            hi User2          ctermbg=0    ctermfg=9
 
             " listchars
             hi SpecialKey ctermfg=red ctermbg=white
@@ -85,6 +66,7 @@
     "}}
 
     " Search {{
+
         " Searches should be case insensitive...
         set ignorecase
         " ...unless there is a capital letter
@@ -93,8 +75,8 @@
         " Google... err... Vim Instant
         set incsearch
         set showmatch
-    "}}
 
+    "}}
 
     " Force showing five extra lines above and below cursor
     set scrolloff=5

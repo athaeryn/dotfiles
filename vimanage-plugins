@@ -1,6 +1,5 @@
 ---
 - Raimondi/delimitMate
-- altercation/vim-colors-solarized
 - athaeryn/vim-markdown
 - chrisbra/NrrwRgn
 - godlygeek/tabular
@@ -22,3 +21,4 @@
 - tpope/vim-surround
 - tpope/vim-unimpaired
 - vim-ruby/vim-ruby
+- vim-scripts/hybrid.vim
