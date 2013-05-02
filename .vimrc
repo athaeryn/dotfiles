@@ -259,6 +259,10 @@
 
 " Autocommands {{
 
+    " Hello good-bye
+    autocmd VimEnter * echo "Hello"
+    autocmd VimLeave * echo "Good-bye"
+
     " Files should open with cursor at same line as when closed
     " From vim docs, via Gary Bernhardt
     autocmd BufReadPost *
