@@ -7,14 +7,15 @@
 
     " Run vimanage to install plugins.
 
-    " Disable vi-compatibility right off the bat.
-    set nocompatible
 
 "}}
 
 " Settings {{
 
     " Environment {{
+
+        " Disable vi-compatibility right off the bat.
+        set nocompatible
 
         " Use zsh
         set shell=zsh
