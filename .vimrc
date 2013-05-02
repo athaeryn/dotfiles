@@ -53,9 +53,10 @@
             hi StartifySpecial  ctermfg=2
 
             " (User1: filename, User2: flags)
-            hi StatusLine    ctermfg=12  ctermbg=0
-            hi StatusLineNC  ctermfg=10  ctermbg=0
-            hi User1         ctermfg=0   ctermbg=8
+            " For some reason bg and fg are reversed for the StatusLine groups..
+            hi StatusLine    ctermfg=8  ctermbg=0
+            hi StatusLineNC  ctermfg=235  ctermbg=243
+            hi User1         ctermfg=0   ctermbg=15
             hi User2         ctermfg=9   ctermbg=0
 
             " listchars
