@@ -327,8 +327,8 @@
     " Splits {{
 
         " Shortcuts for creating splits
-        nnoremap <leader>v <C-w>v<C-w>l<C-w>L
-        nnoremap <leader>h <C-w>s<C-w>j
+        nnoremap <leader>v <C-w>v<C-w>l<C-w>L:Startify<cr>
+        nnoremap <leader>h <C-w>s<C-w>j:Startify<cr>
 
         " Easier split navigation
         nnoremap <c-h> <c-w>h
@@ -341,7 +341,7 @@
     " Tabs {{
 
         " new tab
-        map <leader>tn :tabnew<cr>
+        map <leader>tn :tabnew<cr>:Startify<cr>
         " 'solo' tab
         map <leader>to :tabonly<cr>
         " 'exit'
