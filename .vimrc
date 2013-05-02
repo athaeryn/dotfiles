@@ -31,6 +31,10 @@
         " via Gary Bernhardt
         set t_ti= t_te=
 
+
+        " Enable the :Man command
+        source $VIMRUNTIME/ftplugin/man.vim
+
         " Enable filetype plugins
         filetype plugin indent on
 
@@ -262,6 +266,9 @@
     " Hello good-bye
     autocmd VimEnter * echo "Hello"
     autocmd VimLeave * echo "Good-bye"
+
+    " Don't show listchars on man pages.
+    autocmd FileType man set nolist
 
     " Files should open with cursor at same line as when closed
     " From vim docs, via Gary Bernhardt

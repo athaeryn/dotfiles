@@ -99,3 +99,8 @@ compinit
 zstyle ':completion:*' menu select=2
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
+
+# Read man pages in Vim
+man () {
+    vim -c ":Man $@" -c "only"
+}
