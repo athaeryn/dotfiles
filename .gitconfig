@@ -34,6 +34,8 @@
     rh1 = reset HEAD^ --hard
     rh2 = reset HEAD^^ --hard
 
+    forcepush = push -f
+
     # Handy: search
     f = "!git ls-files | grep -i"
 
