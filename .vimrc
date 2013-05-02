@@ -134,8 +134,7 @@
 
         set statusline=                               " Clear the statusline
         set statusline+=[%n]                          " Buffer number
-        set statusline+=%2*                           " Back to default highlight
-        set statusline+=\ %(%{HasPaste()}\ %)         " Are we in paste mode?
+        set statusline+=%2*\                          " Back to default highlight
         set statusline+=%1*                           " User1 highlight
         set statusline+=\ %f\                         " File name
         set statusline+=%2*                           " Back to default highlight
@@ -307,14 +306,6 @@
         else
             return "\<c-p>"
         endif
-    endfunction
-
-    " Return a string telling if paste mode is enabled
-    function! HasPaste()
-        if &paste
-            return '[PASTE MODE]'
-        en
-        return ''
     endfunction
 
     " Revert the file
