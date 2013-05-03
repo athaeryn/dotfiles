@@ -268,6 +268,8 @@
     " Don't show listchars on man pages.
     autocmd FileType man set nolist
 
+    autocmd BufNewFile,BufRead * if &buftype == "quickfix" | nnoremap q :lclose<cr> | endif
+
     " Files should open with cursor at same line as when closed
     " From vim docs, via Gary Bernhardt
     autocmd BufReadPost *
@@ -418,7 +420,7 @@
     " Open a file in the same directory as the current file
     " (Stolen from Gary Bernhardt)
     cnoremap %% <C-R>=expand('%:h').'/'<cr>
-    map <leader>e :edit %%
+    map <leader>ee :edit %%
 
     " Copy and paste from system clipboard
     map <leader>p "+p
@@ -483,6 +485,8 @@
     " Repeat the last :! command
     nnoremap <c-c> :!!<cr>
 
+    nnoremap <leader>er :Errors<cr>
+
 "}}
 
 " Plugins {{
@@ -519,9 +523,9 @@
 
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
-        let g:syntastic_auto_loc_list = 1
+        "let g:syntastic_auto_loc_list = 1
         let g:syntastic_check_on_open = 1
-        let g:syntastic_loc_list_height = 5
+        "let g:syntastic_loc_list_height = 5
 
     "}}
 
