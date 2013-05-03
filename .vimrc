@@ -23,6 +23,9 @@
         " Use zsh
         set shell=zsh
 
+        " Set terminal type"
+        set term=$TERM
+
         " All other encodings are bad
         set encoding=utf-8
 
@@ -36,7 +39,6 @@
 
         " Pathogen Bundle Manager
         call pathogen#infect()
-        set term=$TERM
 
     "}}
 
