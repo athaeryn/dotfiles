@@ -31,10 +31,6 @@
         " via Gary Bernhardt
         set t_ti= t_te=
 
-
-        " Enable the :Man command
-        source $VIMRUNTIME/ftplugin/man.vim
-
         " Enable filetype plugins
         filetype plugin indent on
 
