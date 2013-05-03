@@ -59,7 +59,7 @@
             hi StartifySpecial  ctermfg=2
 
             " (User1: filename, User2: flags)
-            " For some reason bg and fg are reversed for the StatusLine groups..
+            " For some reason bg and fg are reversed for the statusline groups..
             hi StatusLine    ctermfg=8  ctermbg=0
             hi StatusLineNC  ctermfg=235  ctermbg=243
             hi User1         ctermfg=0   ctermbg=15
@@ -141,12 +141,12 @@
 
         set statusline=                               " Clear the statusline
         set statusline+=[%n]                          " Buffer number
-        set statusline+=%2*\                          " Back to default highlight
+        set statusline+=%2*\                          " Back to default hilight
         set statusline+=%1*                           " User1 highlight
         set statusline+=\ %f\                         " File name
-        set statusline+=%2*                           " Back to default highlight
-        set statusline+=\ %(%m%h%r\ %)                " Flags (help, modified, read-only)
-        set statusline+=%*\                           " Back to default highlight
+        set statusline+=%2*                           " Back to default hilight
+        set statusline+=\ %(%m%h%r\ %)                " Flags (h, [+], RO)
+        set statusline+=%*\                           " Back to default hilight
         set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
         set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
         set statusline+=%{&fileformat}]               " File format
@@ -210,14 +210,20 @@
         " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
         function! NeatFoldText()
             let foldstartchar = matchstr(&foldmarker, '..')
-            let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*' . foldstartchar . '\d*\s*', '', 'g') . ' '
+            let regex = '^\s*"\?\s*\|\s*"\?\s*' . foldstartchar . '\d*\s*'
+            let line = ' ' .
+                        \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
             let lines_count = v:foldend - v:foldstart + 1
-            let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-            let foldchar = matchstr(&fillchars, 'fold:\zs.')
-            let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-            let foldtextend = lines_count_text . repeat(foldchar, 8)
-            let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-            return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+            let lines_count_text = '| ' .
+                        \ printf("%10s", lines_count . ' lines') . ' |'
+            let fill = matchstr(&fillchars, 'fold:\zs.')
+            let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) .
+                        \ line, 0, (winwidth(0)*2)/3)
+            let foldtextend = lines_count_text . repeat(fill, 8)
+            let foldtextlength = strlen(substitute(foldtextstart . foldtextend,
+                        \ '.', 'x', 'g')) + &foldcolumn
+            return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) .
+                        \ foldtextend
         endfunction
         set foldtext=NeatFoldText()
 
@@ -261,29 +267,45 @@
 
 " Autocommands {{
 
-    " Hello good-bye
-    autocmd VimEnter * echo "Hello"
-    autocmd VimLeave * echo "Good-bye"
+    augroup Misc "{{
 
-    " Don't show listchars on man pages.
-    autocmd FileType man set nolist
+        autocmd!
 
-    autocmd BufNewFile,BufRead * if &buftype == "quickfix" | nnoremap q :lclose<cr> | endif
+        " Hello good-bye
+        autocmd VimEnter * echo "Hello"
+        autocmd VimLeave * echo "Good-bye"
 
-    " Files should open with cursor at same line as when closed
-    " From vim docs, via Gary Bernhardt
-    autocmd BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \   exe "normal g`\"" |
-                \ endif
+        " Close a quickfix window with q
+        autocmd BufNewFile,BufRead *
+                    \ if &buftype == "quickfix" |
+                    \     nnoremap q :lclose<cr> |
+                    \ endif
 
-    " For editing crontab
-    au! BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+        " Files should open with cursor at same line as when closed
+        " From vim docs, via Gary Bernhardt
+        autocmd BufReadPost *
+                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                    \     exe "normal g`\"" |
+                    \ endif
 
-    " Folding for .vimrc
-    autocmd BufNewFile,BufRead .vimrc set foldmethod=marker foldmarker={{,}}
+    augroup END "}}
 
-    " Markdown {{
+    augroup FileTypes "{{
+
+        autocmd!
+
+        " Don't show listchars on man pages.
+        autocmd FileType man set nolist
+
+        " For editing crontab
+        autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+
+        " Folding for .vimrc
+        autocmd BufNewFile,BufRead .vimrc set foldmethod=marker foldmarker={{,}}
+
+    augroup END "}}
+
+    augroup Markdown "{{
 
         " Make all text files markdown
         autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
@@ -296,7 +318,7 @@
         autocmd FileType markdown set showbreak=
         autocmd FileType txt set showbreak=
 
-    "}}
+    augroup END "}}
 
 "}}
 
@@ -514,8 +536,12 @@
 
     " Startify {{
 
-        let g:startify_bookmarks = ['~/.vimrc', '~/.zshrc', '/usr/local/etc/nginx/nginx.conf']
-        let g:startify_skiplist = ['COMMIT_EDITMSG', '/usr/local/Cellar/vim']
+        let g:startify_bookmarks = [
+                    \ '~/.vimrc',
+                    \ '~/.zshrc',
+                    \ '/usr/local/etc/nginx/nginx.conf'
+                    \]
+        let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
 
     "}}
 
