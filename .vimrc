@@ -361,27 +361,27 @@
 
         " new tab
         "map <leader>tn :tabnew<cr>:Startify<cr>
-        map <leader>tn :tabnew<cr>
+        noremap <leader>tn :tabnew<cr>
         " 'solo' tab
-        map <leader>to :tabonly<cr>
+        noremap <leader>to :tabonly<cr>
         " 'exit'
-        map <leader>te :tabclose<cr>
+        noremap <leader>te :tabclose<cr>
 
         " Navigation
-        nmap <silent> <C-n> :tabnext<CR>
-        nmap <silent> <C-p> :tabprev<CR>
-        imap <silent> <C-n> <esc><C-n>
-        imap <silent> <C-p> <esc><C-p>
+        nnoremap <silent> <C-n> :tabnext<CR>
+        nnoremap <silent> <C-p> :tabprev<CR>
+        inoremap <silent> <C-n> <esc><C-n>
+        inoremap <silent> <C-p> <esc><C-p>
 
     "}}
 
     " Toggles {{
 
         " ...spell checking
-        map <leader>ss :setlocal spell!<cr>
+        noremap <leader>ss :setlocal spell!<cr>
 
         " ...paste mode
-        map <leader>pp :set paste!<cr>
+        noremap <leader>pp :set paste!<cr>
 
         " ...NERDTree
         nnoremap <leader>r :NERDTreeToggle<cr>
@@ -390,7 +390,7 @@
         nnoremap <leader>w :set nowrap!<cr>
 
         " ...Syntastic mode
-        map <leader>sn :SyntasticToggleMode<cr>
+        noremap <leader>sn :SyntasticToggleMode<cr>
 
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>
@@ -420,11 +420,11 @@
     " Open a file in the same directory as the current file
     " (Stolen from Gary Bernhardt)
     cnoremap %% <C-R>=expand('%:h').'/'<cr>
-    map <leader>ee :edit %%
+    noremap <leader>ee :edit %%
 
     " Copy and paste from system clipboard
-    map <leader>p "+p
-    map <leader>y "+y
+    noremap <leader>p "+p
+    noremap <leader>y "+y
 
     " Sort! :D
     vnoremap <leader>s :sort<cr>
@@ -433,22 +433,22 @@
     nnoremap <enter> :noh<cr>
 
     " Force use of hjkl instead of arrows to break bad habits
-    map <up> <nop>
-    map <down> <nop>
-    map <left> <nop>
-    map <right> <nop>
+    noremap <up> <nop>
+    noremap <down> <nop>
+    noremap <left> <nop>
+    noremap <right> <nop>
 
     " Map F12 to revert (like Photoshop)
-    map <f12> :call Revert()<cr>
+    noremap <f12> :call Revert()<cr>
 
     " Formatting
-    map Q gq
+    noremap Q gq
 
     " Insert spaces in Normal mode
     nnoremap <space> i<space><esc>l
 
     " Rename the current file.
-    map <leader>n :call RenameFile()<cr>
+    noremap <leader>n :call RenameFile()<cr>
 
     " For InsertTabWrapper()
     inoremap <tab> <c-r>=InsertTabWrapper()<cr>
@@ -474,7 +474,7 @@
     vnoremap k gk
 
     " Convert Markdown to HTML
-    nmap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
+    nnoremap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
 
     " Set CtrlP map to ctrl-f because it's easier to hit
     let g:ctrlp_map = '<c-f>'
