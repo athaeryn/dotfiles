@@ -1,4 +1,4 @@
-" NOTES {{
+" NOTES {{{
 
     " Established Jan 2013.
 
@@ -11,11 +11,11 @@
     " I'm managing my plugins with a script I wrote, so run `vimanage` to
     " install plugins.
 
-"}}
+"}}}
 
-" Settings {{
+" Settings {{{
 
-    " Environment {{
+    " Environment {{{
 
         " Disable vi-compatibility right off the bat.
         set nocompatible
@@ -40,15 +40,15 @@
         " Pathogen Bundle Manager
         call pathogen#infect()
 
-    "}}
+    "}}}
 
-    " Colorscheme {{
+    " Colorscheme {{{
 
         let g:hybrid_use_Xresources = 1
         colorscheme hybrid
         syntax enable
 
-        " Highlights {{
+        " Highlights {{{
 
             " Startify
             hi StartifyBracket  ctermfg=8
@@ -68,11 +68,11 @@
             " listchars
             hi SpecialKey ctermfg=red ctermbg=white
 
-        "}}
+        "}}}
 
-    "}}
+    "}}}
 
-    " Search {{
+    " Search {{{
 
         " Searches should be case insensitive...
         set ignorecase
@@ -83,10 +83,10 @@
         set incsearch
         set showmatch
 
-    "}}
+    "}}}
 
     " Force showing five extra lines above and below cursor
-    set scrolloff=5
+    set scrolloff=10
 
     " Don't wrap text, but add characters indicating hidden parts of a line
     " and change horizontal scrolling to be sane
@@ -137,7 +137,7 @@
     set winminheight=10
     set winheight=999
 
-    " Statusline {{
+    " Statusline {{{
 
         set statusline=                               " Clear the statusline
         set statusline+=[%n]                          " Buffer number
@@ -154,17 +154,17 @@
         set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
         set statusline+=\ %P                          " Percent through file
 
-    "}}
+    "}}}
 
-    " Mouse {{
+    " Mouse {{{
 
         " Enable mouse support in terminals that can handle it (iTerm can,
         " Terminal.app can't)
         set mouse=a
 
-    "}}
+    "}}}
 
-    " Info {{
+    " Info {{{
 
         " Do not beep.
         set visualbell
@@ -178,14 +178,14 @@
         " display the current mode in the status line
         set showmode
 
-    "}}
+    "}}}
 
 
 
     " Make backspace also delete indents d line endings
     set backspace=indent,eol,start
 
-    " Indentation {{
+    " Indentation {{{
 
         " Turn on auto-indentation, for better or worse
         set autoindent
@@ -197,9 +197,9 @@
         set softtabstop=4
         set expandtab
 
-    "}}
+    "}}}
 
-    " Folding {{
+    " Folding {{{
 
         " Set fold method to indent
         set foldmethod=indent
@@ -209,8 +209,7 @@
 
         " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
         function! NeatFoldText()
-            let foldstartchar = matchstr(&foldmarker, '..')
-            let regex = '^\s*"\?\s*\|\s*"\?\s*' . foldstartchar . '\d*\s*'
+            let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
             let line = ' ' .
                         \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
             let lines_count = v:foldend - v:foldstart + 1
@@ -227,7 +226,7 @@
         endfunction
         set foldtext=NeatFoldText()
 
-    "}}
+    "}}}
 
 
     " Kill some security exploits and also modelines are a dumb idea
@@ -263,11 +262,11 @@
     " Improve session saving.
     set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
-"}}
+"}}}
 
-" Autocommands {{
+" Autocommands {{{
 
-    augroup Misc "{{
+    augroup Misc "{{{
 
         autocmd!
 
@@ -288,9 +287,9 @@
                     \     exe "normal g`\"" |
                     \ endif
 
-    augroup END "}}
+    augroup END "}}}
 
-    augroup FileTypes "{{
+    augroup FileTypes "{{{
 
         autocmd!
 
@@ -301,11 +300,11 @@
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
         " Folding for .vimrc
-        autocmd BufNewFile,BufRead .vimrc set foldmethod=marker foldmarker={{,}}
+        autocmd BufNewFile,BufRead .vimrc set foldmethod=marker
 
-    augroup END "}}
+    augroup END "}}}
 
-    augroup Markdown "{{
+    augroup Markdown "{{{
 
         " Make all text files markdown
         autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
@@ -318,11 +317,11 @@
         autocmd FileType markdown set showbreak=
         autocmd FileType txt set showbreak=
 
-    augroup END "}}
+    augroup END "}}}
 
-"}}
+"}}}
 
-" Functions {{
+" Functions {{{
 
     " Rename Current File (Stolen from Gary Bernhardt)
     function! RenameFile()
@@ -354,15 +353,15 @@
         return
     endfunction
 
-"}}
+"}}}
 
-" Mappings {{
+" Mappings {{{
 
     " Change the leader key to comma
     let mapleader = ","
     let g:mapleader = ","
 
-    " Splits {{
+    " Splits {{{
 
         " Shortcuts for creating splits
         "nnoremap <leader>v <C-w>v<C-w>l<C-w>L:Startify<cr>
@@ -377,9 +376,9 @@
         nnoremap <c-k> <c-w>k
         nnoremap <c-l> <c-w>l
 
-    "}}
+    "}}}
 
-    " Tabs {{
+    " Tabs {{{
 
         " new tab
         "map <leader>tn :tabnew<cr>:Startify<cr>
@@ -395,9 +394,9 @@
         inoremap <silent> <C-n> <esc><C-n>
         inoremap <silent> <C-p> <esc><C-p>
 
-    "}}
+    "}}}
 
-    " Toggles {{
+    " Toggles {{{
 
         " ...spell checking
         noremap <leader>ss :setlocal spell!<cr>
@@ -417,7 +416,7 @@
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>
 
-    "}}
+    "}}}
 
     " Shortcut to close a buffer without closing the window
     nnoremap <silent> <leader>d :Bclose<cr>
@@ -509,11 +508,11 @@
 
     nnoremap <leader>er :Errors<cr>
 
-"}}
+"}}}
 
-" Plugins {{
+" Plugins {{{
 
-    " CtrlP {{
+    " CtrlP {{{
 
         " Increase CtrlP file limit from 10,000 to 100,000
         let g:ctrlp_max_files = 100000
@@ -532,9 +531,9 @@
         " And the build directory (xcode)
         set wildignore+=*/build/*
 
-    "}}
+    "}}}
 
-    " Startify {{
+    " Startify {{{
 
         let g:startify_bookmarks = [
                     \ '~/.vimrc',
@@ -543,9 +542,9 @@
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
 
-    "}}
+    "}}}
 
-    " Syntastic {{
+    " Syntastic {{{
 
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
@@ -553,7 +552,7 @@
         let g:syntastic_check_on_open = 1
         "let g:syntastic_loc_list_height = 5
 
-    "}}
+    "}}}
 
-"}}
+"}}}
 
