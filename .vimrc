@@ -295,7 +295,7 @@
         autocmd!
 
         " Don't show listchars on man pages.
-        autocmd FileType man set nolist
+        autocmd FileType man set nolist | nnoremap q :q!<cr>
 
         " For editing crontab
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
