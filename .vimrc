@@ -299,8 +299,8 @@
         " For editing crontab
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
-        " Folding for .vimrc
-        autocmd BufNewFile,BufRead .vimrc set foldmethod=marker
+        " Folding for vim files
+        autocmd FileType vim set foldmethod=marker
 
     augroup END "}}}
 
