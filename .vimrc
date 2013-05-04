@@ -353,6 +353,12 @@
         return
     endfunction
 
+    function! TabSpaces (how_many)
+        let &tabstop = a:how_many
+        let &shiftwidth = a:how_many
+        let &softtabstop = a:how_many
+    endfunction
+
 "}}}
 
 " Mappings {{{
