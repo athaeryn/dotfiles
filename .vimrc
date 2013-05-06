@@ -513,6 +513,9 @@
 
     nnoremap <leader>er :Errors<cr>
 
+    " Open the current directory
+    nnoremap <c-d> :!open .<cr>
+
 "}}}
 
 " Plugins {{{
