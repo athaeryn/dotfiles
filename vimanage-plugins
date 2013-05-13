@@ -21,4 +21,5 @@
 - tpope/vim-surround
 - tpope/vim-unimpaired
 - vim-ruby/vim-ruby
+- vim-scripts/brainfuck-syntax
 - vim-scripts/hybrid.vim

@@ -299,6 +299,9 @@
         " For editing crontab
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
+        " For brainfuck
+        autocmd BufNewFile,BufRead *.bf set filetype=brainfuck
+
         " Folding for vim files
         autocmd FileType vim set foldmethod=marker
 
