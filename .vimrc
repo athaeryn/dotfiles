@@ -407,22 +407,22 @@
     " Toggles {{{
 
         " ...spell checking
-        noremap <leader>ss :setlocal spell!<cr>
+        noremap <leader>ss :setlocal spell!<cr>:setlocal spell?<cr>
 
         " ...paste mode
-        noremap <leader>pp :set paste!<cr>
+        noremap <leader>pp :set paste!<cr>:set paste?<cr>
 
         " ...NERDTree
         nnoremap <leader>r :NERDTreeToggle<cr>
 
         " ...textwrap
-        nnoremap <leader>w :set nowrap!<cr>
+        nnoremap <leader>w :set nowrap!<cr>:set wrap?<cr>
 
         " ...Syntastic mode
         noremap <leader>sn :SyntasticToggleMode<cr>
 
         " ...display listchars
-        nnoremap <leader>l :setl nolist!<cr>
+        nnoremap <leader>l :setl nolist!<cr>:set list?<cr>
 
     "}}}
 
