@@ -98,3 +98,10 @@ export NODE_PATH=/usr/local/lib/node
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
+# Android {{{
+
+export PATH=$PATH:~/android/android-sdk-macosx/tools
+export PATH=$PATH:~/android/android-sdk-macosx/platform-tools
+export ANDROID_HOME=~/android/android-sdk-macosx
+
+# }}}
