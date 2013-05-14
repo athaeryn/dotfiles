@@ -96,7 +96,8 @@
     set cmdheight=2
 
     " If wrapping is enabled, mark wrapped lines
-    set showbreak=\ ->\ 
+    " Comment is to prevent automatic trailing whitespace removal
+    set showbreak=\ ->\ "
 
     " Don't redraw while executing macros
     set lazyredraw
@@ -404,13 +405,13 @@
     " Toggles... {{{
 
         " ...spell checking
-        noremap <leader>ss :setlocal spell!<cr>:setlocal spell?<cr>
+        noremap <leader>sl :setlocal spell!<cr>:setlocal spell?<cr>
 
         " ...paste mode
         noremap <leader>pp :set paste!<cr>:set paste?<cr>
 
         " ...NERDTree
-        nnoremap <leader>r :NERDTreeToggle<cr>
+        nnoremap <leader>tr :NERDTreeToggle<cr>
 
         " ...textwrap
         nnoremap <leader>w :set nowrap!<cr>:set wrap?<cr>
@@ -467,9 +468,6 @@
     " Map F12 to revert (like Photoshop)
     noremap <f12> :call Revert()<cr>
 
-    " Formatting
-    noremap Q gq
-
     " Insert spaces in Normal mode
     nnoremap <space> i<space><esc>l
 
@@ -484,8 +482,9 @@
     " For quick .vimrc hacking
     noremap \v :tabnew ~/.vimrc<cr>
 
-    " jj leaves insert mode
-    inoremap jj <ESC>
+    " jj or kj leaves insert mode, staying in place
+    inoremap jj <esc>l
+    inoremap kj <esc>l
 
     " Keep the selection when indenting
     vnoremap < <gv
@@ -503,9 +502,6 @@
     " Convert Markdown to HTML
     nnoremap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
 
-    " Set CtrlP map to ctrl-f because it's easier to hit
-    let g:ctrlp_map = '<c-f>'
-
     " Map <leader>f to open CtrlP in buffer mode
     nnoremap <silent> <leader>f :CtrlPBuffer<cr>
 
@@ -515,19 +511,25 @@
     " Display errors
     nnoremap <leader>er :Errors<cr>
 
-    nnoremap <c-d> :!open .<cr>
     " Open the current directory in Finder
+    nnoremap <silent> <c-d> :!open .<cr>
 
     " Inspect highlight under cursor
     map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
+    " Remove trailing whitespace
+    noremap <leader>rw :%s/\s\+$//e<cr>
+
 "}}}
 
 " Plugins {{{
 
     " CtrlP {{{
+
+        " Set CtrlP map to ctrl-f because it's easier to hit
+        let g:ctrlp_map = '<c-f>'
 
         " Increase CtrlP file limit from 10,000 to 100,000
         let g:ctrlp_max_files = 100000
@@ -563,10 +565,9 @@
 
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
-        "let g:syntastic_auto_loc_list = 1
+
         " Check for errors when opening a file
         let g:syntastic_check_on_open = 1
-        "let g:syntastic_loc_list_height = 5
 
     "}}}
 
