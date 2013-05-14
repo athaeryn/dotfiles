@@ -1,15 +1,7 @@
 " NOTES {{{
 
     " Established Jan 2013.
-
     " My starting point was Dan Menssen's .vimrc. (https://github.com/menssen)
-
-    " I found a few useful things here: http://amix.dk/vim/vimrc.html
-
-    " I've tried to keep things somewhat logically grouped with folds.
-
-    " I'm managing my plugins with a script I wrote, so run `vimanage` to
-    " install plugins.
 
 "}}}
 
