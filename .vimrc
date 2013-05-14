@@ -405,7 +405,7 @@
     " Toggles... {{{
 
         " ...spell checking
-        noremap <leader>sl :setlocal spell!<cr>:setlocal spell?<cr>
+        noremap <leader>sp :setlocal spell!<cr>:setlocal spell?<cr>
 
         " ...paste mode
         noremap <leader>pp :set paste!<cr>:set paste?<cr>
