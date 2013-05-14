@@ -9,13 +9,13 @@
 
     " Environment {{{
 
-        " Disable vi-compatibility right off the bat.
+        " Disable vi-compatibility right off the bat
         set nocompatible
 
         " Use zsh
         set shell=zsh
 
-        " Set terminal type"
+        " Set terminal type
         set term=$TERM
 
         " All other encodings are bad
@@ -38,6 +38,8 @@
 
         let g:hybrid_use_Xresources = 1
         colorscheme hybrid
+
+        " Enable syntax highlighting
         syntax enable
 
         " Highlights {{{
@@ -99,29 +101,28 @@
     " Don't redraw while executing macros
     set lazyredraw
 
-    " show listchars
+    " Show listchars...
     set list
-
-    " which are:
+    " ...which are:
     set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 
-    " highlight all matches for the last used search pattern.
+    " Highlight all matches for the last used search pattern
     set hlsearch
 
     " Highlight the line the cursor is in
     set cursorline
 
-    " Display a colored column at 81 characters
-    " (This means text appearing on top of the line is BAD)
+    " Display a colored column at 81 characters. Do not cross
     set colorcolumn=81
 
-    " Don't unload a buffer when no longer shown in a window
+    " Hang on to a buffer even when no longer shown in a window
     set hidden
 
     " Always show the status line above the command line
     set laststatus=2
 
     " Shrink inactive splits to 10 rows and 20 cols
+    " Considering getting rid of this...
     set winwidth=20
     set winminwidth=20
     set winwidth=120
@@ -158,7 +159,7 @@
 
     " Info {{{
 
-        " Do not beep.
+        " Do NOT beep
         set visualbell
 
         " Show the cursor position at the end of the status line
@@ -167,14 +168,14 @@
         " Show tidbits of info in bottom right about current keyboard command
         set showcmd
 
-        " display the current mode in the status line
+        " Display the current mode in the status line
         set showmode
 
     "}}}
 
 
 
-    " Make backspace also delete indents d line endings
+    " Make backspace also delete indents and line endings
     set backspace=indent,eol,start
 
     " Indentation {{{
@@ -199,7 +200,7 @@
         " Don't fold by default
         set nofoldenable
 
-        " from http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+        " From http://dhruvasagar.com/2013/03/28/vim-better-foldtext
         function! NeatFoldText()
             let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
             let line = ' ' .
@@ -230,7 +231,7 @@
     " Reload a file that is modified from the outside
     set autoread
 
-    " Stop littering .swp files everywhere.
+    " Stop littering .swp files everywhere
     set noswapfile
 
     " Put swapfiles in the backup directory
@@ -251,7 +252,7 @@
     " Gimme tab completion on .css-class-names and stuff
     set iskeyword+=-
 
-    " Improve session saving.
+    " Improve session saving
     set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
 "}}}
@@ -285,13 +286,15 @@
 
         autocmd!
 
-        " Don't show listchars on man pages.
+        " For man pages:
+        "   - don't show listchars
+        "   - exit with q
         autocmd FileType man set nolist | nnoremap q :q!<cr>
 
-        " For editing crontab
+        " This makes editing crontab possible
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
-        " For brainfuck
+        " .bf means brainfuck
         autocmd BufNewFile,BufRead *.bf set filetype=brainfuck
 
         " Folding for vim files
@@ -348,6 +351,7 @@
         return
     endfunction
 
+    " Change the amount of space to insert in place of a tab
     function! TabSpaces (how_many)
         let &tabstop = a:how_many
         let &shiftwidth = a:how_many
@@ -365,11 +369,12 @@
     " Splits {{{
 
         " Shortcuts for creating splits
-        nnoremap <leader>v <C-w>v<C-w>l<C-w>L:Startify<cr>
-        nnoremap <leader>h <C-w>s<C-w>j:Startify<cr>
-        " Without opening startify
-        nnoremap <leader>V <C-w>v<C-w>l<C-w>L
-        nnoremap <leader>H <C-w>s<C-w>j
+        " Show Startify by default...
+        nnoremap <leader>v <c-w>v<c-w>l<c-w>L:Startify<cr>
+        nnoremap <leader>h <c-w>s<c-w>j:Startify<cr>
+        " ...or not with capital V and H
+        nnoremap <leader>V <c-w>v<c-w>l<c-w>L
+        nnoremap <leader>H <c-w>s<c-w>j
 
         " Easier split navigation
         nnoremap <c-h> <c-w>h
@@ -381,22 +386,22 @@
 
     " Tabs {{{
 
-        " new tab
+        " New tab (show Startify)
         map <leader>tn :tabnew<cr>:Startify<cr>
-        " 'solo' tab
+        " Only tab
         noremap <leader>to :tabonly<cr>
-        " 'exit'
+        " Exit
         noremap <leader>te :tabclose<cr>
 
         " Navigation
-        nnoremap <silent> <C-n> :tabnext<CR>
-        nnoremap <silent> <C-p> :tabprev<CR>
-        inoremap <silent> <C-n> <esc><C-n>
-        inoremap <silent> <C-p> <esc><C-p>
+        nnoremap <silent> <c-n> :tabnext<cr>
+        nnoremap <silent> <c-p> :tabprev<cr>
+        inoremap <silent> <c-n> <esc><c-n>
+        inoremap <silent> <c-p> <esc><c-p>
 
     "}}}
 
-    " Toggles {{{
+    " Toggles... {{{
 
         " ...spell checking
         noremap <leader>ss :setlocal spell!<cr>:setlocal spell?<cr>
@@ -434,7 +439,7 @@
     noremap <c-e> 5<c-e>
     noremap <c-y> 5<c-y>
 
-    " Turn off vim-mode regexes because nobody knows how they work
+    " Always be magical. Very magical. Always.
     nnoremap / /\v
     vnoremap / /\v
 
@@ -453,7 +458,7 @@
     " Clear highlighted search
     nnoremap <enter> :noh<cr>
 
-    " Force use of hjkl instead of arrows to break bad habits
+    " Friends don't let friends use the arrow keys
     noremap <up> <nop>
     noremap <down> <nop>
     noremap <left> <nop>
@@ -468,14 +473,15 @@
     " Insert spaces in Normal mode
     nnoremap <space> i<space><esc>l
 
-    " Rename the current file.
+    " Rename the current file
     noremap <leader>n :call RenameFile()<cr>
 
     " For InsertTabWrapper()
     inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+    " Omnicomplete uses shift-tab
     inoremap <s-tab> <c-n>
 
-    " For quick .vimrc hacking.
+    " For quick .vimrc hacking
     noremap \v :tabnew ~/.vimrc<cr>
 
     " jj leaves insert mode
@@ -506,15 +512,16 @@
     " Repeat the last :! command
     nnoremap <c-c> :!!<cr>
 
+    " Display errors
     nnoremap <leader>er :Errors<cr>
 
-    " Open the current directory
     nnoremap <c-d> :!open .<cr>
+    " Open the current directory in Finder
 
-    " Inspect hi under cursor
-    map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+    " Inspect highlight under cursor
+    map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
     \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
 "}}}
 
@@ -557,6 +564,7 @@
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
         "let g:syntastic_auto_loc_list = 1
+        " Check for errors when opening a file
         let g:syntastic_check_on_open = 1
         "let g:syntastic_loc_list_height = 5
 
