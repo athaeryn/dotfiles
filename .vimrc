@@ -515,8 +515,8 @@
     nnoremap <silent> <c-d> :!open .<cr>
 
     " Inspect highlight under cursor
-    map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-    \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+    map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+    \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
     " Remove trailing whitespace
