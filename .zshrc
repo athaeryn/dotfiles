@@ -1,6 +1,5 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="athaeryn"
 
 # ALIASES {{
     alias zshconfig="vim ~/.zshrc ; source ~/.zshrc"
@@ -29,7 +28,7 @@ source $ZSH/oh-my-zsh.sh
     }
 
     function prompt_char {
-        command git branch >/dev/null 2>/dev/null && echo '±' && return
+        git branch >/dev/null 2>/dev/null && echo '±' && return
         svn branch >/dev/null 2>/dev/null && echo '' && return
         echo '$'
     }
@@ -58,8 +57,16 @@ source $ZSH/oh-my-zsh.sh
 # This loads RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-
 export PATH=/usr/local/bin:$PATH:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
+
+PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
+%{$reset_color%}$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[magenta]%}?"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 export VISUAL=vim
 export EDITOR=vim
