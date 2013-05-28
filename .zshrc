@@ -106,3 +106,9 @@ export ANDROID_HOME=~/android/android-sdk-macosx
 
 # }}}
 
+# Cowsay {{{
+
+export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
+
+# }}}
+
