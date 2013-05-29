@@ -454,7 +454,7 @@
     noremap <leader>y "+y
 
     " Sort! :D
-    vnoremap <leader>s :sort<cr>
+    vnoremap <leader>st :sort<cr>
 
     " Clear highlighted search
     nnoremap <enter> :noh<cr>
