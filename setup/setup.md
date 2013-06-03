@@ -70,6 +70,10 @@ Link everything up.
 
 Use ~/.ssh/config as a guide.
 
+## 13. Install MySQL, PHP, and Nginx...
+
+...with this [helpful guide](http://xig.me/osx-php-mysql-nginx.html)!
+
 ----
 
 # Appendix A
