@@ -26,7 +26,7 @@ class Vimanage
     end
 
     def initial_setup
-        system("mkdir -p ~/.vim/autoload ~/.vim/bundle")
+        system("mkdir -p ~/.vim/autoload ~/.vim/bundle ~/.vim/backup ~/.vim/undo")
         system("mkdir -p ~/.vim/bundle/bclose/plugin")
 
         #Check for Bclose
