@@ -5,6 +5,7 @@
 - athaeryn/vim-markdown
 - chrisbra/NrrwRgn
 - godlygeek/tabular
+- kchmck/vim-coffee-script
 - kien/ctrlp.vim
 - mhinz/vim-startify
 - mileszs/ack.vim
