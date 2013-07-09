@@ -54,10 +54,14 @@ source $ZSH/oh-my-zsh.sh
     }
 #}}
 
-# This loads RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-export PATH=/usr/local/bin:$PATH:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
+export PATH=/usr/local/bin:$PATH:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
+
+# Add rbenv to the path
+export PATH="$HOME/.rbenv/bin:$PATH"
+export RBENV_ROOT=/usr/local/var/rbenv
+# Enable rbenv shims and autocomplete
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
 %{$reset_color%}$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
