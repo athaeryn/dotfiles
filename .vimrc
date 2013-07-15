@@ -51,6 +51,7 @@
             hi StartifyPath     ctermfg=12
             hi StartifySlash    ctermfg=7
             hi StartifySpecial  ctermfg=2
+            hi StartifyHeader   ctermfg=3
 
             " (User1: filename, User2: flags)
             " For some reason bg and fg are reversed for the statusline groups..
@@ -561,6 +562,24 @@
                     \ '/usr/local/etc/nginx/nginx.conf'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
+        let g:startify_custom_header = [
+                     \ '',
+                     \ '    1111111111111111111111111111111111111',
+                     \ '    0000000000000000000000000000000000000',
+                     \ '',
+                     \ '    111     111 11111111111 1111     1111',
+                     \ '    101     101     101     010101 101010',
+                     \ '    010     010     010     010 01010 010',
+                     \ '    000     010     000     000  010  000',
+                     \ '     000   000      000     000       000',
+                     \ '      0000000       000     000       000',
+                     \ '        000     00000000000 000       000',
+                     \ '',
+                     \ '    0000000000000000000000000000000000000',
+                     \ '    1111111111111111111111111111111111111',
+                     \ '',
+                     \ '',
+                     \ ]
 
     "}}}
 
