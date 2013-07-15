@@ -55,10 +55,8 @@ source $ZSH/oh-my-zsh.sh
 #}}
 
 
-# This loads RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-export PATH=/usr/local/bin:$PATH:/usr/local/sbin:~/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
+export PATH=/usr/local/bin:$PATH:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
 
 PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
 %{$reset_color%}$(git_prompt_info)$(virtualenv_info) $(prompt_char) '
@@ -68,6 +66,9 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[magenta]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+# rbenv needs this
+eval "$(rbenv init -)"
 
 export VISUAL=vim
 export EDITOR=vim
