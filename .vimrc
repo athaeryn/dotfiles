@@ -522,6 +522,9 @@
     " Remove trailing whitespace
     noremap <leader>rw :%s/\s\+$//e<cr>
 
+    " Refresh the split to the right
+    noremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
+
 "}}}
 
 " Plugins {{{
