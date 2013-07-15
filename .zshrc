@@ -6,6 +6,8 @@ ZSH=$HOME/.oh-my-zsh
     alias lgrep="l | grep"
     alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 
+    alias rhash="rbenv rehash"
+
     # Spelling helpers
     alias gerp="grep"
     alias git="~/bin/leaf-collector"
