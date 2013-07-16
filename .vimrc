@@ -562,6 +562,7 @@
                     \ '/usr/local/etc/nginx/nginx.conf'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
+        let g:startify_change_to_dir = 0
         let g:startify_custom_header = [
                      \ '',
                      \ '    1111111111111111111111111111111111111',
