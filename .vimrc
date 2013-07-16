@@ -302,6 +302,9 @@
         " Folding for vim files
         autocmd FileType vim set foldmethod=marker
 
+        " Don't show listchars in git commit view, it's annoying
+        autocmd FileType gitcommit set nolist
+
     augroup END "}}}
 
     augroup Markdown "{{{
