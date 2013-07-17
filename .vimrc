@@ -430,6 +430,21 @@
 
     "}}}
 
+    " Vimux {{{
+
+        " These are prefixed with 'm' to avoid slowing down <leader>v
+
+        " Prompt for a command
+        nnoremap <leader>mvc :VimuxPromptCommand<cr>
+
+        " Run the last command
+        nnoremap <leader>mvl :VimuxRunLastCommand<cr>
+
+        " Close the Vimux pane
+        nnoremap <leader>mvx :VimuxCloseRunner<cr>
+
+    " }}}
+
     " Shortcut to close a buffer without closing the window
     nnoremap <silent> <leader>d :Bclose<cr>
 
