@@ -235,7 +235,6 @@
 
     " Stop littering .swp files everywhere
     set noswapfile
-
     " Put swapfiles in the backup directory
     set directory=~/.vim/backup
 
@@ -373,13 +372,9 @@
 
     " Splits {{{
 
-        " Shortcuts for creating splits
-        " Show Startify by default...
+        " Shortcuts for creating splits (show Startify)
         nnoremap <leader>v <c-w>v<c-w>l<c-w>L:Startify<cr>
         nnoremap <leader>h <c-w>s<c-w>j:Startify<cr>
-        " ...or not with capital V and H
-        nnoremap <leader>V <c-w>v<c-w>l<c-w>L
-        nnoremap <leader>H <c-w>s<c-w>j
 
         " Easier split navigation
         nnoremap <c-h> <c-w>h
@@ -435,9 +430,6 @@
     nnoremap <leader><leader> <c-^>
 
     " Add a line below in normal mode, stay in normal mode
-    nnoremap <c-o> o<esc>
-
-    " Add a blank line below in normal mode, stay in normal mode
     nnoremap <c-o> o<esc>0D
 
     " Make scroll up/down scroll faster
@@ -447,11 +439,6 @@
     " Always be magical. Very magical. Always.
     nnoremap / /\v
     vnoremap / /\v
-
-    " Open a file in the same directory as the current file
-    " (Stolen from Gary Bernhardt)
-    cnoremap %% <C-R>=expand('%:h').'/'<cr>
-    noremap <leader>ee :edit %%
 
     " Copy and paste from system clipboard
     noremap <leader>p "+p
@@ -483,7 +470,7 @@
     " Omnicomplete uses shift-tab
     inoremap <s-tab> <c-n>
 
-    " For quick .vimrc hacking
+    " For quick .vimrc changing
     noremap \v :tabnew ~/.vimrc<cr>
 
     " jj or kj leaves insert mode, staying in place
