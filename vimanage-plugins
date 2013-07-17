@@ -1,8 +1,8 @@
 ---
 - Raimondi/delimitMate
 - Rip-Rip/clang_complete
-- Valloric/MatchTagAlways
 - athaeryn/vim-markdown
+- benmills/vimux
 - chrisbra/NrrwRgn
 - godlygeek/tabular
 - kchmck/vim-coffee-script
