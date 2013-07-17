@@ -44,21 +44,29 @@
 
         " Highlights {{{
 
-            " Startify
-            hi StartifyBracket  ctermfg=8
-            hi StartifyFile     ctermfg=15
-            hi StartifyNumber   ctermfg=11
-            hi StartifyPath     ctermfg=12
-            hi StartifySlash    ctermfg=7
-            hi StartifySpecial  ctermfg=2
-            hi StartifyHeader   ctermfg=3
+            " Startify {{{
 
-            " (User1: filename, User2: flags)
-            " For some reason bg and fg are reversed for the statusline groups..
-            hi StatusLine    ctermfg=8  ctermbg=0
-            hi StatusLineNC  ctermfg=235  ctermbg=243
-            hi User1         ctermfg=0   ctermbg=15
-            hi User2         ctermfg=9   ctermbg=0
+                hi StartifyBracket  ctermfg=8
+                hi StartifyFile     ctermfg=15
+                hi StartifyNumber   ctermfg=11
+                hi StartifyPath     ctermfg=12
+                hi StartifySlash    ctermfg=7
+                hi StartifySpecial  ctermfg=2
+                hi StartifyHeader   ctermfg=3
+
+            " }}}
+
+            " Statusline {{{
+
+                " For some reason bg and fg are reversed for the statusline groups..
+                hi StatusLine    ctermfg=10  ctermbg=0
+                hi StatusLineNC  ctermfg=8   ctermbg=0
+                " Filename
+                hi User1  ctermfg=0  ctermbg=7
+                " Flags
+                hi User2  ctermfg=9  ctermbg=0
+
+            " }}}
 
             " listchars
             hi SpecialKey ctermfg=red ctermbg=white
@@ -135,19 +143,18 @@
     " Statusline {{{
 
         set statusline=                               " Clear the statusline
-        set statusline+=[%n]                          " Buffer number
-        set statusline+=%2*\                          " Back to default hilight
+        set statusline+=[%n]\                         " Buffer number
         set statusline+=%1*                           " User1 highlight
         set statusline+=\ %f\                         " File name
-        set statusline+=%2*                           " Back to default hilight
-        set statusline+=\ %(%m%h%r\ %)                " Flags (h, [+], RO)
-        set statusline+=%*\                           " Back to default hilight
+        set statusline+=%2*                           " User2 hilight
+        set statusline+=%(\ %m%h%r\ %)                " Flags (h, [+], RO)
+        set statusline+=%*\                           " Back to default highlight
         set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
         set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
         set statusline+=%{&fileformat}]               " File format
         set statusline+=%=                            " Right align the rest
         set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
-        set statusline+=\ %P                          " Percent through file
+        set statusline+=\ %P\                         " Percent through file
 
     "}}}
 
