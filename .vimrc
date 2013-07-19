@@ -564,6 +564,10 @@
         " And the build directory (xcode)
         set wildignore+=*/build/*
 
+        let g:ctrlp_custom_ignore = {
+                    \ 'dir': '\v[\/]\.sass-cache'
+                    \ }
+
     "}}}
 
     " Startify {{{
