@@ -5,8 +5,10 @@ automake
 boost
 brew-cask
 cmake
+cowsay
 cscope
 ctags
+figlet
 freetype
 gdbm
 gettext
@@ -24,6 +26,7 @@ libtool
 libxml2
 libxslt
 libyaml
+mcrypt
 mysql
 nginx
 node
@@ -31,6 +34,8 @@ opencv
 openssl
 pcre
 php54
+php54-mcrypt
+phpmyadmin
 pkg-config
 pow
 python
