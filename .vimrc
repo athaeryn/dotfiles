@@ -419,6 +419,9 @@
         " ...NERDTree
         nnoremap <leader>tr :NERDTreeToggle<cr>
 
+        " ...Tagbar
+        nnoremap <f8> :TagbarToggle<cr>
+
         " ...textwrap
         nnoremap <leader>w :set nowrap!<cr>:set wrap?<cr>
 
