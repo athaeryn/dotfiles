@@ -27,14 +27,14 @@ class Vimanage
 
     def initial_setup
         system("mkdir -p ~/.vim/autoload ~/.vim/bundle ~/.vim/backup ~/.vim/undo")
-        system("mkdir -p ~/.vim/bundle/bclose/plugin")
+        #system("mkdir -p ~/.vim/bundle/bclose/plugin")
 
         #Check for Bclose
-        unless File.exist?(File.expand_path('~/.vim/bundle/bclose/plugin/bclose.vim'))
-            print "Bclose script not found. Installing... "
-            system("cp #{@file_path}bclose.vim ~/.vim/bundle/bclose/plugin/bclose.vim")
-            print "done.\n"
-        end
+        #unless File.exist?(File.expand_path('~/.vim/bundle/bclose/plugin/bclose.vim'))
+            #print "Bclose script not found. Installing... "
+            #system("cp #{@file_path}bclose.vim ~/.vim/bundle/bclose/plugin/bclose.vim")
+            #print "done.\n"
+        #end
 
         #Check for pathogen
         unless File.exist?(File.expand_path "~/.vim/autoload/pathogen.vim")

@@ -449,7 +449,7 @@
     " }}}
 
     " Shortcut to close a buffer without closing the window
-    nnoremap <silent> <leader>d :Bclose<cr>
+    nnoremap <silent> <leader>d :Bdelete<cr>
 
     " Map <leader><leader> to switch to last buffer
     nnoremap <leader><leader> <c-^>
