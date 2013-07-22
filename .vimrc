@@ -611,6 +611,9 @@
         " Check for errors when opening a file
         let g:syntastic_check_on_open = 1
 
+        " Don't make life so easy
+        let g:syntastic_javascript_jslint_conf = ""
+
     "}}}
 
 "}}}
