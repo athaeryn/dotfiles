@@ -608,9 +608,6 @@
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
 
-        " Check for errors when opening a file
-        let g:syntastic_check_on_open = 1
-
         " Don't make life so easy
         let g:syntastic_javascript_jslint_conf = ""
 
