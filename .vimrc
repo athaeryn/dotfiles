@@ -536,10 +536,10 @@
     \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
     " Remove trailing whitespace
-    noremap <leader>rw :%s/\s\+$//e<cr>
+    nnoremap <leader>rw :%s/\s\+$//e<cr>
 
     " Refresh the split to the right
-    noremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
+    nnoremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
 
     " Ack.vim
     nnoremap <leader>a :Ack 
