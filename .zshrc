@@ -7,6 +7,7 @@ ZSH=$HOME/.oh-my-zsh
     alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
 
     alias rhash="rbenv rehash"
+    alias todos="ag -i todo"
 
     # Spelling helpers
     alias gerp="grep"
