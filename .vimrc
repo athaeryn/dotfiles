@@ -541,9 +541,19 @@
     " Refresh the split to the right
     noremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
 
+    " Ack.vim
+    nnoremap <leader>a :Ack 
+
 "}}}
 
 " Plugins {{{
+
+    " Ack {{{
+
+        " Use the Silver Searcher
+        let g:ackprg = 'ag --nogroup --nocolor --column'
+
+    "}}}
 
     " CtrlP {{{
 
