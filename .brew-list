@@ -20,6 +20,7 @@ glm
 gource
 imagemagick
 jpeg
+jpegoptim
 lame
 libevent
 libgpg-error
@@ -29,6 +30,8 @@ libtool
 libxml2
 libxslt
 libyaml
+macvim
+markdown
 mcrypt
 mysql
 nginx
@@ -52,6 +55,7 @@ sdl
 sdl_image
 sqlite
 texi2html
+the_silver_searcher
 tmux
 trash
 tree
