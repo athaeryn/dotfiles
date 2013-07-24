@@ -448,6 +448,12 @@
 
     " }}}
 
+    " RainbowParentheses {{{
+
+        nnoremap <leader>rb :RainbowParenthesesToggle<cr>
+
+    " "}}}
+
     " Shortcut to close a buffer without closing the window
     nnoremap <silent> <leader>d :Bdelete<cr>
 

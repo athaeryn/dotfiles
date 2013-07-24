@@ -7,6 +7,7 @@
 - godlygeek/tabular
 - kchmck/vim-coffee-script
 - kien/ctrlp.vim
+- kien/rainbow_parentheses.vim
 - majutsushi/tagbar
 - mhinz/vim-startify
 - mileszs/ack.vim
