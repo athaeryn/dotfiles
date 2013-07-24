@@ -2,7 +2,6 @@
 - Raimondi/delimitMate
 - Rip-Rip/clang_complete
 - athaeryn/vim-markdown
-- benmills/vimux
 - chrisbra/NrrwRgn
 - godlygeek/tabular
 - kchmck/vim-coffee-script
@@ -10,6 +9,7 @@
 - kien/rainbow_parentheses.vim
 - majutsushi/tagbar
 - mhinz/vim-startify
+- mhinz/vim-tmuxify
 - mileszs/ack.vim
 - moll/vim-bbye
 - mutewinter/nginx.vim

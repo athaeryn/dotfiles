@@ -433,21 +433,6 @@
 
     "}}}
 
-    " Vimux {{{
-
-        " These are prefixed with 'm' to avoid slowing down <leader>v
-
-        " Prompt for a command
-        nnoremap <leader>mvc :VimuxPromptCommand<cr>
-
-        " Run the last command
-        nnoremap <leader>mvl :VimuxRunLastCommand<cr>
-
-        " Close the Vimux pane
-        nnoremap <leader>mvx :VimuxCloseRunner<cr>
-
-    " }}}
-
     " RainbowParentheses {{{
 
         nnoremap <leader>rb :RainbowParenthesesToggle<cr>
