@@ -1,13 +1,11 @@
-" NOTES {{{
+" NOTES {{{1
 
     " Established Jan 2013.
     " My starting point was Dan Menssen's .vimrc. (https://github.com/menssen)
 
-"}}}
+" Settings {{{1
 
-" Settings {{{
-
-    " Environment {{{
+    " Environment {{{2
 
         " Disable vi-compatibility right off the bat
         set nocompatible
@@ -32,19 +30,18 @@
         " Pathogen Bundle Manager
         call pathogen#infect()
 
-    "}}}
+    " Colorscheme {{{2
 
-    " Colorscheme {{{
+        "Init {{{3
+            let g:hybrid_use_Xresources = 1
+            colorscheme hybrid
 
-        let g:hybrid_use_Xresources = 1
-        colorscheme hybrid
+            " Enable syntax highlighting
+            syntax enable
 
-        " Enable syntax highlighting
-        syntax enable
+        " Highlights {{{3
 
-        " Highlights {{{
-
-            " Startify {{{
+            " Startify {{{4
 
                 hi StartifyBracket  ctermfg=8
                 hi StartifyFile     ctermfg=15
@@ -54,9 +51,7 @@
                 hi StartifySpecial  ctermfg=2
                 hi StartifyHeader   ctermfg=3
 
-            " }}}
-
-            " Statusline {{{
+            " Statusline {{{4
 
                 " For some reason bg and fg are reversed for the statusline groups..
                 hi StatusLine    ctermfg=10  ctermbg=0
@@ -66,16 +61,11 @@
                 " Flags
                 hi User2  ctermfg=9  ctermbg=0
 
-            " }}}
+            "Other {{{4
+                " listchars
+                hi SpecialKey ctermfg=red ctermbg=white
 
-            " listchars
-            hi SpecialKey ctermfg=red ctermbg=white
-
-        "}}}
-
-    "}}}
-
-    " Search {{{
+    " Search {{{2
 
         " Searches should be case insensitive...
         set ignorecase
@@ -86,61 +76,60 @@
         set incsearch
         set showmatch
 
-    "}}}
+    " Other {{{2
+        " Force showing five extra lines above and below cursor
+        set scrolloff=10
 
-    " Force showing five extra lines above and below cursor
-    set scrolloff=10
+        " Don't wrap text, but add characters indicating hidden parts of a line
+        " and change horizontal scrolling to be sane
+        set nowrap
+        set sidescroll=1
+        set sidescrolloff=1
+        set listchars=extends:>,precedes:<
 
-    " Don't wrap text, but add characters indicating hidden parts of a line
-    " and change horizontal scrolling to be sane
-    set nowrap
-    set sidescroll=1
-    set sidescrolloff=1
-    set listchars=extends:>,precedes:<
+        " Display line numbers
+        set number
 
-    " Display line numbers
-    set number
+        " Make command line 2 lines tall
+        set cmdheight=2
 
-    " Make command line 2 lines tall
-    set cmdheight=2
+        " If wrapping is enabled, mark wrapped lines
+        " Comment is to prevent automatic trailing whitespace removal
+        set showbreak=\ ->\ "
 
-    " If wrapping is enabled, mark wrapped lines
-    " Comment is to prevent automatic trailing whitespace removal
-    set showbreak=\ ->\ "
+        " Don't redraw while executing macros
+        set lazyredraw
 
-    " Don't redraw while executing macros
-    set lazyredraw
+        " Show listchars...
+        set list
+        " ...which are:
+        set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 
-    " Show listchars...
-    set list
-    " ...which are:
-    set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
+        " Highlight all matches for the last used search pattern
+        set hlsearch
 
-    " Highlight all matches for the last used search pattern
-    set hlsearch
+        " Highlight the line the cursor is in
+        set cursorline
 
-    " Highlight the line the cursor is in
-    set cursorline
+        " Display a colored column at 81 characters. Do not cross
+        set colorcolumn=81
 
-    " Display a colored column at 81 characters. Do not cross
-    set colorcolumn=81
+        " Hang on to a buffer even when no longer shown in a window
+        set hidden
 
-    " Hang on to a buffer even when no longer shown in a window
-    set hidden
+        " Always show the status line above the command line
+        set laststatus=2
 
-    " Always show the status line above the command line
-    set laststatus=2
+        " Shrink inactive splits to 10 rows and 20 cols
+        " Considering getting rid of this...
+        set winwidth=20
+        set winminwidth=20
+        set winwidth=120
+        set winheight=10
+        set winminheight=10
+        set winheight=999
 
-    " Shrink inactive splits to 10 rows and 20 cols
-    " Considering getting rid of this...
-    set winwidth=20
-    set winminwidth=20
-    set winwidth=120
-    set winheight=10
-    set winminheight=10
-    set winheight=999
-
-    " Statusline {{{
+    " Statusline {{{2
 
         set statusline=                               " Clear the statusline
         set statusline+=[%n]\                         " Buffer number
@@ -156,17 +145,13 @@
         set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
         set statusline+=\ %P\                         " Percent through file
 
-    "}}}
-
-    " Mouse {{{
+    " Mouse {{{2
 
         " Enable mouse support in terminals that can handle it (iTerm can,
         " Terminal.app can't)
         set mouse=a
 
-    "}}}
-
-    " Info {{{
+    " Info {{{2
 
         " Do NOT beep
         set visualbell
@@ -180,14 +165,12 @@
         " Display the current mode in the status line
         set showmode
 
-    "}}}
+    "Other {{{2
 
+        " Make backspace also delete indents and line endings
+        set backspace=indent,eol,start
 
-
-    " Make backspace also delete indents and line endings
-    set backspace=indent,eol,start
-
-    " Indentation {{{
+    " Indentation {{{2
 
         " Turn on auto-indentation, for better or worse
         set autoindent
@@ -199,9 +182,7 @@
         set softtabstop=4
         set expandtab
 
-    "}}}
-
-    " Folding {{{
+    " Folding {{{2
 
         " Set fold method to indent
         set foldmethod=indent
@@ -228,46 +209,42 @@
         endfunction
         set foldtext=NeatFoldText()
 
-    "}}}
+    "Other {{{2
+        " Kill some security exploits and also modelines are a dumb idea
+        set modelines=0
 
+        " Where to put backup files
+        set backupdir=~/.vim/backup
 
-    " Kill some security exploits and also modelines are a dumb idea
-    set modelines=0
+        " Reload a file that is modified from the outside
+        set autoread
 
-    " Where to put backup files
-    set backupdir=~/.vim/backup
+        " Stop littering .swp files everywhere
+        set noswapfile
+        " Put swapfiles in the backup directory
+        set directory=~/.vim/backup
 
-    " Reload a file that is modified from the outside
-    set autoread
+        " Keep a really long command/search history
+        set history=1000
 
-    " Stop littering .swp files everywhere
-    set noswapfile
-    " Put swapfiles in the backup directory
-    set directory=~/.vim/backup
+        " Make tab completion a lot smarter (this mostly makes it work like zsh)
+        set wildmode=longest,list
+        set wildmenu
 
-    " Keep a really long command/search history
-    set history=1000
+        " Stores undo info in a file so that it persists after vim closes
+        " Need to have ~/.vim/undo
+        set undofile
+        set undodir=~/.vim/undo
 
-    " Make tab completion a lot smarter (this mostly makes it work like zsh)
-    set wildmode=longest,list
-    set wildmenu
+        " Gimme tab completion on .css-class-names and stuff
+        set iskeyword+=-
 
-    " Stores undo info in a file so that it persists after vim closes
-    " Need to have ~/.vim/undo
-    set undofile
-    set undodir=~/.vim/undo
+        " Improve session saving
+        set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
-    " Gimme tab completion on .css-class-names and stuff
-    set iskeyword+=-
+" Autocommands {{{1
 
-    " Improve session saving
-    set sessionoptions=blank,curdir,folds,help,tabpages,winpos
-
-"}}}
-
-" Autocommands {{{
-
-    augroup Misc "{{{
+    augroup Misc "{{{2
 
         autocmd!
 
@@ -288,9 +265,9 @@
                     \     exe "normal g`\"" |
                     \ endif
 
-    augroup END "}}}
+    augroup END
 
-    augroup FileTypes "{{{
+    augroup FileTypes "{{{2
 
         autocmd!
 
@@ -311,9 +288,9 @@
         " Don't show listchars in git commit view, it's annoying
         autocmd FileType gitcommit set nolist
 
-    augroup END "}}}
+    augroup END
 
-    augroup Markdown "{{{
+    augroup Markdown "{{{2
 
         " Make all text files markdown
         autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
@@ -326,11 +303,9 @@
         autocmd FileType markdown set showbreak=
         autocmd FileType txt set showbreak=
 
-    augroup END "}}}
+    augroup END
 
-"}}}
-
-" Functions {{{
+" Functions {{{1
 
     " Rename Current File (Stolen from Gary Bernhardt)
     function! RenameFile()
@@ -369,15 +344,14 @@
         let &softtabstop = a:how_many
     endfunction
 
-"}}}
+" Mappings {{{1
 
-" Mappings {{{
+    " Leader {{{2
+        " Change the leader key to comma
+        let mapleader = ","
+        let g:mapleader = ","
 
-    " Change the leader key to comma
-    let mapleader = ","
-    let g:mapleader = ","
-
-    " Splits {{{
+    " Splits {{{2
 
         " Shortcuts for creating splits (show Startify)
         nnoremap <leader>v <c-w>v<c-w>l<c-w>L:Startify<cr>
@@ -389,9 +363,7 @@
         nnoremap <c-k> <c-w>k
         nnoremap <c-l> <c-w>l
 
-    "}}}
-
-    " Tabs {{{
+    " Tabs {{{2
 
         " New tab (show Startify)
         map <leader>tn :tabnew<cr>:Startify<cr>
@@ -406,9 +378,7 @@
         inoremap <silent> <c-n> <esc><c-n>
         inoremap <silent> <c-p> <esc><c-p>
 
-    "}}}
-
-    " Toggles... {{{
+    " Toggles... {{{2
 
         " ...spell checking
         noremap <leader>sp :setlocal spell!<cr>:setlocal spell?<cr>
@@ -431,122 +401,116 @@
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>:set list?<cr>
 
-    "}}}
-
-    " RainbowParentheses {{{
+    " RainbowParentheses {{{2
 
         nnoremap <leader>rb :RainbowParenthesesToggle<cr>
 
-    " "}}}
+        "Other {{{2
+        " Shortcut to close a buffer without closing the window
+        nnoremap <silent> <leader>d :Bdelete<cr>
 
-    " Shortcut to close a buffer without closing the window
-    nnoremap <silent> <leader>d :Bdelete<cr>
+        " Map <leader><leader> to switch to last buffer
+        nnoremap <leader><leader> <c-^>
 
-    " Map <leader><leader> to switch to last buffer
-    nnoremap <leader><leader> <c-^>
+        " Add a line below in normal mode, stay in normal mode
+        nnoremap <c-o> o<esc>0D
 
-    " Add a line below in normal mode, stay in normal mode
-    nnoremap <c-o> o<esc>0D
+        " Make scroll up/down scroll faster
+        noremap <c-e> 5<c-e>
+        noremap <c-y> 5<c-y>
 
-    " Make scroll up/down scroll faster
-    noremap <c-e> 5<c-e>
-    noremap <c-y> 5<c-y>
+        " Always be magical. Very magical. Always.
+        nnoremap / /\v
+        vnoremap / /\v
 
-    " Always be magical. Very magical. Always.
-    nnoremap / /\v
-    vnoremap / /\v
+        " Copy and paste from system clipboard
+        noremap <leader>p "+p
+        noremap <leader>y "+y
 
-    " Copy and paste from system clipboard
-    noremap <leader>p "+p
-    noremap <leader>y "+y
+        " Sort! :D
+        vnoremap <leader>st :sort<cr>
 
-    " Sort! :D
-    vnoremap <leader>st :sort<cr>
+        " Clear highlighted search
+        nnoremap <enter> :noh<cr>
 
-    " Clear highlighted search
-    nnoremap <enter> :noh<cr>
+        " Friends don't let friends use the arrow keys
+        noremap <up> <nop>
+        noremap <down> <nop>
+        noremap <left> <nop>
+        noremap <right> <nop>
 
-    " Friends don't let friends use the arrow keys
-    noremap <up> <nop>
-    noremap <down> <nop>
-    noremap <left> <nop>
-    noremap <right> <nop>
+        " Map F12 to revert (like Photoshop)
+        noremap <f12> :call Revert()<cr>
 
-    " Map F12 to revert (like Photoshop)
-    noremap <f12> :call Revert()<cr>
+        " Insert spaces in Normal mode
+        nnoremap <space> i<space><esc>l
 
-    " Insert spaces in Normal mode
-    nnoremap <space> i<space><esc>l
+        " Rename the current file
+        noremap <leader>n :call RenameFile()<cr>
 
-    " Rename the current file
-    noremap <leader>n :call RenameFile()<cr>
+        " For InsertTabWrapper()
+        inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+        " Omnicomplete uses shift-tab
+        inoremap <s-tab> <c-n>
 
-    " For InsertTabWrapper()
-    inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-    " Omnicomplete uses shift-tab
-    inoremap <s-tab> <c-n>
+        " For quick .vimrc changing
+        noremap \v :tabnew ~/.vimrc<cr>
 
-    " For quick .vimrc changing
-    noremap \v :tabnew ~/.vimrc<cr>
+        " jj or kj leaves insert mode, staying in place
+        inoremap jj <esc>l
+        inoremap kj <esc>l
 
-    " jj or kj leaves insert mode, staying in place
-    inoremap jj <esc>l
-    inoremap kj <esc>l
+        " Keep the selection when indenting
+        vnoremap < <gv
+        vnoremap > >gv
 
-    " Keep the selection when indenting
-    vnoremap < <gv
-    vnoremap > >gv
+        " Write as root, when you forgot to sudo edit
+        cnoreabbrev w!! w !sudo tee % >/dev/null
 
-    " Write as root, when you forgot to sudo edit
-    cnoreabbrev w!! w !sudo tee % >/dev/null
+        " For navigating wrapped lines
+        nnoremap j gj
+        nnoremap k gk
+        vnoremap j gj
+        vnoremap k gk
 
-    " For navigating wrapped lines
-    nnoremap j gj
-    nnoremap k gk
-    vnoremap j gj
-    vnoremap k gk
+        " Convert Markdown to HTML
+        nnoremap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
 
-    " Convert Markdown to HTML
-    nnoremap <leader>md :%! /usr/local/bin/markdown --html4tags <cr>
+        " Map <leader>f to open CtrlP in buffer mode
+        nnoremap <silent> <leader>f :CtrlPBuffer<cr>
 
-    " Map <leader>f to open CtrlP in buffer mode
-    nnoremap <silent> <leader>f :CtrlPBuffer<cr>
+        " Repeat the last :! command
+        nnoremap <c-c> :!!<cr>
 
-    " Repeat the last :! command
-    nnoremap <c-c> :!!<cr>
+        " Display errors
+        nnoremap <leader>er :Errors<cr>
 
-    " Display errors
-    nnoremap <leader>er :Errors<cr>
+        " Open the current directory in Finder
+        nnoremap <silent> <c-d> :!open .<cr>
 
-    " Open the current directory in Finder
-    nnoremap <silent> <c-d> :!open .<cr>
+        " Inspect highlight under cursor
+        map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+        \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
-    " Inspect highlight under cursor
-    map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
-    \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-    \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
+        " Remove trailing whitespace
+        nnoremap <leader>rw :%s/\s\+$//e<cr>:noh<cr>
 
-    " Remove trailing whitespace
-    nnoremap <leader>rw :%s/\s\+$//e<cr>
+        " Refresh the split to the right
+        nnoremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
 
-    " Refresh the split to the right
-    nnoremap <leader>rr :wincmd w \| edit \| wincmd p<cr>
+        " Ack.vim
+        nnoremap <leader>a :Ack<space>
 
-    " Ack.vim
-    nnoremap <leader>a :Ack 
 
-"}}}
+" Plugins {{{1
 
-" Plugins {{{
-
-    " Ack {{{
+    " Ack {{{2
 
         " Use the Silver Searcher
         let g:ackprg = 'ag --nogroup --nocolor --column'
 
-    "}}}
-
-    " CtrlP {{{
+    " CtrlP {{{2
 
         " Set CtrlP map to ctrl-f because it's easier to hit
         let g:ctrlp_map = '<c-f>'
@@ -572,9 +536,7 @@
                     \ 'dir': '\v[\/]\.sass-cache'
                     \ }
 
-    "}}}
-
-    " Startify {{{
+    " Startify {{{2
 
         let g:startify_bookmarks = [
                     \ '~/.vimrc',
@@ -602,17 +564,10 @@
                      \ '',
                      \ ]
 
-    "}}}
-
-    " Syntastic {{{
+    " Syntastic {{{2
 
         " Enable syntastic error signs in the line number column
         let g:syntastic_enable_signs = 1
 
         " Don't make life so easy
         let g:syntastic_javascript_jslint_conf = ""
-
-    "}}}
-
-"}}}
-
