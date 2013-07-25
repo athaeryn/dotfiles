@@ -261,6 +261,12 @@
                     \     nnoremap q :lclose<cr> |
                     \ endif
 
+        " Close a help window with q
+        autocmd BufNewFile,BufRead *
+                    \ if &buftype == "help" |
+                    \     nnoremap q :q<cr> |
+                    \ endif
+
         " Files should open with cursor at same line as when closed
         " From vim docs, via Gary Bernhardt
         autocmd BufReadPost *
