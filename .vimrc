@@ -252,6 +252,9 @@
         autocmd VimEnter * echo "Hello"
         autocmd VimLeave * echo "Good-bye"
 
+        " Automatically fold everything when opening ~/.vimrc"
+        autocmd BufRead .vimrc set fen
+
         " Close a quickfix window with q
         autocmd BufNewFile,BufRead *
                     \ if &buftype == "quickfix" |
