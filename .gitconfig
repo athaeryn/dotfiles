@@ -35,6 +35,8 @@
     rh2 = reset HEAD^^ --hard
 
     forcepush = push -f
+    stache = stash
+    stacheapply = stash apply
 
     # Handy: search
     f = "!git ls-files | grep -i"
