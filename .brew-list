@@ -4,6 +4,7 @@ autoconf
 automake
 boost
 brew-cask
+clisp
 cmake
 cowsay
 cscope
@@ -26,6 +27,7 @@ libevent
 libgpg-error
 libksba
 libpng
+libsigsegv
 libtool
 libxml2
 libxslt
