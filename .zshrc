@@ -55,21 +55,6 @@ source $ZSH/oh-my-zsh.sh
     function man () {
         vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
     }
-
-    # Brew list
-    function brewlistm () {
-        brew list > ~/.brew-list
-    }
-    function brewlisti () {
-        cat ~/.brew-list | xargs brew install
-    }
-    # Brew cask list
-    function brewcasklistm () {
-        brew cask list > ~/.brew-cask-list
-    }
-    function brewcasklisti () {
-        cat ~/.brew-cask-list | xargs brew cask install
-    }
 #}}
 
 
