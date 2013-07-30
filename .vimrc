@@ -32,12 +32,11 @@
 
     " Colorscheme {{{2
 
-        "Init {{{3
-            let g:hybrid_use_Xresources = 1
-            colorscheme hybrid
+        let g:hybrid_use_Xresources = 1
+        colorscheme hybrid
 
-            " Enable syntax highlighting
-            syntax enable
+        " Enable syntax highlighting
+        syntax enable
 
         " Highlights {{{3
 
@@ -75,6 +74,81 @@
         " Google... err... Vim Instant
         set incsearch
         set showmatch
+
+    " Statusline {{{2
+
+        set statusline=                               " Clear the statusline
+        set statusline+=[%n]\                         " Buffer number
+        set statusline+=%1*                           " User1 highlight
+        set statusline+=\ %f\                         " File name
+        set statusline+=%2*                           " User2 hilight
+        set statusline+=%(\ %m%h%r\ %)                " Flags (h, [+], RO)
+        set statusline+=%*\                           " Back to default highlight
+        set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
+        set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
+        set statusline+=%{&fileformat}]               " File format
+        set statusline+=%=                            " Right align the rest
+        set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
+        set statusline+=\ %P\                         " Percent through file
+
+    " Mouse {{{2
+
+        " Enable mouse support in terminals that can handle it (iTerm can,
+        " Terminal.app can't)
+        set mouse=a
+
+    " Info {{{2
+
+        " Do NOT beep
+        set visualbell
+
+        " Show the cursor position at the end of the status line
+        set ruler
+
+        " Show tidbits of info in bottom right about current keyboard command
+        set showcmd
+
+        " Display the current mode in the status line
+        set showmode
+
+    " Indentation {{{2
+
+        " Turn on auto-indentation, for better or worse
+        set autoindent
+        set smartindent
+
+        " Use four space instead of a tab
+        set tabstop=4
+        set shiftwidth=4
+        set softtabstop=4
+        set expandtab
+
+    " Folding {{{2
+
+        " Set fold method to indent
+        set foldmethod=indent
+
+        " Don't fold by default
+        set nofoldenable
+
+        " From http://dhruvasagar.com/2013/03/28/vim-better-foldtext
+        function! NeatFoldText()
+            let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
+            let line = ' ' .
+                        \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
+            let lines_count = v:foldend - v:foldstart + 1
+            let lines_count_text = '| ' .
+                        \ printf("%10s", lines_count . ' lines') . ' |'
+            let fill = matchstr(&fillchars, 'fold:\zs.')
+            let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) .
+                        \ line, 0, (winwidth(0)*2)/3)
+            let foldtextend = lines_count_text . repeat(fill, 8)
+            let foldtextlength = strlen(substitute(foldtextstart . foldtextend,
+                        \ '.', 'x', 'g')) + &foldcolumn
+            return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) .
+                        \ foldtextend
+        endfunction
+        set foldtext=NeatFoldText()
 
     " Other {{{2
         " Force showing five extra lines above and below cursor
@@ -129,87 +203,9 @@
         set winminheight=10
         set winheight=999
 
-    " Statusline {{{2
-
-        set statusline=                               " Clear the statusline
-        set statusline+=[%n]\                         " Buffer number
-        set statusline+=%1*                           " User1 highlight
-        set statusline+=\ %f\                         " File name
-        set statusline+=%2*                           " User2 hilight
-        set statusline+=%(\ %m%h%r\ %)                " Flags (h, [+], RO)
-        set statusline+=%*\                           " Back to default highlight
-        set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
-        set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
-        set statusline+=%{&fileformat}]               " File format
-        set statusline+=%=                            " Right align the rest
-        set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
-        set statusline+=\ %P\                         " Percent through file
-
-    " Mouse {{{2
-
-        " Enable mouse support in terminals that can handle it (iTerm can,
-        " Terminal.app can't)
-        set mouse=a
-
-    " Info {{{2
-
-        " Do NOT beep
-        set visualbell
-
-        " Show the cursor position at the end of the status line
-        set ruler
-
-        " Show tidbits of info in bottom right about current keyboard command
-        set showcmd
-
-        " Display the current mode in the status line
-        set showmode
-
-    "Other {{{2
-
         " Make backspace also delete indents and line endings
         set backspace=indent,eol,start
 
-    " Indentation {{{2
-
-        " Turn on auto-indentation, for better or worse
-        set autoindent
-        set smartindent
-
-        " Use four space instead of a tab
-        set tabstop=4
-        set shiftwidth=4
-        set softtabstop=4
-        set expandtab
-
-    " Folding {{{2
-
-        " Set fold method to indent
-        set foldmethod=indent
-
-        " Don't fold by default
-        set nofoldenable
-
-        " From http://dhruvasagar.com/2013/03/28/vim-better-foldtext
-        function! NeatFoldText()
-            let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
-            let line = ' ' .
-                        \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
-            let lines_count = v:foldend - v:foldstart + 1
-            let lines_count_text = '| ' .
-                        \ printf("%10s", lines_count . ' lines') . ' |'
-            let fill = matchstr(&fillchars, 'fold:\zs.')
-            let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) .
-                        \ line, 0, (winwidth(0)*2)/3)
-            let foldtextend = lines_count_text . repeat(fill, 8)
-            let foldtextlength = strlen(substitute(foldtextstart . foldtextend,
-                        \ '.', 'x', 'g')) + &foldcolumn
-            return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) .
-                        \ foldtextend
-        endfunction
-        set foldtext=NeatFoldText()
-
-    "Other {{{2
         " Kill some security exploits and also modelines are a dumb idea
         set modelines=0
 
