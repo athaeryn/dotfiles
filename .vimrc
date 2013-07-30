@@ -62,7 +62,7 @@
 
             "Other {{{4
                 " listchars
-                hi SpecialKey ctermfg=red ctermbg=white
+                hi SpecialKey ctermfg=9 ctermbg=15
 
     " Search {{{2
 
