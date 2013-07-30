@@ -294,8 +294,9 @@
         " Folding for vim files
         autocmd FileType vim set foldmethod=marker
 
-        " Don't show listchars in git commit view, it's annoying
+        " Don't show listchars in git commit view or gitconfig, it's annoying
         autocmd FileType gitcommit set nolist
+        autocmd FileType gitconfig set nolist
 
     augroup END
 
