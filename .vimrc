@@ -151,7 +151,7 @@
         set foldtext=NeatFoldText()
 
     " Other {{{2
-        " Force showing five extra lines above and below cursor
+        " Force showing ten extra lines above and below cursor
         set scrolloff=10
 
         " Don't wrap text, but add characters indicating hidden parts of a line
