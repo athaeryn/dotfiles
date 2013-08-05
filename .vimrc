@@ -508,6 +508,9 @@
         " Ack.vim
         nnoremap <leader>a :Ack<space>
 
+        " Comment
+        nnoremap <leader>c gcc
+
 
 " Plugins {{{1
 
