@@ -34,9 +34,10 @@
     rh1 = reset HEAD^ --hard
     rh2 = reset HEAD^^ --hard
 
-    forcepush = push -f
+    force-push = push -f
     stache = stash
-    stacheapply = stash apply
+    stache-apply = stash apply
+    mog = "!f() { git merge "$1" --no-ff --log; }; f"
 
     # Handy: search
     f = "!git ls-files | grep -i"
