@@ -350,6 +350,13 @@
         let &softtabstop = a:how_many
     endfunction
 
+    " Reload all buffers from disk
+    function! ReloadAll()
+        set noconfirm
+        tabdo e!
+        set confirm
+    endfunction
+
 " Mappings {{{1
 
     " Leader {{{2
