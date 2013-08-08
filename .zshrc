@@ -12,6 +12,9 @@ ZSH=$HOME/.oh-my-zsh
     # Spelling helpers
     alias gerp="grep"
     alias git="~/bin/leaf-collector"
+
+    # Get my IP
+    alias myip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
 #}}
 
 # Red dots displayed while waiting for completion
