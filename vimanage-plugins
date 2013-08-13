@@ -17,7 +17,6 @@
 - nathanaelkane/vim-indent-guides
 - paradigm/TextObjectify
 - scrooloose/nerdcommenter
-- scrooloose/nerdtree
 - scrooloose/syntastic
 - tpope/vim-characterize
 - tpope/vim-commentary
