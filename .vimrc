@@ -357,6 +357,17 @@
         set confirm
     endfunction
 
+
+
+" Commands {{{1
+
+    command! TwoSpaces call TabSpaces(2)
+    command! FourSpaces call TabSpaces(4)
+
+    command! ReloadAll call ReloadAll()
+
+
+
 " Mappings {{{1
 
     " Leader {{{2
