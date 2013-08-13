@@ -38,6 +38,7 @@
     stache = stash
     stache-apply = stash apply
     mog = "!f() { git merge "$1" --no-ff --log; }; f"
+    pad = "!f() { git add -p "$1"; }; f"
 
     # Handy: search
     f = "!git ls-files | grep -i"
