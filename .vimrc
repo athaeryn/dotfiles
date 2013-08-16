@@ -568,6 +568,9 @@
                     \ 'dir': '\v[\/]\.sass-cache'
                     \ }
 
+        " Prevent CtrlP opening a split beside the Startify buffer
+        let g:ctrlp_reuse_window = 'startify'
+
 
 
     " Netrw {{{2
