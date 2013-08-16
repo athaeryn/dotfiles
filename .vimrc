@@ -245,8 +245,8 @@
         autocmd!
 
         " Hello good-bye
-        autocmd VimEnter * echo "Hello"
-        autocmd VimLeave * echo "Good-bye"
+        autocmd VimEnter * echo "Hello, Manderson!"
+        autocmd VimLeave * echo "Good-bye, Manderson!"
 
         " Automatically fold everything when opening ~/.vimrc"
         autocmd BufRead .vimrc set fen
