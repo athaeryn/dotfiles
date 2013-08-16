@@ -429,7 +429,15 @@
 
         nnoremap <leader>rb :RainbowParenthesesToggle<cr>
 
-        "Other {{{2
+    " Commentary {{{2
+
+        xmap <leader>c <Plug>Commentary
+        nmap <leader>c <Plug>Commentary
+        nmap <leader>c<space> <Plug>CommentaryLine
+        nmap <leader>cu <Plug>CommentaryUndo
+
+    "Other {{{2
+
         " Shortcut to close a buffer without closing the window
         nnoremap <silent> <leader>d :Bdelete<cr>
 
@@ -525,9 +533,6 @@
 
         " Ack.vim
         nnoremap <leader>a :Ack<space>
-
-        " Comment
-        nnoremap <leader>c gcc
 
 
 " Plugins {{{1
