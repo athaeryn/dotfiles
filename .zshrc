@@ -58,6 +58,12 @@ source $ZSH/oh-my-zsh.sh
     function man () {
         vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
     }
+
+    function notes () {
+        NOTESPATH=~/notes
+        DAYFILE="$(date +%d-%m-%y.txt)"
+        <"$NOTESPATH/$DAYFILE"
+    }
 #}}
 
 
