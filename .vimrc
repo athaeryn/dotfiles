@@ -589,7 +589,8 @@
         let g:startify_bookmarks = [
                     \ '~/.vimrc',
                     \ '~/.zshrc',
-                    \ '/usr/local/etc/nginx/nginx.conf'
+                    \ '/usr/local/etc/nginx/nginx.conf',
+                    \ '~/notes'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
         let g:startify_change_to_dir = 0
