@@ -366,7 +366,10 @@
 
     command! ReloadAll call ReloadAll()
 
+" Abbreviations {{{1
 
+    " Insert a timestamp
+    iabbrev _d <c-r>=strftime('%H:%M -')<cr>
 
 " Mappings {{{1
 
