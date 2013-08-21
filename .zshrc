@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
     }
 
     # Read man pages in Vim
-    function man () {
+    function mam () {
         vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
     }
 
