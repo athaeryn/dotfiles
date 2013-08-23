@@ -6,6 +6,7 @@
 - athaeryn/vim-personal
 - chrisbra/NrrwRgn
 - godlygeek/tabular
+- jelera/vim-javascript-syntax
 - kchmck/vim-coffee-script
 - kien/ctrlp.vim
 - kien/rainbow_parentheses.vim
@@ -17,6 +18,7 @@
 - moll/vim-bbye
 - mutewinter/nginx.vim
 - nathanaelkane/vim-indent-guides
+- pangloss/vim-javascript
 - paradigm/TextObjectify
 - scrooloose/syntastic
 - tpope/vim-characterize
