@@ -366,6 +366,8 @@
 
     command! ReloadAll call ReloadAll()
 
+    command! Pipes !pipes
+
 " Abbreviations {{{1
 
     " Insert a timestamp
