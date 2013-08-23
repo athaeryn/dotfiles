@@ -5,6 +5,7 @@
 - athaeryn/vim-markdown
 - athaeryn/vim-personal
 - chrisbra/NrrwRgn
+- duff/vim-scratch
 - godlygeek/tabular
 - jelera/vim-javascript-syntax
 - kchmck/vim-coffee-script
