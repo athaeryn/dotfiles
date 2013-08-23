@@ -15,6 +15,9 @@ ZSH=$HOME/.oh-my-zsh
 
     # Get my IP
     alias myip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
+
+    # Use macvim
+    alias vim=mvim\ -v
 #}}
 
 # Red dots displayed while waiting for completion
