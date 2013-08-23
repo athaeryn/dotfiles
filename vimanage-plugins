@@ -1,6 +1,7 @@
 ---
 - Raimondi/delimitMate
 - Rip-Rip/clang_complete
+- Valloric/YouCompleteMe
 - athaeryn/vim-markdown
 - athaeryn/vim-personal
 - chrisbra/NrrwRgn
@@ -9,6 +10,7 @@
 - kien/ctrlp.vim
 - kien/rainbow_parentheses.vim
 - majutsushi/tagbar
+- marijnh/tern_for_vim
 - mhinz/vim-startify
 - mhinz/vim-tmuxify
 - mileszs/ack.vim
