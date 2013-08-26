@@ -18,6 +18,9 @@ ZSH=$HOME/.oh-my-zsh
 
     # Use macvim
     alias vim=mvim\ -v
+
+    # Remove .DS_Store
+    alias nods="rm -f .DS_Store"
 #}}
 
 # Red dots displayed while waiting for completion
