@@ -294,6 +294,9 @@
         autocmd FileType gitcommit set nolist
         autocmd FileType gitconfig set nolist
 
+        autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
+        autocmd FileType qf nnoremap <buffer> <cr> <cr>
+
     augroup END
 
     augroup Markdown "{{{2
@@ -440,6 +443,10 @@
         nmap <leader>c <Plug>Commentary
         nmap <leader>c<space> <Plug>CommentaryLine
         nmap <leader>cu <Plug>CommentaryUndo
+
+    " SkyBison {{{2
+
+        cnoremap <c-l> <c-r>=SkyBison("")<cr><cr>
 
     "Other {{{2
 

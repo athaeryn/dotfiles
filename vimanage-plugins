@@ -19,6 +19,7 @@
 - mutewinter/nginx.vim
 - nathanaelkane/vim-indent-guides
 - pangloss/vim-javascript
+- paradigm/SkyBison
 - paradigm/TextObjectify
 - scrooloose/syntastic
 - tpope/vim-characterize
