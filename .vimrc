@@ -613,9 +613,9 @@
                     \ '~/notes'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
-        let g:startify_files_number = 15
+        let g:startify_files_number = 14
         let g:startify_change_to_dir = 0
-        let g:startify_custom_indices = ['a', 's', 'd', 'f']
+        let g:startify_custom_indices = ['a', 'd', 'f']
         let g:startify_custom_header = [
                      \ '    -------------------        -   -        --------------------',
                      \ '        ----------------       -----       -----------------',
