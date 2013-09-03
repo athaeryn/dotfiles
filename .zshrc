@@ -70,6 +70,10 @@ source $ZSH/oh-my-zsh.sh
         DAYFILE="$(date +%d-%m-%y.txt)"
         <"$NOTESPATH/$DAYFILE"
     }
+
+    function upload () {
+        imguru "$1" | pbcopy
+    }
 #}}
 
 
