@@ -20,6 +20,7 @@
 - pangloss/vim-javascript
 - paradigm/SkyBison
 - paradigm/TextObjectify
+- scrooloose/nerdtree
 - scrooloose/syntastic
 - tpope/vim-characterize
 - tpope/vim-commentary
