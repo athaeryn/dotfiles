@@ -297,6 +297,8 @@
         autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
         autocmd FileType qf nnoremap <buffer> <cr> <cr>
 
+        autocmd FileType startify setlocal colorcolumn=""
+
     augroup END
 
     augroup Markdown "{{{2
@@ -358,6 +360,12 @@
         set noconfirm
         tabdo e!
         set confirm
+    endfunction
+
+    " Build the footer for startify
+    function! BuildFooter()
+        let footer = 'hey there'
+        return footer
     endfunction
 
 
@@ -602,7 +610,9 @@
                     \ '~/notes'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
+        let g:startify_files_number = 15
         let g:startify_change_to_dir = 0
+        let g:startify_custom_indices = ['a', 's', 'd', 'f']
         let g:startify_custom_header = [
                      \ '    -------------------        -   -        --------------------',
                      \ '        ----------------       -----       -----------------',
@@ -615,6 +625,7 @@
                      \ '                                ---',
                      \ '                                 -'
                      \ ]
+        let g:startify_custom_footer = BuildFooter()
 
     " Syntastic {{{2
 
