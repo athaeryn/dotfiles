@@ -379,6 +379,9 @@
 
     command! Pipes !pipes
 
+    command! Todos Ack TODO
+
+
 " Abbreviations {{{1
 
     " Insert a timestamp
