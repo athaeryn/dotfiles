@@ -115,7 +115,7 @@
 
         " Turn on auto-indentation, for better or worse
         set autoindent
-        set smartindent
+        set cindent
 
         " Use four space instead of a tab
         set tabstop=4
