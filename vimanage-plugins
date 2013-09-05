@@ -15,6 +15,7 @@
 - mhinz/vim-tmuxify
 - mileszs/ack.vim
 - moll/vim-bbye
+- moll/vim-node
 - mutewinter/nginx.vim
 - nathanaelkane/vim-indent-guides
 - pangloss/vim-javascript
