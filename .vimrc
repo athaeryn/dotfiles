@@ -105,13 +105,13 @@
         set statusline=
 
         " Buffer number
-        set statusline+=[%n]\
+        set statusline+=[%n]\ ""
 
         " User1 highlight
         set statusline+=%1*
 
         " File name
-        set statusline+=\ %f\
+        set statusline+=\ %f\ ""
 
         " User2 hilight
         set statusline+=%2*
@@ -120,7 +120,7 @@
         set statusline+=%(\ %m%h%r\ %)
 
         " Back to default highlight
-        set statusline+=%*\
+        set statusline+=%*\ ""
 
         " Filetype
         set statusline+=%<[%{strlen(&ft)?&ft:'none'},
@@ -138,7 +138,7 @@
         set statusline+=%-14.(%l,%c%V%)
 
         " Percent through file
-        set statusline+=\ %P\
+        set statusline+=\ %P\ ""
 
     " Mouse {{{2
 
