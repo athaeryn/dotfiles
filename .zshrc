@@ -4,7 +4,7 @@ ZSH=$HOME/.oh-my-zsh
 # ALIASES {{
     alias zshconfig="vim ~/.zshrc ; source ~/.zshrc"
     alias lgrep="l | grep"
-    alias pshop="open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app"
+    alias pshop="open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app"
 
     alias rhash="rbenv rehash"
     alias todos="ag -i todo"
