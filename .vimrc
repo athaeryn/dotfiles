@@ -694,7 +694,7 @@
                     \ '/usr/local/etc/nginx/nginx.conf',
                     \ '~/notes'
                     \]
-        let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim']
+        let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim', '^/usr/local/Cellar/macvim']
         let g:startify_files_number = 14
         let g:startify_change_to_dir = 0
         let g:startify_custom_indices = ['a', 'd', 'f']
