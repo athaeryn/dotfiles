@@ -112,6 +112,7 @@
                 hi StartifySlash    ctermfg=7
                 hi StartifySpecial  ctermfg=2
                 hi StartifyHeader   ctermfg=3
+                hi StartifyFooter   ctermfg=8
 
             " Statusline {{{4
 
@@ -449,7 +450,7 @@
 
     " Build the footer for startify
     function! BuildFooter()
-        let footer = 'hey there'
+        let footer = ["", "hey there"]
         return footer
     endfunction
 
@@ -699,17 +700,18 @@
         let g:startify_change_to_dir = 0
         let g:startify_custom_indices = ['a', 'd', 'f']
         let g:startify_custom_header = [
-                     \ '    -------------------        -   -        --------------------',
-                     \ '        ----------------       -----       -----------------',
-                     \ '          ---------------M---M-MMMMM-M---M---------------',
-                     \ '           --------------M---M---M---MM-MM--------------',
-                     \ '            --------------M-M----M---M-M-M-------------',
-                     \ '           ----------------M---MMMMM-M---M--------------',
-                     \ '                            -----------',
-                     \ '                               -----',
-                     \ '                                ---',
-                     \ '                                 -'
-                     \ ]
+                    \ '',
+                    \ '    -------------------        -   -        --------------------',
+                    \ '        ----------------       -----       -----------------',
+                    \ '          ---------------M---M-MMMMM-M---M---------------',
+                    \ '           --------------M---M---M---MM-MM--------------',
+                    \ '            --------------M-M----M---M-M-M-------------',
+                    \ '           ----------------M---MMMMM-M---M--------------',
+                    \ '                            -----------',
+                    \ '                               -----',
+                    \ '                                ---',
+                    \ '                                 -'
+                    \ ]
         let g:startify_custom_footer = BuildFooter()
 
     " Syntastic {{{2
