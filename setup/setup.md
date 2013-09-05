@@ -28,9 +28,9 @@ Xcode > Preferences > Downloads, Command Line Tools
 
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 
-## 4. Install RVM
+## 4. Install rbenv
 
-    curl -L https://get.rvm.io | bash -s stable --ruby
+    brew install rbenv && brew install ruby-build
 
 ## 5. Install ZSH
 
@@ -48,29 +48,32 @@ Xcode > Preferences > Downloads, Command Line Tools
 
 Link everything up.
 
-## 8. Vimanage
+## 8. Install NeoBundle
 
-    cd ~/git/dotfiles
-    vimanage update
+    git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
-## 9. Install other Homebrew packages:
+## 9. Install bundles
+
+    vim +NeoBundleInstall
+
+## 10. Install other Homebrew packages:
 
     brew tap phinze/cask
     brew install brew-cask git reattach-to-user-namespace tmux tree vim
 
-## 10. Install apps with brew-cask
+## 11. Install apps with brew-cask
 
     brew cask install alfred app-zapper arduino blender caffeine cfxr daisy-disk dropbox eclipse firefox google-chrome google-chrome-canary growlnotify iterm2 jumpcut lime-chat moom name-changer one-password spotify steam totalspaces transmit u-torrent you-need-a-budget
 
-## 11. Link Alfred with cask
+## 12. Link Alfred with cask
 
     brew cask alfred link
 
-## 12. Set up SSH
+## 13. Set up SSH
 
 Use ~/.ssh/config as a guide.
 
-## 13. Install MySQL, PHP, and Nginx...
+## 14. Install MySQL, PHP, and Nginx...
 
 ...with this [helpful guide](http://xig.me/osx-php-mysql-nginx.html)!
 
