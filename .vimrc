@@ -83,7 +83,10 @@
 
     " Colorscheme {{{2
 
+        " Use my terminal colors
         let g:hybrid_use_Xresources = 1
+
+        " Use hybrid colorscheme
         colorscheme hybrid
 
         " Enable syntax highlighting
@@ -103,15 +106,19 @@
 
             " Statusline {{{4
 
-                " For some reason bg and fg are reversed for the statusline groups..
+                " For some reason bg and fg are reversed for the statusline
+                " groups..
                 hi StatusLine    ctermfg=10  ctermbg=0
                 hi StatusLineNC  ctermfg=8   ctermbg=0
+
                 " Filename
                 hi User1  ctermfg=0  ctermbg=7
+
                 " Flags
                 hi User2  ctermfg=9  ctermbg=0
 
             "Other {{{4
+
                 " listchars
                 hi SpecialKey ctermfg=9 ctermbg=15
 
@@ -119,6 +126,7 @@
 
         " Searches should be case insensitive...
         set ignorecase
+
         " ...unless there is a capital letter
         set smartcase
 
@@ -128,19 +136,44 @@
 
     " Statusline {{{2
 
-        set statusline=                               " Clear the statusline
-        set statusline+=[%n]\                         " Buffer number
-        set statusline+=%1*                           " User1 highlight
-        set statusline+=\ %f\                         " File name
-        set statusline+=%2*                           " User2 hilight
-        set statusline+=%(\ %m%h%r\ %)                " Flags (h, [+], RO)
-        set statusline+=%*\                           " Back to default highlight
-        set statusline+=%<[%{strlen(&ft)?&ft:'none'}, " Filetype
-        set statusline+=%{strlen(&fenc)?&fenc:&enc},  " Encoding
-        set statusline+=%{&fileformat}]               " File format
-        set statusline+=%=                            " Right align the rest
-        set statusline+=%-14.(%l,%c%V%)               " Cursor line, column
-        set statusline+=\ %P\                         " Percent through file
+        " Clear the statusline
+        set statusline=
+
+        " Buffer number
+        set statusline+=[%n]\
+
+        " User1 highlight
+        set statusline+=%1*
+
+        " File name
+        set statusline+=\ %f\
+
+        " User2 hilight
+        set statusline+=%2*
+
+        " Flags (h, [+], RO)
+        set statusline+=%(\ %m%h%r\ %)
+
+        " Back to default highlight
+        set statusline+=%*\
+
+        " Filetype
+        set statusline+=%<[%{strlen(&ft)?&ft:'none'},
+
+        " Encoding
+        set statusline+=%{strlen(&fenc)?&fenc:&enc},
+
+        " File format
+        set statusline+=%{&fileformat}]
+
+        " Right align the rest
+        set statusline+=%=
+
+        " Cursor line, column
+        set statusline+=%-14.(%l,%c%V%)
+
+        " Percent through file
+        set statusline+=\ %P\
 
     " Mouse {{{2
 
