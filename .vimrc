@@ -74,6 +74,15 @@
         NeoBundle 'vim-scripts/brainfuck-syntax'
         NeoBundle 'vim-scripts/hybrid.vim'
 
+        NeoBundle 'Shougo/vimproc', {
+              \ 'build' : {
+              \     'windows' : 'make -f make_mingw32.mak',
+              \     'cygwin' : 'make -f make_cygwin.mak',
+              \     'mac' : 'make -f make_mac.mak',
+              \     'unix' : 'make -f make_unix.mak',
+              \    },
+              \ }
+
         " Enable filetype plugins and indentation
         filetype plugin indent on
 
