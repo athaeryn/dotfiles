@@ -340,14 +340,6 @@
         endif
     endfunction
 
-    " Revert the file
-    function! Revert ()
-        if confirm("Revert?", "&Yes\n&No", 2) == 1
-            edit!
-        endif
-        return
-    endfunction
-
     " Change the amount of space to insert in place of a tab
     function! TabSpaces (how_many)
         let &tabstop = a:how_many
@@ -493,9 +485,6 @@
         noremap <down> <nop>
         noremap <left> <nop>
         noremap <right> <nop>
-
-        " Map F12 to revert (like Photoshop)
-        noremap <f12> :call Revert()<cr>
 
         " Insert spaces in Normal mode
         nnoremap <space> i<space><esc>l
