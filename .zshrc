@@ -40,7 +40,7 @@ source $ZSH/oh-my-zsh.sh
     }
 
     function git_branch_prompt () {
-        git br | grep \* | awk '{printf "[%s] %s\n", $2, "±"}'
+        git br | grep \* | awk '{printf "|%s| $", $2}'
     }
 
     function prompt_char {
