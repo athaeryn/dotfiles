@@ -1,6 +1,13 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+# Plugins can be found in ~/.oh-my-zsh/plugins
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
+
 # ALIASES {{
     alias zshconfig="vim ~/.zshrc ; source ~/.zshrc"
     alias lgrep="l | grep"
@@ -21,17 +28,14 @@ ZSH=$HOME/.oh-my-zsh
 
     # Remove .DS_Store
     alias nods="rm -f .DS_Store"
+
+    # lsa with trailing / for directories
+    alias lsa="ls -lahp"
 #}}
 
 # Red dots displayed while waiting for completion
 COMPLETION_WAITING_DOTS="true"
 
-# Plugins can be found in ~/.oh-my-zsh/plugins
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
 
 
 # FUNCTIONS {{
