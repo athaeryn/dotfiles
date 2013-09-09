@@ -647,6 +647,7 @@
         let g:startify_bookmarks = [
                     \ '~/.vimrc',
                     \ '~/.zshrc',
+                    \ '~/.vim/vimrc/bundles.vim',
                     \ '/usr/local/etc/nginx/nginx.conf',
                     \ '~/notes'
                     \]
