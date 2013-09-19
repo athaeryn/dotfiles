@@ -37,6 +37,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/brainfuck-syntax'
+NeoBundle 'vim-scripts/EasyGrep'
 NeoBundle 'vim-scripts/hybrid.vim'
 
 NeoBundle 'Shougo/vimproc', {
