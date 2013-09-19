@@ -34,7 +34,7 @@ Xcode > Preferences > Downloads, Command Line Tools
 
 ## 5. Install ZSH
 
-    brew install zsh
+    brew install --disable-etcdir zsh
     chsh -s /bin/zsh
 
 ## 6. Install oh-my-zsh
