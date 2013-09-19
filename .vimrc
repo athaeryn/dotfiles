@@ -87,6 +87,11 @@
                 " listchars
                 hi SpecialKey ctermfg=9 ctermbg=15
 
+                " TabLine
+                hi TabLine cterm=underline ctermfg=8 ctermbg=0
+                hi TabLineFill cterm=underline ctermfg=8 ctermbg=0
+                hi TabLineSel cterm=underline ctermfg=0 ctermbg=8
+
     " Search {{{2
 
         " Searches should be case insensitive...
