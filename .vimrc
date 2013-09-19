@@ -407,14 +407,24 @@
 
 " Commands {{{1
 
+    " Switch between 2 and 4 spaces for indentation
     command! TwoSpaces call TabSpaces(2)
     command! FourSpaces call TabSpaces(4)
 
+    " Reload all files from disk
     command! ReloadAll call ReloadAll()
 
+    " Show the pipes screensaver
     command! Pipes !pipes
 
+    " Search for todos with Ack
     command! Todos Ack TODO
+
+    " Toggle text-wrapping
+    command! ToggleWrap set nowrap!
+
+    " Edit notes
+    command! Notes edit ~/notes
 
 
 " Abbreviations {{{1
@@ -469,9 +479,6 @@
 
         " ...Tagbar
         nnoremap <f8> :TagbarToggle<cr>
-
-        " ...textwrap
-        nnoremap <leader>w :set nowrap!<cr>:set wrap?<cr>
 
         " ...Syntastic mode
         noremap <leader>sn :SyntasticToggleMode<cr>
