@@ -403,12 +403,6 @@
         set confirm
     endfunction
 
-    " Build the footer for startify
-    function! BuildFooter()
-        let footer = ["", "hey there"]
-        return footer
-    endfunction
-
 
 
 " Commands {{{1
@@ -668,7 +662,7 @@
                     \ '                                ---',
                     \ '                                 -'
                     \ ]
-        let g:startify_custom_footer = BuildFooter()
+        let g:startify_custom_footer = ['', ''] + map(split(system('tips | cowsay -W 80'), '\n'), '"    ".v:val')
 
     " Syntastic {{{2
 
