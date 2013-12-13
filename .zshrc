@@ -14,7 +14,7 @@ source $ZSH/oh-my-zsh.sh
     alias pshop="open -a /Applications/Adobe\ Photoshop\ CC/Adobe\ Photoshop\ CC.app"
 
     alias rhash="rbenv rehash"
-    alias todos="ag -i todo"
+    alias todos="ag TODO\:"
 
     # Spelling helpers
     alias gerp="grep"
@@ -73,14 +73,24 @@ COMPLETION_WAITING_DOTS="true"
         vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
     }
 
+    NOTESPATH=~/notes
     function notes () {
-        NOTESPATH=~/notes
         DAYFILE="$(date +%d-%m-%y.txt)"
         <"$NOTESPATH/$DAYFILE"
     }
 
+    function notef () {
+        ag "$*" "$NOTESPATH"
+    }
+
     function upload () {
         imguru "$1" | pbcopy
+    }
+
+    # For using the Google
+    function google () {
+        query="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$*")"
+        open http://google.com/#q="$query"
     }
 #}}
 
