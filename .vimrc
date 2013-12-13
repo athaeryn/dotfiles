@@ -172,9 +172,9 @@
         set cindent
 
         " Use four space instead of a tab
-        set tabstop=4
-        set shiftwidth=4
-        set softtabstop=4
+        set tabstop=2
+        set shiftwidth=2
+        set softtabstop=2
         set expandtab
 
     " Folding {{{2
@@ -247,15 +247,6 @@
 
         " Always show the status line above the command line
         set laststatus=2
-
-        " Shrink inactive splits to 10 rows and 20 cols
-        " Considering getting rid of this...
-        set winwidth=20
-        set winminwidth=20
-        set winwidth=120
-        set winheight=10
-        set winminheight=10
-        set winheight=999
 
         " Make backspace also delete indents and line endings
         set backspace=indent,eol,start
@@ -674,7 +665,7 @@
                     \ '                                ---',
                     \ '                                 -'
                     \ ]
-        let g:startify_custom_footer = ['', ''] + map(split(system('tips | cowsay -W 80'), '\n'), '"    ".v:val')
+        let g:startify_custom_footer = ['', ''] + map(split(system('tips'), '\n'), '"    ".v:val')
 
     " Syntastic {{{2
 
