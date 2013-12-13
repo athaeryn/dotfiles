@@ -18,7 +18,9 @@ source $ZSH/oh-my-zsh.sh
 
     # Spelling helpers
     alias gerp="grep"
-    alias git="~/bin/leaf-collector"
+    if [ -f ~/bin/leaf-collector ]; then
+        alias git="~/bin/leaf-collector"
+    fi
 
     # Get my IP
     alias myip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
@@ -91,6 +93,11 @@ COMPLETION_WAITING_DOTS="true"
     function google () {
         query="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$*")"
         open http://google.com/#q="$query"
+    }
+
+    function serv () {
+        PORT=${1:-3000}
+        ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
     }
 #}}
 
