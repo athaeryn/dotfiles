@@ -81,12 +81,12 @@ COMPLETION_WAITING_DOTS="true"
         <"$NOTESPATH/$DAYFILE"
     }
 
-    function notef () {
-        ag "$*" "$NOTESPATH"
+    function vocab () {
+        echo "$*" >> ~/vocab.txt
     }
 
-    function upload () {
-        imguru "$1" | pbcopy
+    function notef () {
+        ag "$*" "$NOTESPATH"
     }
 
     # For using the Google
@@ -124,13 +124,13 @@ export LSCOLORS=gxfxcxdxbxegedabagacad
 export NODE_PATH=/usr/local/lib/node
 
 # Gource {{
-    #function dimensions_for_gource {
-        #ruby -e 'puts `system_profiler SPDisplaysDataType | grep Resolution`.lines[0][22..-1].tr(" ", "")'
-    #}
-    ## always load gource config ~/.gource
-    #alias gource="gource --load-config ~/.gourcerc"
-    #_D=$(dimensions_for_gource)
-    #alias gourcefull="gource --load-config ~/.gourcerc -f -$_D"
+    function dimensions_for_gource {
+        ruby -e 'puts `system_profiler SPDisplaysDataType | grep Resolution`.lines[0][22..-1].tr(" ", "")'
+    }
+    # always load gource config ~/.gource
+    alias gource="gource --load-config ~/.gourcerc"
+    _D=$(dimensions_for_gource)
+    alias gourcefull="gource --load-config ~/.gourcerc -f -$_D"
 #}}
 
 # COMPLETION {{
@@ -161,3 +161,4 @@ export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
 
 # }}}
 
+export TERM=xterm-256color-italic

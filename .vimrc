@@ -1,14 +1,6 @@
-" NOTES {{{1
-
-    " Established Jan 2013.
-    " My starting point was Dan Menssen's .vimrc. (https://github.com/menssen)
-
 " Settings {{{1
 
     " Environment {{{2
-
-        " Disable vi-compatibility right off the bat
-        set nocompatible
 
         " Use zsh
         set shell=zsh
@@ -24,25 +16,24 @@
         " via Gary Bernhardt
         set t_ti= t_te=
 
-    " NeoBundle {{{2
+        " NeoBundle {{{2
 
-        if has('vim_starting')
+            if has('vim_starting')
             set runtimepath+=~/.vim/bundle/neobundle.vim/
-        endif
+            endif
 
-        call neobundle#rc(expand('~/.vim/bundle/'))
+            call neobundle#rc(expand('~/.vim/bundle/'))
 
-        " Let NeoBundle manage NeoBundle
-        NeoBundleFetch 'Shougo/neobundle.vim'
+            " Let NeoBundle manage NeoBundle
+            NeoBundleFetch 'Shougo/neobundle.vim'
 
-        " Load the bundles
-        source ~/.vim/vimrc/bundles.vim
+            " Load the bundles
+            source ~/.vim/vimrc/bundles.vim
 
-        " Enable filetype plugins and indentation
-        filetype plugin indent on
+            " Enable filetype plugins and indentation
+            filetype plugin indent on
 
-        NeoBundleCheck
-
+            NeoBundleCheck
 
 
     " Colorscheme {{{2
@@ -85,12 +76,27 @@
             "Other {{{4
 
                 " listchars
-                hi SpecialKey ctermfg=9 ctermbg=15
+                hi SpecialKey ctermfg=1 ctermbg=15
 
                 " TabLine
                 hi TabLine cterm=underline ctermfg=8 ctermbg=0
                 hi TabLineFill cterm=underline ctermfg=8 ctermbg=0
                 hi TabLineSel cterm=underline ctermfg=0 ctermbg=8
+
+                " Columns 'n' lines
+                hi ColorColumn ctermbg=0
+                hi CursorLine cterm=none ctermbg=0
+                hi VertSplit cterm=none ctermbg=0 ctermfg=8
+
+                " Italic comments
+                hi Comment cterm=italic
+
+                " Purple Search
+                hi Search ctermfg=15 ctermbg=12
+
+                " Purple highlights
+                hi Visual ctermfg=15 ctermbg=13
+
 
     " Search {{{2
 
@@ -104,6 +110,10 @@
         set incsearch
         set showmatch
 
+        " Highlight all matches for the last used search pattern
+        set hlsearch
+
+
     " Statusline {{{2
 
         " Clear the statusline
@@ -112,17 +122,17 @@
         " Buffer number
         set statusline+=[%n]\ ""
 
-        " User1 highlight
-        set statusline+=%1*
-
-        " File name
-        set statusline+=\ %f\ ""
-
         " User2 hilight
         set statusline+=%2*
 
         " Flags (h, [+], RO)
         set statusline+=%(\ %m%h%r\ %)
+
+        " User1 highlight
+        set statusline+=%1*
+
+        " File name
+        set statusline+=\ %f\ ""
 
         " Back to default highlight
         set statusline+=%*\ ""
@@ -147,17 +157,13 @@
 
     " Mouse {{{2
 
-        " Enable mouse support in terminals that can handle it (iTerm can,
-        " Terminal.app can't)
+        " Enable mouse support in terminals that can handle it
         set mouse=a
 
     " Info {{{2
 
         " Do NOT beep
         set visualbell
-
-        " Show the cursor position at the end of the status line
-        set ruler
 
         " Show tidbits of info in bottom right about current keyboard command
         set showcmd
@@ -169,6 +175,7 @@
 
         " Turn on auto-indentation, for better or worse
         set autoindent
+        set smartindent
         set cindent
 
         " Use four space instead of a tab
@@ -213,17 +220,19 @@
         set nowrap
         set sidescroll=1
         set sidescrolloff=1
-        set listchars=extends:>,precedes:<
 
         " Display line numbers
         set number
 
-        " Make command line 2 lines tall
-        set cmdheight=2
+        " Don't let the numbers take up more space than necessary
+        set numberwidth=1
+
+        " Make command line 1 lines tall
+        set cmdheight=1
 
         " If wrapping is enabled, mark wrapped lines
-        " Comment is to prevent automatic trailing whitespace removal
-        set showbreak=\ ->\ "
+        " (comment is to prevent automatic trailing whitespace removal)
+        set showbreak=\ »\ "
 
         " Don't redraw while executing macros
         set lazyredraw
@@ -233,16 +242,13 @@
         " ...which are:
         set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 
-        " Highlight all matches for the last used search pattern
-        set hlsearch
-
         " Highlight the line the cursor is in
         set cursorline
 
-        " Display a colored column at 81 characters. Do not cross
+        " Display a colored column at 81 characters. Do not cross!
         set colorcolumn=81
 
-        " Hang on to a buffer even when no longer shown in a window
+        " Don't drop buffers even when no longer shown in a window
         set hidden
 
         " Always show the status line above the command line
@@ -251,19 +257,19 @@
         " Make backspace also delete indents and line endings
         set backspace=indent,eol,start
 
-        " Kill some security exploits and also modelines are a dumb idea
+        " No modelines
         set modelines=0
 
         " Where to put backup files
         set backupdir=~/.vim/backup
 
-        " Reload a file that is modified from the outside
-        set autoread
-
         " Stop littering .swp files everywhere
         set noswapfile
         " Put swapfiles in the backup directory
         set directory=~/.vim/backup
+
+        " Reload a file that is modified from the outside
+        set autoread
 
         " Keep a really long command/search history
         set history=1000
@@ -289,33 +295,11 @@
 
         autocmd!
 
-        " Hello good-bye
-        autocmd VimEnter * echo "Hello, Manderson!"
-        autocmd VimLeave * echo "Good-bye, Manderson!"
-
         " Automatically fold everything when opening ~/.vimrc"
         autocmd BufRead .vimrc set fen
 
-        " Close a quickfix window with q
-        autocmd BufNewFile,BufRead *
-                    \ if &buftype == "quickfix" |
-                    \     nnoremap q :lclose<cr> |
-                    \ endif
-
-        " Close a help window with q
-        autocmd BufNewFile,BufRead *
-                    \ if &buftype == "help" |
-                    \     nnoremap q :q<cr> |
-                    \ endif
-
-        " Files should open with cursor at same line as when closed
-        " From vim docs, via Gary Bernhardt
-        autocmd BufReadPost *
-                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                    \     exe "normal g`\"" |
-                    \ endif
-
     augroup END
+
 
     augroup FileTypes "{{{2
 
@@ -329,9 +313,6 @@
         " This makes editing crontab possible
         autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
-        " .bf means brainfuck
-        autocmd BufNewFile,BufRead *.bf set filetype=brainfuck
-
         " Folding for vim files
         autocmd FileType vim set foldmethod=marker
 
@@ -344,9 +325,13 @@
 
         autocmd FileType startify setlocal colorcolumn=""
 
+        autocmd FileType json command! Format %!python -m json.tool
+
     augroup END
 
     augroup Markdown "{{{2
+
+        autocmd!
 
         " Make all text files markdown
         autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
@@ -385,6 +370,7 @@
         endif
     endfunction
 
+
     " Change the amount of space to insert in place of a tab
     function! TabSpaces (how_many)
         let &tabstop = a:how_many
@@ -392,23 +378,11 @@
         let &softtabstop = a:how_many
     endfunction
 
-    " Reload all buffers from disk
-    function! ReloadAll()
-        set noconfirm
-        tabdo e!
-        set confirm
-    endfunction
-
-
-
 " Commands {{{1
 
     " Switch between 2 and 4 spaces for indentation
     command! TwoSpaces call TabSpaces(2)
     command! FourSpaces call TabSpaces(4)
-
-    " Reload all files from disk
-    command! ReloadAll call ReloadAll()
 
     " Show the pipes screensaver
     command! Pipes !pipes
@@ -416,11 +390,15 @@
     " Search for todos with Ack
     command! Todos Ack TODO
 
-    " Toggle text-wrapping
-    command! ToggleWrap set nowrap!
-
     " Edit notes
     command! Notes edit ~/notes
+
+    " Make the current window 80 cols wide
+    command! Eighty vertical resize 80
+
+    " Call concealerator
+    command! ConcealToggle let &conceallevel=&conceallevel==0?2:0
+
 
 
 " Abbreviations {{{1
@@ -437,9 +415,9 @@
 
     " Splits {{{2
 
-        " Shortcuts for creating splits (show Startify)
-        nnoremap <leader>v <c-w>v<c-w>l<c-w>L:Startify<cr>
-        nnoremap <leader>h <c-w>s<c-w>j:Startify<cr>
+        " Shortcuts for creating splits
+        nnoremap <leader>v <c-w>v<c-w>l<c-w>L
+        nnoremap <leader>h <c-w>s<c-w>j
 
         " Easier split navigation
         nnoremap <c-h> <c-w>h
@@ -449,8 +427,9 @@
 
     " Tabs {{{2
 
-        " New tab (show Startify)
+        " New tab
         map <leader>tn :tabnew<cr>:Startify<cr>
+        map <leader>tn :tabnew<cr>
         " Only tab
         noremap <leader>to :tabonly<cr>
         " Exit
@@ -459,8 +438,6 @@
         " Navigation
         nnoremap <silent> <c-n> :tabnext<cr>
         nnoremap <silent> <c-p> :tabprev<cr>
-        inoremap <silent> <c-n> <esc><c-n>
-        inoremap <silent> <c-p> <esc><c-p>
 
     " Toggles... {{{2
 
@@ -481,6 +458,9 @@
 
         " ...display listchars
         nnoremap <leader>l :setl nolist!<cr>:set list?<cr>
+
+        " ...text wrapping
+        nnoremap <leader>wr :setl nowrap!<cr>:set wrap?<cr>
 
     " RainbowParentheses {{{2
 
@@ -526,29 +506,11 @@
         " Clear highlighted search
         nnoremap <enter> :noh<cr>
 
-        " Friends don't let friends use the arrow keys
-        noremap <up> <nop>
-        noremap <down> <nop>
-        noremap <left> <nop>
-        noremap <right> <nop>
-
-        " Insert spaces in Normal mode
-        nnoremap <space> i<space><esc>l
-
         " Rename the current file
         noremap <leader>n :call RenameFile()<cr>
 
         " For InsertTabWrapper()
         inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-        " Omnicomplete uses shift-tab
-        inoremap <s-tab> <c-n>
-
-        " For quick .vimrc changing
-        noremap \v :tabnew ~/.vimrc<cr>
-
-        " jj or kj leaves insert mode, staying in place
-        inoremap jj <esc>l
-        inoremap kj <esc>l
 
         " Keep the selection when indenting
         vnoremap < <gv
@@ -575,11 +537,8 @@
         " Display errors
         nnoremap <leader>er :Errors<cr>
 
-        " Open the current directory in Finder
-        nnoremap <silent> <c-d> :!open .<cr>
-
         " Inspect highlight under cursor
-        map <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+        nnoremap <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
         \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
@@ -592,6 +551,9 @@
         " Ack.vim
         nnoremap <leader>a :Ack<space>
 
+        " Dispatch rspec
+        nnoremap <leader>rs :Dispatch bundle exec rspec<cr>
+
 
 " Plugins {{{1
 
@@ -602,25 +564,20 @@
 
     " CtrlP {{{2
 
-        " Set CtrlP map to ctrl-f because it's easier to hit
+        " Use <c-f> as the mapping for CtrlP
         let g:ctrlp_map = '<c-f>'
 
         " Increase CtrlP file limit from 10,000 to 100,000
         let g:ctrlp_max_files = 100000
 
         " CtrlP should ignore dot files
-        let g:ctrlp_dotfiles = 1
+        " let g:ctrlp_dotfiles = 1
 
         " CtrlP shouldn't remember the last input
         let g:ctrlp_persistent_input = 0
 
         " Don't let CtrlP change working directory
         let g:ctrlp_working_path_mode = 0
-
-        " CtrlP should ignore the cache directory (symfony)
-        set wildignore+=*/app/cache/*
-        " And the build directory (xcode)
-        set wildignore+=*/build/*
 
         let g:ctrlp_custom_ignore = {
                     \ 'dir': '\v[\/]\.sass-cache'
@@ -629,14 +586,26 @@
         " Prevent CtrlP opening a split beside the Startify buffer
         let g:ctrlp_reuse_window = 'startify'
 
+        " Use ag if we got it
+        if executable('ag')
+          " Use the silver searcher
+          let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+          " Also set :grep to use ag
+          set grepprg=ag\ --nogroup\ --nocolor
+
+          " ag is fast enough that CtrlP doesn't need to cache
+          let g:ctrlp_use_caching = 0
+        endif
+
+    " NERDTree {{{2
 
 
     " Netrw {{{2
+
         let g:netrw_liststyle=3
         let g:netrw_browse_split=3
         let g:netrw_preview=1
         let g:netrw_winsize=20
-
 
 
     " Startify {{{2
@@ -649,9 +618,9 @@
                     \ '~/notes'
                     \]
         let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim', '^/usr/local/Cellar/macvim']
-        let g:startify_files_number = 14
+        let g:startify_list_order = ['files', 'bookmarks', 'sessions']
+        let g:startify_files_number = 10
         let g:startify_change_to_dir = 0
-        let g:startify_custom_indices = ['a', 'd', 'f']
         let g:startify_custom_header = [
                     \ '',
                     \ '    -------------------        -   -        --------------------',
