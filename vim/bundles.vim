@@ -1,4 +1,6 @@
 NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'bilalq/lite-dfm'
 NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'athaeryn/vim-openscad'
 NeoBundle 'athaeryn/vim-personal'
@@ -44,6 +46,8 @@ NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'vim-scripts/EasyGrep'
 NeoBundle 'vim-scripts/brainfuck-syntax'
 NeoBundle 'vim-scripts/hybrid.vim'
+
+NeoBundle 'vim-scripts/newspaper.vim'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {

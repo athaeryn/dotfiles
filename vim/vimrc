@@ -28,7 +28,7 @@
             NeoBundleFetch 'Shougo/neobundle.vim'
 
             " Load the bundles
-            source ~/.vim/vimrc/bundles.vim
+            source ~/.vim/bundles.vim
 
             " Enable filetype plugins and indentation
             filetype plugin indent on
@@ -213,7 +213,7 @@
 
     " Other {{{2
         " Force showing ten extra lines above and below cursor
-        set scrolloff=10
+        set scrolloff=5
 
         " Don't wrap text, but add characters indicating hidden parts of a line
         " and change horizontal scrolling to be sane
@@ -625,10 +625,10 @@
                     \ '',
                     \ '    -------------------        -   -        --------------------',
                     \ '        ----------------       -----       -----------------',
-                    \ '          ---------------M---M-MMMMM-M---M---------------',
-                    \ '           --------------M---M---M---MM-MM--------------',
-                    \ '            --------------M-M----M---M-M-M-------------',
-                    \ '           ----------------M---MMMMM-M---M--------------',
+                    \ '          ---------------█---█-█████-█---█---------------',
+                    \ '           --------------█---█---█---██-██--------------',
+                    \ '            --------------█-█----█---█-█-█-------------',
+                    \ '           ----------------█---█████-█---█--------------',
                     \ '                            -----------',
                     \ '                               -----',
                     \ '                                ---',
