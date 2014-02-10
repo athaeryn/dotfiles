@@ -23,6 +23,12 @@ try_source ~/.zsh/modules/gource.zsh
 try_source ~/.zsh/modules/android.zsh
 
 
+# COMPLETION
+autoload -U compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # ignore case
+
+
 # zstyle ':completion:*:*:git:*' script ~/.git-completion.sh
 # fpath=(~/.zsh/funcs $fpath)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
