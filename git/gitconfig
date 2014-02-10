@@ -83,3 +83,5 @@
     added = yellow
     changed = green
     untracked = cyan
+[gitsh]
+	defaultCommand = status -s
