@@ -14,7 +14,7 @@ linkup pow/powconfig ~/.powconfig
 
 # ssh
 mkdir -p ~/.ssh
-cp ssh/config ~/.ssh/git-config
+cp ssh/config ~/.ssh/example-config
 echo "Remember to set up ~/.ssh if you haven't."
 
 # tmux
@@ -24,9 +24,11 @@ linkup tmux/tmux.conf ~/.tmux.conf
 mkdir -p ~/.vim/backup
 mkdir -p ~/.vim/undo
 linkup vim/vimrc ~/.vimrc
-linkup vim/after ~/.vim/.after
-linkup vim/bundles.vim ~/.vim
-
+linkup vim/after ~/.vim/
+linkup vim/bundles.vim ~/.vim/
+echo "If you haven't installed NeoBundle:"
+echo "  git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim"
+echo "  vim +NeoBundleInstall +q"
 
 # zsh
 mkdir -p ~/.zsh
