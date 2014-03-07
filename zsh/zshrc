@@ -113,3 +113,5 @@ export TERM=xterm-256color-italic
 
 # rbenv needs this
 eval "$(rbenv init -)"
+
+try_source ~/.fzf.zsh
