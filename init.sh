@@ -1,4 +1,5 @@
 function linkup () {
+  echo "ln -Ffs $(pwd)/$1 $2"
   ln -Ffs "$(pwd)/$1" "$2"
 }
 
@@ -14,8 +15,14 @@ linkup pow/powconfig ~/.powconfig
 
 # ssh
 mkdir -p ~/.ssh
+if [ -f ~/Dropbox/ssh/config ]; then
+  ln -Ffs ~/Dropbox/ssh/config ~/.ssh
+else
+  echo "\n>> You should set up ssh config with Dropbox.\n"
+fi
 cp ssh/config ~/.ssh/example-config
-echo "Remember to set up ~/.ssh if you haven't."
+echo "\n>> Remember to set up ~/.ssh if you haven't.\n"
+
 
 # tmux
 linkup tmux/tmux.conf ~/.tmux.conf
@@ -26,9 +33,10 @@ mkdir -p ~/.vim/undo
 linkup vim/vimrc ~/.vimrc
 linkup vim/after ~/.vim/
 linkup vim/bundles.vim ~/.vim/
-echo "If you haven't installed NeoBundle:"
+echo "\nIf you haven't installed NeoBundle:"
 echo "  git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim"
-echo "  vim +NeoBundleInstall +q"
+echo "  vim +NeoBundleInstall +q\n"
+
 
 # zsh
 mkdir -p ~/.zsh
