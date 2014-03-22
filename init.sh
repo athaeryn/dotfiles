@@ -3,17 +3,40 @@ function linkup () {
   ln -Ffs "$(pwd)/$1" "$2"
 }
 
-# git
+
+#        _ _
+#   __ _(_) |_
+#  / _` | | __|
+# | (_| | | |_
+#  \__, |_|\__|
+#  |___/
+#
 linkup git/gitconfig ~/.gitconfig
 linkup git/gitignore_global ~/.gitignore_global
 
-# irb
+
+#  _      _
+# (_)_ __| |__
+# | | '__| '_ \
+# | | |  | |_) |
+# |_|_|  |_.__/
+#
 linkup irb/irbrc ~/.irbrc
 
-# pow
+#  _ __   _____      __
+# | '_ \ / _ \ \ /\ / /
+# | |_) | (_) \ V  V /
+# | .__/ \___/ \_/\_/
+# |_|
+#
 linkup pow/powconfig ~/.powconfig
 
-# ssh
+#          _
+#  ___ ___| |__
+# / __/ __| '_ \
+# \__ \__ \ | | |
+# |___/___/_| |_|
+#
 mkdir -p ~/.ssh
 if [ -f ~/Dropbox/ssh/config ]; then
   ln -Ffs ~/Dropbox/ssh/config ~/.ssh
@@ -24,10 +47,21 @@ cp ssh/config ~/.ssh/example-config
 echo "\n>> Remember to set up ~/.ssh if you haven't.\n"
 
 
-# tmux
+#  _
+# | |_ _ __ ___  _   ___  __
+# | __| '_ ` _ \| | | \ \/ /
+# | |_| | | | | | |_| |>  <
+#  \__|_| |_| |_|\__,_/_/\_\
+#
 linkup tmux/tmux.conf ~/.tmux.conf
 
-# vim
+
+#        _
+# __   _(_)_ __ ___
+# \ \ / / | '_ ` _ \
+#  \ V /| | | | | | |
+#   \_/ |_|_| |_| |_|
+#
 mkdir -p ~/.vim/backup
 mkdir -p ~/.vim/undo
 linkup vim/vimrc ~/.vimrc
@@ -38,7 +72,12 @@ echo "  git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundl
 echo "  vim +NeoBundleInstall +q\n"
 
 
-# zsh
+#          _
+#  _______| |__
+# |_  / __| '_ \
+#  / /\__ \ | | |
+# /___|___/_| |_|
+#
 mkdir -p ~/.zsh
 linkup zsh/zshrc ~/.zshrc
 linkup zsh/zshenv ~/.zshenv
