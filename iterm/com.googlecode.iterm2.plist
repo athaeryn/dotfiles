@@ -525,6 +525,10 @@
 	<false/>
 	<key>HideTab</key>
 	<true/>
+	<key>HideTabCloseButton</key>
+	<false/>
+	<key>HideTabNumber</key>
+	<false/>
 	<key>HighlightTabLabels</key>
 	<true/>
 	<key>HotKeyBookmark</key>
@@ -562,7 +566,7 @@
 	<key>NSFontPanelPreviewHeight</key>
 	<real>79</real>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/git/dotfiles</string>
+	<string>~/git/dotfiles/iterm</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -591,17 +595,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>307 259 445 270 0 0 1440 878 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>418 219 924 485 0 0 1440 878 </string>
+	<string>486 342 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>528 562 384 129 0 0 1440 878 </string>
 	<key>NSWindow Frame SUUpdateAlertFrame</key>
-	<string>432 381 575 392 0 0 1440 900 </string>
+	<string>240 4 960 874 0 0 1440 878 </string>
 	<key>NSWindow Frame com.apple.typography_panel_Inconsolata-dz</key>
 	<string>398 646 260 42 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>367 283 570 527 0 0 1440 878 </string>
+	<string>0 11 717 867 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 5 1438 873 0 0 1440 878 </string>
+	<string>0 345 570 527 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1437,7 +1441,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/mike/git/dotfiles</string>
+	<string>~/git/dotfiles/iterm</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
