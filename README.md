@@ -17,17 +17,15 @@ Google it, son.
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 ```
 
-
 ## 3. Install You Some Homebrew Packages:
 
 ```sh
-$ brew install stow git reattach-to-user-namespace tmux vim rbenv ruby-build
+$ brew bundle
 
 # zsh
 $ brew install --disable-etcdir zsh
 $ chsh -s $(which zsh)
 ```
-I'm going to do this with a `Brewfile` eventually, I think.
 
 ## 4. Stow those packages
 
