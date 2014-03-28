@@ -29,13 +29,10 @@ $ chsh -s $(which zsh)
 
 ## 4. Stow those packages
 
+Stow was installed for you from the Brewfile. Did you catch that?
+
 ```sh
 $ cd ~/dotfiles
-$ stow vim
-$ stow zsh
-$ stow git
-$ stow pow
-$ stow irb
-$ stow tmux
+$ stow dat
 ```
 
