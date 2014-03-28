@@ -27,7 +27,7 @@ $ brew install --disable-etcdir zsh
 $ chsh -s $(which zsh)
 ```
 
-## 4. Stow those packages
+## 4. Stow Them Packages
 
 Stow was installed for you from the Brewfile. Did you catch that?
 
