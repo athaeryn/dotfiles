@@ -17,7 +17,7 @@ Google it, son.
 ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 ```
 
-## 3. Install You Some Homebrew Packages:
+## 3. Install You Some Homebrew Packages
 
 ```sh
 $ brew bundle
