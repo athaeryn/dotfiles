@@ -90,6 +90,13 @@ function serv () {
   ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
 }
 
+function light () {
+  echo -e "\033]50;SetProfile=manderson-light\x7"
+}
+function dark () {
+  echo -e "\033]50;SetProfile=manderson-dark\x7"
+}
+
 
 
 setopt PROMPT_SUBST

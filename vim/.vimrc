@@ -289,6 +289,9 @@
         " Improve session saving
         set sessionoptions=blank,curdir,folds,help,tabpages,winpos
 
+        " Don't show the startup message
+        set shortmess=I
+
 " Autocommands {{{1
 
     augroup Misc "{{{2
