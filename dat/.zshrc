@@ -115,7 +115,7 @@ export HOSTSPATH=~/git/buildhosts
 export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
 
 
-export TERM=xterm-256color-italic
+export TERM=xterm-256color
 
 
 # rbenv needs this
