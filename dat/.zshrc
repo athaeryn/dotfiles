@@ -79,22 +79,9 @@ function notef () {
   ag "$*" "$NOTESPATH"
 }
 
-# For using the Google
-function google () {
-  query="$(ruby -r cgi -e 'puts CGI.escape(ARGV[0])' "$*")"
-  open http://google.com/#q="$query"
-}
-
 function serv () {
   PORT=${1:-3000}
   ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
-}
-
-function light () {
-  echo -e "\033]50;SetProfile=manderson-light\x7"
-}
-function dark () {
-  echo -e "\033]50;SetProfile=manderson-dark\x7"
 }
 
 
@@ -114,11 +101,9 @@ export HOSTSPATH=~/git/buildhosts
 
 export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
 
-
 export TERM=xterm-256color
 
+eval "$(direnv hook $0)"
 
-# rbenv needs this
-eval "$(rbenv init -)"
 
 try_source ~/.fzf.zsh

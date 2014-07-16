@@ -17,7 +17,7 @@ syn match   htmlArg "\<\(data-[\-a-zA-Z0-9_]\+\)=" contained
 hi link htmlTagName Normal
 hi link htmlArg Normal
 
-hi htmlTag     ctermfg=8
-hi htmlEndTag  ctermfg=8
+hi link htmlTag Comment
+hi link htmlEndTag Comment
 
-hi htmlString ctermfg=10
+hi link htmlString String

@@ -1,62 +1,52 @@
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'AndrewRadev/vim-eco'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'bilalq/lite-dfm'
-NeoBundle 'Rip-Rip/clang_complete'
-NeoBundle 'athaeryn/vim-openscad'
-NeoBundle 'athaeryn/vim-personal'
-NeoBundle 'chrisbra/NrrwRgn'
-NeoBundle 'dbakker/vim-lint'
-NeoBundle 'duff/vim-scratch'
-NeoBundle 'editorconfig/editorconfig-vim'
-NeoBundle 'elzr/vim-json'
-NeoBundle 'godlygeek/tabular'
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'kien/rainbow_parentheses.vim'
-NeoBundle 'majutsushi/tagbar'
-" NeoBundle 'mhinz/vim-startify'
-NeoBundle 'mhinz/vim-tmuxify'
-NeoBundle 'mileszs/ack.vim'
-NeoBundle 'moll/vim-bbye'
-NeoBundle 'moll/vim-node'
-NeoBundle 'mustache/vim-mode'
-NeoBundle 'mutewinter/nginx.vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'paradigm/SkyBison'
-NeoBundle 'paradigm/TextObjectify'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'thoughtbot/vim-rspec'
-NeoBundle 'tpope/vim-characterize'
-NeoBundle 'tpope/vim-projectile'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-cucumber'
-NeoBundle 'tpope/vim-dispatch'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-ragtag'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-scriptease'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'vim-scripts/EasyGrep'
-NeoBundle 'vim-scripts/brainfuck-syntax'
-NeoBundle 'vim-scripts/hybrid.vim'
-
-NeoBundle 'vim-scripts/newspaper.vim'
-
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+https://github.com/Raimondi/delimitMate
+https://github.com/AndrewRadev/vim-eco
+https://github.com/altercation/vim-colors-solarized
+https://github.com/bilalq/lite-dfm
+https://github.com/Rip-Rip/clang_complete
+https://github.com/athaeryn/vim-openscad
+https://github.com/athaeryn/vim-seahorse
+https://github.com/chrisbra/NrrwRgn
+https://github.com/dbakker/vim-lint
+https://github.com/duff/vim-scratch
+https://github.com/editorconfig/editorconfig-vim
+https://github.com/elzr/vim-json
+https://github.com/godlygeek/tabular
+https://github.com/jelera/vim-javascript-syntax
+https://github.com/kchmck/vim-coffee-script
+https://github.com/kien/ctrlp.vim
+https://github.com/kien/rainbow_parentheses.vim
+https://github.com/majutsushi/tagbar
+https://github.com/mhinz/vim-startify
+https://github.com/mhinz/vim-tmuxify
+https://github.com/mileszs/ack.vim
+https://github.com/moll/vim-bbye
+https://github.com/moll/vim-node
+https://github.com/mustache/vim-mode
+https://github.com/mutewinter/nginx.vim
+https://github.com/nathanaelkane/vim-indent-guides
+https://github.com/othree/html5.vim
+https://github.com/pangloss/vim-javascript
+https://github.com/paradigm/SkyBison
+https://github.com/paradigm/TextObjectify
+https://github.com/scrooloose/nerdtree
+https://github.com/scrooloose/syntastic
+https://github.com/thoughtbot/vim-rspec
+https://github.com/tpope/vim-characterize
+https://github.com/tpope/vim-projectile
+https://github.com/tpope/vim-commentary
+https://github.com/tpope/vim-cucumber
+https://github.com/tpope/vim-dispatch
+https://github.com/tpope/vim-endwise
+https://github.com/tpope/vim-fugitive
+https://github.com/tpope/vim-markdown
+https://github.com/tpope/vim-ragtag
+https://github.com/tpope/vim-rails
+https://github.com/tpope/vim-repeat
+https://github.com/tpope/vim-scriptease
+https://github.com/tpope/vim-surround
+https://github.com/tpope/vim-unimpaired
+https://github.com/vim-ruby/vim-ruby
+https://github.com/vim-scripts/EasyGrep
+https://github.com/vim-scripts/brainfuck-syntax
+https://github.com/vim-scripts/hybrid.vim
+https://github.com/fatih/vim-go
