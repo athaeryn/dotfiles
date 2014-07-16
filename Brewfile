@@ -10,6 +10,7 @@ install ruby-build
 # Other things
 install ccrypt
 install ctags
+install direnv
 install fzf
 install macvim
 install markdown
