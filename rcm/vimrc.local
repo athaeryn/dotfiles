@@ -1,0 +1,335 @@
+" Prevent Vim from clobbering the scrollback buffer.
+" http://www.shallowsky.com/linux/noaltscreen.html
+" via Gary Bernhardt
+set t_ti= t_te=
+
+"=========================================================="
+" Statusline
+"=========================================================="
+
+" Clear the statusline.
+set statusline=
+
+" Buffer number.
+set statusline+=[%n]\ ""
+
+" User2 hilight.
+set statusline+=%2*
+
+" Flags (h, [+], RO).
+set statusline+=%(\ %m%h%r\ %)
+
+" User1 highlight.
+set statusline+=%1*
+
+" File name.
+set statusline+=\ %f\ ""
+
+" Back to default highlight.
+set statusline+=%*\ ""
+
+" Filetype.
+set statusline+=%<[%{strlen(&ft)?&ft:'none'},
+
+" Encoding.
+set statusline+=%{strlen(&fenc)?&fenc:&enc},
+
+" File format.
+set statusline+=%{&fileformat}]
+
+" Right align the rest.
+set statusline+=%=
+
+" Cursor line, column.
+set statusline+=%-14.(%l,%c%V%)
+
+" Percent through file.
+set statusline+=\ %P\ ""
+
+
+"=========================================================="
+" Colorscheme/highlights
+"=========================================================="
+
+set background=light
+colorscheme seahorse
+
+"" Startify
+"
+hi! link StartifyBracket Grey
+hi! link StartifyFile    Black
+hi! link StartifyNumber  Blue
+hi! link StartifyPath    Grey
+hi! link StartifySlash   Grey
+hi! link StartifySpecial Grey
+hi! link StartifyHeader  Yellow
+
+"" Statusline
+"
+" Filename
+hi! link User1 LightGreyBg
+" Flags
+hi! link User2 YellowBg
+
+"" NERDTree
+"
+" Directory
+hi! link NERDTreeUp Comment
+hi! link NERDTreeDir Comment
+hi! link NERDTreeDirSlash Comment
+
+"" Vim
+"
+hi! link vimString String
+
+"" Other
+"
+" TabLine
+" hi TabLine cterm=underline ctermfg=8 ctermbg=0
+" hi TabLineFill cterm=underline ctermfg=8 ctermbg=0
+" hi TabLineSel cterm=underline ctermfg=0 ctermbg=8
+
+" Columns 'n' lines
+" hi ColorColumn ctermbg=0
+" hi CursorLine cterm=none ctermbg=0
+" hi VertSplit cterm=none ctermbg=0 ctermfg=8
+
+
+"=========================================================="
+" Settings
+"=========================================================="
+
+" Set fold method to indent.
+set foldmethod=indent
+
+" Don't fold by default.
+set nofoldenable
+set foldtext=NeatFoldText()
+
+" Set font in GUI.
+set guifont=Fira\ Mono\ OT:h13
+
+" Backup files.
+set backupdir=~/.vim-backup
+" Swapfiles.
+set directory=~/.vim-backup
+" Undo files.
+set undodir=~/.vim-undo
+
+" Stop littering .swp files everywhere.
+set noswapfile
+" Stores undo info in a file so that it persists after vim closes.
+set undofile
+
+
+"=========================================================="
+" Abbreviations
+"=========================================================="
+
+" Insert a timestamp.
+iabbrev _d <c-r>=strftime('%H:%M -')<cr>
+
+"=========================================================="
+" Autocommands
+"=========================================================="
+
+augroup Misc
+  autocmd!
+
+  " Automatically fold everything when opening ~/.vimrc.
+  autocmd BufRead .vimrc set foldenable
+augroup END
+
+
+augroup FileTypes
+  autocmd!
+
+  " This makes editing crontab possible.
+  autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+
+  " Folding for vim files.
+  autocmd FileType vim set foldmethod=marker
+
+  autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
+  autocmd FileType qf nnoremap <buffer> <cr> <cr>
+
+  " No ColorColumn in Startify.
+  autocmd FileType startify setlocal colorcolumn=""
+augroup END
+
+augroup Markdown
+  autocmd!
+
+  " Treat all text files as markdown.
+  autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
+
+  " Wrap text for txt/markdown.
+  autocmd FileType markdown set wrap linebreak textwidth=0
+  autocmd FileType txt set wrap linebreak textwidth=0
+
+  " Don't showbreak for txt/markdown.
+  autocmd FileType markdown set showbreak=
+  autocmd FileType txt set showbreak=
+
+  " Convert Markdown to HTML (in place!).
+  autocmd FileType markdown command! Html %! /usr/local/bin/markdown --html4tags <cr>
+augroup END
+
+
+"=========================================================="
+" Functions
+"=========================================================="
+
+" From http://dhruvasagar.com/2013/03/28/vim-better-foldtext.
+function! NeatFoldText()
+  let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
+  let line = ' ' .
+              \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' .
+              \ printf("%10s", lines_count . ' lines') . ' |'
+  let fill = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) .
+              \ line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(fill, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend,
+              \ '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) .
+              \ foldtextend
+endfunction
+
+
+"=========================================================="
+" Mappings
+"=========================================================="
+
+" New tab.
+map <leader>tn :tabnew<cr>
+
+" Tab navigation.
+nnoremap <silent> <c-n> :tabnext<cr>
+nnoremap <silent> <c-p> :tabprev<cr>
+
+" Add a line below in normal mode and stay in normal mode.
+nnoremap <c-o> o<esc>
+
+" Switch between the last two files.
+nnoremap <leader><leader> <c-^>
+
+" Copy and paste from system clipboard.
+noremap <leader>p "+p
+noremap <leader>y "+y
+
+" Write as root, when you forgot to sudo edit.
+cnoreabbrev w!! w !sudo tee % >/dev/null
+
+" Map <leader>f to open CtrlP in buffer mode.
+nnoremap <silent> <leader>f :CtrlPBuffer<cr>
+
+" Previous.
+nnoremap <silent> <f7> :prev<cr>
+" Next.
+nnoremap <silent> <f9> :next<cr>
+
+" Ack.vim.
+nnoremap <leader>a :Ack<space>
+
+" Copy and paste from system clipboard.
+noremap <leader>p "+p
+noremap <leader>y "+y
+
+" Always be magical. Very magical. Always.
+nnoremap / /\v
+vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
+
+" Switch to last buffer.
+nnoremap <leader><leader> <c-^>
+
+" Close a buffer without closing the window.
+nnoremap <silent> <leader>d :Bdelete<cr>
+
+" SkyBison.
+cnoremap <c-l> <c-r>=SkyBison("")<cr><cr>
+
+" Commentary.
+xmap <leader>c <Plug>Commentary
+nmap <leader>c <Plug>Commentary
+nmap <leader>c<space> <Plug>CommentaryLine
+nmap <leader>cu <Plug>CommentaryUndo
+
+" Toggle NERDTree.
+nnoremap <leader>tr :NERDTreeToggle<cr>
+
+"=========================================================="
+" Commands
+"=========================================================="
+
+" Edit notes.
+command! Notes edit ~/notes
+
+
+"=========================================================="
+" Plugins Settings
+"=========================================================="
+
+"" CtrlP
+"
+" Open with <c-f>.
+let g:ctrlp_map = '<c-f>'
+
+" Increase file limit from 10,000 to 100,000.
+let g:ctrlp_max_files = 100000
+
+" Don't remember the last input.
+let g:ctrlp_persistent_input = 0
+
+" Don't change working directory.
+let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\v[\/]\.sass-cache'
+            \ }
+
+" Prevent opening a split beside the Startify buffer.
+let g:ctrlp_reuse_window = 'startify'
+
+"" Netrw
+"
+let g:netrw_liststyle=3
+let g:netrw_browse_split=3
+let g:netrw_preview=1
+let g:netrw_winsize=20
+
+"" Startify
+"
+let g:startify_bookmarks = [
+            \ '~/.vimrc',
+            \ '~/.zshrc',
+            \ '~/.vim/bundles.vim',
+            \ '/usr/local/etc/nginx/nginx.conf',
+            \ '~/notes'
+            \]
+let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim', '^/usr/local/Cellar/macvim']
+let g:startify_list_order = ['files', 'bookmarks', 'sessions']
+let g:startify_files_number = 10
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = [
+            \ '',
+            \ '    ░░░░░░░░░░░░░░░░░░░        ░   ░        ░░░░░░░░░░░░░░░░░░░░',
+            \ '        ░░░░░░░░░░░░░░░░       ░░░░░       ░░░░░░░░░░░░░░░░░',
+            \ '          ░░░░░░░░░░░░░░░▓░░░▓░▓▓▓▓▓░▓░░░▓░░░░░░░░░░░░░░░',
+            \ '           ░░░░░░░░░░░░░░▓░░░▓░░░▓░░░▓▓░▓▓░░░░░░░░░░░░░░',
+            \ '            ░░░░░░░░░░░░░░▓░▓░░░░▓░░░▓░▓░▓░░░░░░░░░░░░░',
+            \ '           ░░░░░░░░░░░░░░░░▓░░░▓▓▓▓▓░▓░░░▓░░░░░░░░░░░░░░',
+            \ '                            ░░░░░░░░░░░',
+            \ '                               ░░░░░',
+            \ '                                ░░░',
+            \ '                                 ░'
+            \ ]
+
+"" Syntastic
+"
+" Enable syntastic error signs in the line number column.
+let g:syntastic_enable_signs = 1
