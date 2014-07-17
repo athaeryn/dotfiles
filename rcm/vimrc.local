@@ -129,6 +129,9 @@ set undofile
 " Insert a timestamp.
 iabbrev _d <c-r>=strftime('%H:%M -')<cr>
 
+" Whatever.
+iabbrev wwha ¯\_(ツ)_/¯
+
 "=========================================================="
 " Autocommands
 "=========================================================="
