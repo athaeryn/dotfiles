@@ -107,7 +107,7 @@ set nofoldenable
 set foldtext=NeatFoldText()
 
 " Set font in GUI.
-set guifont=Fira\ Mono\ OT:h13
+set guifont=Fira\ Mono\ OT:h12
 
 " Backup files.
 set backupdir=~/.vim-backup
@@ -121,13 +121,20 @@ set noswapfile
 " Stores undo info in a file so that it persists after vim closes.
 set undofile
 
+" Show listchars.
+set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
+set list
+
+set iskeyword+=-
+
 
 "=========================================================="
 " Abbreviations
 "=========================================================="
 
 " Insert a timestamp.
-iabbrev _d <c-r>=strftime('%H:%M -')<cr>
+iabbrev _t <c-r>=strftime('%D')<cr>
+iabbrev _d <c-r>=strftime('%H:%M')<cr>
 
 " Whatever.
 iabbrev wwha ¯\_(ツ)_/¯
@@ -201,6 +208,13 @@ function! NeatFoldText()
               \ foldtextend
 endfunction
 
+function! DFM()
+  call LiteDFM()
+  set nonumber
+  set nocursorline
+  set colorcolumn=0
+endfunction
+
 
 "=========================================================="
 " Mappings
@@ -272,6 +286,14 @@ nnoremap <leader>tr :NERDTreeToggle<cr>
 " Edit notes.
 command! Notes edit ~/notes
 
+function! LeaveMeAloneSyntastic()
+  SyntasticToggleMode
+  sign unplace *
+endfunction
+command! LeaveMeAloneSyntastic call LeaveMeAloneSyntastic()
+
+command! DFM call DFM()
+
 
 "=========================================================="
 " Plugins Settings
@@ -309,6 +331,7 @@ let g:netrw_winsize=20
 "
 let g:startify_bookmarks = [
             \ '~/.vimrc',
+            \ '~/.vimrc.local',
             \ '~/.zshrc',
             \ '~/.vim/bundles.vim',
             \ '/usr/local/etc/nginx/nginx.conf',

@@ -24,8 +24,5 @@ alias ls="ls -G"
 # ls -la with trailing / for directories
 alias lsa="ls -lahp"
 
-# Breaking a habit
-alias clear="killall iTerm"
-
 # I don't wanna type bundle exec no more
 alias be="bundle exec"

@@ -700,35 +700,35 @@
 			<key>Ansi 2 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.41335573792457581</real>
+				<real>0.53800714015960693</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.54439783096313477</real>
+				<real>0.71709394454956055</real>
 				<key>Red Component</key>
-				<real>0.24447998404502869</real>
+				<real>0.24686035513877869</real>
 			</dict>
 			<key>Ansi 3 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.19223542511463165</real>
+				<real>0.035510532557964325</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.53309172391891479</real>
+				<real>0.68329930305480957</real>
 				<key>Red Component</key>
-				<real>0.77664357423782349</real>
+				<real>0.99355018138885498</real>
 			</dict>
 			<key>Ansi 4 Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.74800419807434082</real>
+				<real>0.86259001493453979</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.39558085799217224</real>
+				<real>0.50475156307220459</real>
 				<key>Red Component</key>
-				<real>0.28943899273872375</real>
+				<real>0.35962337255477905</real>
 			</dict>
 			<key>Ansi 5 Color</key>
 			<dict>
@@ -794,20 +794,31 @@
 			<key>Background Color</key>
 			<dict>
 				<key>Blue Component</key>
-				<real>0.8985247015953064</real>
+				<real>0.93121457099914551</real>
 				<key>Color Space</key>
 				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.89848899841308594</real>
+				<real>0.93119877576828003</real>
 				<key>Red Component</key>
-				<real>0.89855015277862549</real>
+				<real>0.93122667074203491</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
-			<key>Background Image Location</key>
-			<string></string>
+			<key>Badge Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>0.5</real>
+				<key>Blue Component</key>
+				<real>0.0</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
+				<key>Green Component</key>
+				<real>0.0</real>
+				<key>Red Component</key>
+				<real>1</real>
+			</dict>
 			<key>Blend</key>
-			<real>0.30000001192092896</real>
+			<real>0.29999999999999999</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -848,6 +859,8 @@
 			</dict>
 			<key>Cursor Guide Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>0.25</real>
 				<key>Blue Component</key>
 				<real>1</real>
 				<key>Color Space</key>
@@ -1204,6 +1217,8 @@
 			</dict>
 			<key>Link Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
 				<real>0.67800000000000005</real>
 				<key>Color Space</key>
@@ -1226,7 +1241,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FiraMonoOT 13</string>
+			<string>FiraMonoOT 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prevent Opening in a Tab</key>
@@ -1400,7 +1415,7 @@
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.0770692825317383</real>
+			<real>1.0640883847891565</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1457,7 +1472,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/mike/dotfiles/iterm</string>
+	<string>/Users/mike/git/dotfiles/iterm</string>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>

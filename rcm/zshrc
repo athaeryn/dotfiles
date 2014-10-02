@@ -69,21 +69,10 @@ function mam () {
   vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
 }
 
-NOTESPATH=~/notes
-  function notes () {
-  DAYFILE="$(date +%d-%m-%y.txt)"
-  <"$NOTESPATH/$DAYFILE"
-}
-
-function notef () {
-  ag "$*" "$NOTESPATH"
-}
-
 function serv () {
   PORT=${1:-3000}
   ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
 }
-
 
 
 setopt PROMPT_SUBST
@@ -107,3 +96,5 @@ eval "$(direnv hook $0)"
 
 
 try_source ~/.fzf.zsh
+
+export PYTHONSTARTUP=~/.pythonrc

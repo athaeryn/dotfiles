@@ -42,11 +42,9 @@ https://github.com/tpope/vim-markdown
 https://github.com/tpope/vim-ragtag
 https://github.com/tpope/vim-rails
 https://github.com/tpope/vim-repeat
-https://github.com/tpope/vim-scriptease
 https://github.com/tpope/vim-surround
 https://github.com/tpope/vim-unimpaired
 https://github.com/vim-ruby/vim-ruby
 https://github.com/vim-scripts/EasyGrep
 https://github.com/vim-scripts/brainfuck-syntax
 https://github.com/vim-scripts/hybrid.vim
-https://github.com/fatih/vim-go
