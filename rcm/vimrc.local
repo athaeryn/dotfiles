@@ -51,36 +51,38 @@ set statusline+=\ %P\ ""
 " Colorscheme/highlights
 "=========================================================="
 
-set background=light
-colorscheme seahorse
+" set background=light
+" colorscheme seahorse
+set background=dark
+colorscheme hybrid
 
 "" Startify
 "
-hi! link StartifyBracket Grey
-hi! link StartifyFile    Black
-hi! link StartifyNumber  Blue
-hi! link StartifyPath    Grey
-hi! link StartifySlash   Grey
-hi! link StartifySpecial Grey
-hi! link StartifyHeader  Yellow
+" hi! link StartifyBracket Grey
+" hi! link StartifyFile    Black
+" hi! link StartifyNumber  Blue
+" hi! link StartifyPath    Grey
+" hi! link StartifySlash   Grey
+" hi! link StartifySpecial Grey
+" hi! link StartifyHeader  Yellow
 
 "" Statusline
 "
 " Filename
-hi! link User1 LightGreyBg
+" hi! link User1 LightGreyBg
 " Flags
-hi! link User2 YellowBg
+" hi! link User2 YellowBg
 
 "" NERDTree
 "
 " Directory
-hi! link NERDTreeUp Comment
-hi! link NERDTreeDir Comment
-hi! link NERDTreeDirSlash Comment
+" hi! link NERDTreeUp Comment
+" hi! link NERDTreeDir Comment
+" hi! link NERDTreeDirSlash Comment
 
 "" Vim
 "
-hi! link vimString String
+" hi! link vimString String
 
 "" Other
 "
@@ -208,13 +210,6 @@ function! NeatFoldText()
               \ foldtextend
 endfunction
 
-function! DFM()
-  call LiteDFM()
-  set nonumber
-  set nocursorline
-  set colorcolumn=0
-endfunction
-
 
 "=========================================================="
 " Mappings
@@ -291,8 +286,6 @@ function! LeaveMeAloneSyntastic()
   sign unplace *
 endfunction
 command! LeaveMeAloneSyntastic call LeaveMeAloneSyntastic()
-
-command! DFM call DFM()
 
 
 "=========================================================="
