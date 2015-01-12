@@ -74,6 +74,13 @@ function serv () {
   ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
 }
 
+function wordplay () {
+  while read word; do
+  grep "$word" /usr/share/dict/words;
+  echo "";
+  done
+}
+
 
 setopt PROMPT_SUBST
 PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
@@ -92,9 +99,10 @@ export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
 
 export TERM=xterm-256color
 
+eval "$(rbenv init -)"
 eval "$(direnv hook $0)"
-
 
 try_source ~/.fzf.zsh
 
 export PYTHONSTARTUP=~/.pythonrc
+export PYTHONPATH=`brew --prefix`/lib/python2.7/site-packages:$PYTHONPATH
