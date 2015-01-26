@@ -16,13 +16,6 @@ try_source ~/.zsh/spectrum.zsh
 # try_source ~/.git-completion.sh
 
 
-# MODULES
-try_source ~/.zsh/modules/keybindings.zsh
-try_source ~/.zsh/modules/aliases.zsh
-try_source ~/.zsh/modules/gource.zsh
-try_source ~/.zsh/modules/android.zsh
-
-
 # COMPLETION
 autoload -U compinit
 compinit
@@ -106,3 +99,10 @@ try_source ~/.fzf.zsh
 
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=`brew --prefix`/lib/python2.7/site-packages:$PYTHONPATH
+
+
+# MODULES
+try_source ~/.zsh/modules/keybindings.zsh
+try_source ~/.zsh/modules/aliases.zsh
+try_source ~/.zsh/modules/gource.zsh
+try_source ~/.zsh/modules/android.zsh

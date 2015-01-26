@@ -12,7 +12,7 @@ alias gerp="grep"
 # Get my IP
 alias myip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
 
-# Use macvim
+# Use the best vim available.
 if which nvim >/dev/null ; then
   alias vim="nvim"
 elif which mvim >/dev/null ; then
