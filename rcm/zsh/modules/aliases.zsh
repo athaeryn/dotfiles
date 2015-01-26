@@ -13,7 +13,11 @@ alias gerp="grep"
 alias myip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
 
 # Use macvim
-alias vim="mvim -v"
+if which nvim >/dev/null ; then
+  alias vim="nvim"
+elif which mvim >/dev/null ; then
+  alias vim="mvim -v"
+fi
 
 # Remove .DS_Store
 alias nods="rm -f .DS_Store"
