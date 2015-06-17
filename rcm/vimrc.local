@@ -51,27 +51,31 @@ set statusline+=\ %P\ ""
 " Colorscheme/highlights
 "=========================================================="
 
-" set background=light
-" colorscheme seahorse
 set background=dark
-colorscheme hybrid
+colorscheme base16-solarized
+if has('gui_running')
+  set background=light
+  colorscheme seahorse
+endif
 
 "" Startify
 "
-" hi! link StartifyBracket Grey
-" hi! link StartifyFile    Black
-" hi! link StartifyNumber  Blue
-" hi! link StartifyPath    Grey
-" hi! link StartifySlash   Grey
-" hi! link StartifySpecial Grey
-" hi! link StartifyHeader  Yellow
+hi! StartifyBracket ctermfg=7
+hi! StartifyFile    ctermfg=13
+hi! StartifyNumber  ctermfg=3
+hi! StartifyPath    ctermfg=11
+hi! StartifySlash   ctermfg=11
+hi! StartifySpecial ctermfg=11
+hi! StartifyHeader  ctermfg=3
+
+
+hi! Search ctermfg=13 ctermbg=4
 
 "" Statusline
 "
-" Filename
-" hi! link User1 LightGreyBg
 " Flags
-" hi! link User2 YellowBg
+hi! User1 ctermbg=10 ctermfg=15
+hi! User2 ctermbg=0 ctermfg=1
 
 "" NERDTree
 "
@@ -108,8 +112,10 @@ set foldmethod=indent
 set nofoldenable
 set foldtext=NeatFoldText()
 
-" Set font in GUI.
-set guifont=Fira\ Mono\ OT:h12
+if has('gui_running')
+  " Set font in GUI.
+  set guifont=Fira\ Mono:h12
+endif
 
 " Backup files.
 set backupdir=~/.vim-backup
@@ -135,8 +141,8 @@ set iskeyword+=-
 "=========================================================="
 
 " Insert a timestamp.
-iabbrev _t <c-r>=strftime('%D')<cr>
-iabbrev _d <c-r>=strftime('%H:%M')<cr>
+iabbrev _d <c-r>=strftime('%D')<cr>
+iabbrev _t <c-r>=strftime('%H:%M')<cr>
 
 " Whatever.
 iabbrev wwha ¯\_(ツ)_/¯
@@ -256,12 +262,6 @@ nnoremap <leader>a :Ack<space>
 noremap <leader>p "+p
 noremap <leader>y "+y
 
-" Always be magical. Very magical. Always.
-nnoremap / /\v
-vnoremap / /\v
-nnoremap ? ?\v
-vnoremap ? ?\v
-
 " Switch to last buffer.
 nnoremap <leader><leader> <c-^>
 
@@ -278,7 +278,7 @@ nmap <leader>cu <Plug>CommentaryUndo
 nnoremap <leader>tr :NERDTreeToggle<cr>
 
 " Ack for word under cursor
-nnoremap <c-g> :Ack <c-r><c-w><cr>
+nnoremap <c-g> :Ack<cr>
 
 " Redraw!
 nnoremap <leader>rd :redraw!<cr>
@@ -289,12 +289,6 @@ nnoremap <leader>rd :redraw!<cr>
 
 " Edit notes.
 command! Notes edit ~/notes
-
-function! LeaveMeAloneSyntastic()
-  SyntasticToggleMode
-  sign unplace *
-endfunction
-command! LeaveMeAloneSyntastic call LeaveMeAloneSyntastic()
 
 " Run the buffer through node
 command! Node % write ! node
@@ -365,3 +359,6 @@ let g:startify_custom_header = [
 "
 " Enable syntastic error signs in the line number column.
 let g:syntastic_enable_signs = 1
+let g:syntastic_mode_map = { 'mode': 'passive',
+                            \ 'active_filetypes': [],
+                            \ 'passive_filetypes': [] }

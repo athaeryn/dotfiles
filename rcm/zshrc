@@ -33,13 +33,12 @@ function collapse_pwd {
 }
 
 function git_branch_prompt () {
-  git branch | grep \* | awk '{printf "|%s| $", $2}'
+  git branch | grep \* | awk '{printf "|%s| ", $2}'
 }
 
 function prompt_char {
   git branch >/dev/null 2>/dev/null && git_branch_prompt && return
-  svn branch >/dev/null 2>/dev/null && echo '' && return
-  echo '$'
+  echo ''
 }
 
 function virtualenv_info {
@@ -63,8 +62,7 @@ function mam () {
 }
 
 function serv () {
-  PORT=${1:-3000}
-  ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => ARGV[0], :DocumentRoot => Dir.pwd).start' $PORT
+  python -m SimpleHTTPServer $@
 }
 
 function wordplay () {
@@ -76,11 +74,11 @@ function wordplay () {
 
 
 setopt PROMPT_SUBST
-PROMPT='%{$fg[green]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%}: %{$fg[blue]%}$(collapse_pwd)
-%{$reset_color%}$(prompt_char) '
+PROMPT='%{$fg[green]%}%n%{$reset_color%} $(prompt_char)%{$fg[blue]%}$(collapse_pwd)
+%{$reset_color%}> '
 
 
-export PATH=/usr/local/bin:$PATH:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin
+export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin:$PATH
 export VISUAL=vim
 export EDITOR=vim
 export LSCOLORS=exfxcxdxbxegedabagacad
