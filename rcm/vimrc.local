@@ -1,7 +1,38 @@
-" Prevent Vim from clobbering the scrollback buffer.
-" http://www.shallowsky.com/linux/noaltscreen.html
-" via Gary Bernhardt
-set t_ti= t_te=
+"=========================================================="
+" Bundles
+"=========================================================="
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'chrisbra/NrrwRgn'
+Plug 'elzr/vim-json'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
+Plug 'mileszs/ack.vim'
+Plug 'moll/vim-bbye'
+Plug 'mustache/vim-mode'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'paradigm/TextObjectify'
+Plug 'sk1418/last256'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/EasyGrep'
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
+
+" Plug 'mhinz/vim-tmuxify'
+
+call plug#end()
+
 
 "=========================================================="
 " Statusline
@@ -51,11 +82,12 @@ set statusline+=\ %P\ ""
 " Colorscheme/highlights
 "=========================================================="
 
-set background=dark
-colorscheme base16-solarized
 if has('gui_running')
   set background=light
   colorscheme seahorse
+else
+  set background=dark
+  colorscheme last256
 endif
 
 "" Startify
@@ -102,8 +134,18 @@ hi! User2 ctermbg=0 ctermfg=1
 
 
 "=========================================================="
-" Settings
+" Misc. Settings
 "=========================================================="
+
+" Use spacebar as leader.
+let mapleader = " "
+let g:mapleader = " "
+
+" Prevent Vim from clobbering the scrollback buffer.
+" http://www.shallowsky.com/linux/noaltscreen.html
+" via Gary Bernhardt
+set t_ti= t_te=
+
 
 " Set fold method to indent.
 set foldmethod=indent
@@ -118,11 +160,11 @@ if has('gui_running')
 endif
 
 " Backup files.
-set backupdir=~/.vim-backup
+set backupdir=~/.vim/backup
 " Swapfiles.
-set directory=~/.vim-backup
+set directory=~/.vim/backup
 " Undo files.
-set undodir=~/.vim-undo
+set undodir=~/.vim/undo
 
 " Stop littering .swp files everywhere.
 set noswapfile
@@ -137,36 +179,14 @@ set iskeyword+=-
 
 
 "=========================================================="
-" Abbreviations
-"=========================================================="
-
-" Insert a timestamp.
-iabbrev _d <c-r>=strftime('%D')<cr>
-iabbrev _t <c-r>=strftime('%H:%M')<cr>
-
-" Whatever.
-iabbrev wwha ¯\_(ツ)_/¯
-
-"=========================================================="
 " Autocommands
 "=========================================================="
-
-augroup Misc
-  autocmd!
-
-  " Automatically fold everything when opening ~/.vimrc.
-  autocmd BufRead .vimrc set foldenable
-augroup END
-
 
 augroup FileTypes
   autocmd!
 
   " This makes editing crontab possible.
   autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
-
-  " Folding for vim files.
-  autocmd FileType vim set foldmethod=marker
 
   autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
   autocmd FileType qf nnoremap <buffer> <cr> <cr>
@@ -207,19 +227,14 @@ augroup END
 " From http://dhruvasagar.com/2013/03/28/vim-better-foldtext.
 function! NeatFoldText()
   let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
-  let line = ' ' .
-              \ substitute(getline(v:foldstart), regex, '', 'g') . ' '
+  let line = ' ' . substitute(getline(v:foldstart), regex, '', 'g') . ' '
   let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' .
-              \ printf("%10s", lines_count . ' lines') . ' |'
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
   let fill = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) .
-              \ line, 0, (winwidth(0)*2)/3)
+  let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
   let foldtextend = lines_count_text . repeat(fill, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend,
-              \ '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) .
-              \ foldtextend
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
 
@@ -235,7 +250,7 @@ nnoremap <silent> <c-n> :tabnext<cr>
 nnoremap <silent> <c-p> :tabprev<cr>
 
 " Add a line below in normal mode and stay in normal mode.
-nnoremap <c-o> o<esc>
+" nnoremap <c-o> o<esc>
 
 " Switch between the last two files.
 nnoremap <leader><leader> <c-^>
@@ -243,6 +258,8 @@ nnoremap <leader><leader> <c-^>
 " Copy and paste from system clipboard.
 noremap <leader>p "+p
 noremap <leader>y "+y
+noremap <leader>P "+P
+noremap <leader>Y "+Y
 
 " Write as root, when you forgot to sudo edit.
 cnoreabbrev w!! w !sudo tee % >/dev/null
@@ -283,6 +300,12 @@ nnoremap <c-g> :Ack<cr>
 " Redraw!
 nnoremap <leader>rd :redraw!<cr>
 
+if has('nvim')
+  " Escape!
+  tnoremap <leader><esc> <c-\><c-n>
+endif
+
+
 "=========================================================="
 " Commands
 "=========================================================="
@@ -294,6 +317,7 @@ command! Notes edit ~/notes
 command! Node % write ! node
 
 command! Anon /\vfunction\s*\(
+
 
 "=========================================================="
 " Plugins Settings
@@ -359,6 +383,7 @@ let g:startify_custom_header = [
 "
 " Enable syntastic error signs in the line number column.
 let g:syntastic_enable_signs = 1
+" Passive by default.
 let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': [] }
