@@ -5,6 +5,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'chrisbra/NrrwRgn'
+Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
@@ -125,6 +126,9 @@ else
   hi ColorColumn ctermbg=0
   hi CursorLine cterm=none ctermbg=0
   hi VertSplit cterm=none ctermbg=8 ctermfg=8
+
+  " Conceal
+  hi! link Conceal Comment
 endif
 
 
@@ -171,6 +175,9 @@ set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 set list
 
 set iskeyword+=-
+
+set conceallevel=2
+set concealcursor=nc
 
 
 "=========================================================="
