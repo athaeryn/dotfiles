@@ -11,61 +11,42 @@ colors                  # colors
 zsh-mime-setup          # run everything as if it's an executable
 select-word-style bash  # ctrl+w on words
 
+# Bind some keys
+bindkey -v # Vim mode
+bindkey '^a' beginning-of-line
+bindkey '^d' delete-char
+bindkey '^e' end-of-line
+bindkey '^r' history-incremental-search-backward
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 
+# http://dougblack.io/words/zsh-vi-mode.html
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1
+
+
+# 256 color stuff
 try_source ~/.zsh/spectrum.zsh
-# try_source ~/.git-completion.sh
 
 
-# COMPLETION
+# Completion
 autoload -U compinit
 compinit
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # ignore case
 
 
-# zstyle ':completion:*:*:git:*' script ~/.git-completion.sh
-# fpath=(~/.zsh/funcs $fpath)
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-
+# Enable using comments interactively (like Bash)
 setopt interactivecomments
 
-# FUNCTIONS
-function collapse_pwd {
-  echo $(pwd | sed -e "s,^$HOME,~,")
-}
 
-function git_branch_prompt () {
-  git branch | grep \* | awk '{printf "|%s| ", $2}'
-}
-
-function prompt_char {
-  git branch >/dev/null 2>/dev/null && git_branch_prompt && return
-  echo ''
-}
-
-function virtualenv_info {
-  [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`') '
-}
-
-# View diffs in view
-function vd {
-  git diff $@ | view -
-}
-
-# Notify me after a long running command
-function prowl {
-  $@
-  /usr/local/bin/growlnotify -p Emergency "Task" -m "Done"
-}
-
-# Read man pages in Vim
-function mam () {
-  vim -c 'source $VIMRUNTIME/ftplugin/man.vim' -c ":Man $@" -c 'only'
-}
-
-function serv () {
-  python -m SimpleHTTPServer $@
-}
-
+# Function
 function wordplay () {
   while read word; do
   grep "$word" /usr/share/dict/words;
@@ -74,34 +55,70 @@ function wordplay () {
 }
 
 
-setopt PROMPT_SUBST
-PROMPT='%{$fg[green]%}%n%{$reset_color%} $(prompt_char)%{$fg[blue]%}$(collapse_pwd)
+function set_prompt {
+  function collapsed_pwd {
+    echo $(pwd | sed -e "s,^$HOME,~,")
+  }
+  function git_branch () {
+    git branch >/dev/null 2>/dev/null && \
+    git branch | grep \* | awk '{printf "|%s| ", $2}'
+  }
+  setopt PROMPT_SUBST
+  PROMPT='%{$fg[green]%}%n%{$reset_color%} $(git_branch)%{$fg[blue]%}$(collapsed_pwd)
 %{$reset_color%}> '
+}
+set_prompt
 
 
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:~/bin:/usr/local/opt/node:/usr/local/share/npm/bin:$PATH
+path=(
+  ~/bin
+  /usr/local/bin
+  /usr/local/sbin
+  /usr/bin
+  /usr/sbin
+  /bin
+  /sbin
+  /usr/local/bin
+  /usr/local/opt/node
+  /usr/local/share/npm/bin
+  $path
+)
+
 export VISUAL=vim
 export EDITOR=vim
-export LSCOLORS=exfxcxdxbxegedabagacad
+
 export NODE_PATH=/usr/local/lib/node
-export HOSTSPATH=~/git/buildhosts
-
-
-export COWPATH=/usr/local/Cellar/cowsay/3.03/share/cows
-
 export TERM=xterm-256color
-
-eval "$(rbenv init -)"
-eval "$(direnv hook $0)"
-
-try_source ~/.fzf.zsh
+export LSCOLORS=exfxcxdxbxegedabagacad
 
 export PYTHONSTARTUP=~/.pythonrc
 export PYTHONPATH=`brew --prefix`/lib/python2.7/site-packages:$PYTHONPATH
 
 
-# MODULES
-try_source ~/.zsh/modules/keybindings.zsh
-try_source ~/.zsh/modules/aliases.zsh
-try_source ~/.zsh/modules/gource.zsh
-try_source ~/.zsh/modules/android.zsh
+# Aliases
+
+# Show todos
+alias todos="ag TODO\:"
+
+# Get my IP
+alias my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
+
+# Use the best vim available.
+if which nvim >/dev/null ; then
+  alias vim="nvim"
+elif which mvim >/dev/null ; then
+  alias vim="mvim -v"
+fi
+
+# Always use LSCOLORS
+alias ls="ls -G"
+
+# ls -la with trailing / for directories
+alias lsa="ls -lahp"
+
+# I don't wanna type bundle exec no more
+alias be="bundle exec"
+
+# Run a little server
+alias serv="python -m SimpleHTTPServer"
+

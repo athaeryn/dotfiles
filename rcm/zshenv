@@ -1,1 +1,2 @@
 eval "$(/usr/local/bin/rbenv init -)"
+eval "$(direnv hook $0)"
