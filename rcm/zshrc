@@ -26,6 +26,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # ignore case
 # fpath=(~/.zsh/funcs $fpath)
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 
+setopt interactivecomments
 
 # FUNCTIONS
 function collapse_pwd {
