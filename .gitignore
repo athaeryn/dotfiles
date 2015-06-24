@@ -1,6 +1,5 @@
 # Vim things
-vim/.vim/undo/
-vim/.vim/backup/
-dat/.vim/undo
-dat/.vim/bundle
-dat/.vim/.netrwhist
+rcm/vim/undo/
+rcm/vim/backup/
+rcm/vim/plugged/
+
