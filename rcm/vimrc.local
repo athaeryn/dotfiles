@@ -4,22 +4,24 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'benekastah/neomake'
 Plug 'chrisbra/NrrwRgn'
-Plug 'pangloss/vim-javascript'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elzr/vim-json'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'mustache/vim-mode'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'pangloss/vim-javascript'
 Plug 'paradigm/TextObjectify'
 Plug 'sk1418/last256'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
@@ -117,6 +119,9 @@ else
   hi! User1 ctermbg=10 ctermfg=15
   hi! User2 ctermbg=0 ctermfg=1
 
+  "" TODO
+  hi! Todo ctermbg=none ctermfg=11
+
   "" NERDTree
   hi! link NERDTreeUp Comment
   hi! link NERDTreeDir Comment
@@ -126,9 +131,6 @@ else
   hi ColorColumn ctermbg=0
   hi CursorLine cterm=none ctermbg=0
   hi VertSplit cterm=none ctermbg=8 ctermfg=8
-
-  " Conceal
-  hi! link Conceal Comment
 endif
 
 
@@ -237,6 +239,11 @@ function! NeatFoldText()
   let foldtextend = lines_count_text . repeat(fill, 8)
   let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
   return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+function! Standard()
+  set makeprg=./node_modules/.bin/standard
+  autocmd! BufWritePost * Neomake!
 endfunction
 
 
@@ -359,9 +366,7 @@ let g:startify_bookmarks = [
             \ '~/.vimrc',
             \ '~/.vimrc.local',
             \ '~/.zshrc',
-            \ '~/.vim/bundles.vim',
-            \ '/usr/local/etc/nginx/nginx.conf',
-            \ '~/notes'
+            \ '/usr/local/etc/nginx/nginx.conf'
             \]
 let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim', '^/usr/local/Cellar/macvim']
 let g:startify_list_order = ['files', 'bookmarks', 'sessions']
@@ -380,6 +385,9 @@ let g:startify_custom_header = [
             \ '                                ░░░',
             \ '                                 ░'
             \ ]
+" Let NERDTree use the Startify buffer
+autocmd User Startified setlocal buftype=
+
 
 "" Syntastic
 "
@@ -389,3 +397,4 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': [] }
+
