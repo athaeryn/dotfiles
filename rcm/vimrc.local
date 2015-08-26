@@ -8,8 +8,10 @@ Plug 'benekastah/neomake'
 Plug 'chrisbra/NrrwRgn'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elzr/vim-json'
+Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
@@ -17,6 +19,7 @@ Plug 'mustache/vim-mode'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'pangloss/vim-javascript'
 Plug 'paradigm/TextObjectify'
+Plug 'rust-lang/rust.vim'
 Plug 'sk1418/last256'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
@@ -28,7 +31,7 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
-
+Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 
@@ -243,6 +246,11 @@ endfunction
 
 function! Standard()
   set makeprg=./node_modules/.bin/standard
+  autocmd! BufWritePost * Neomake!
+endfunction
+
+function! Pep8()
+  set makeprg=pep8\ ./**/*.py
   autocmd! BufWritePost * Neomake!
 endfunction
 

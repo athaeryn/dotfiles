@@ -575,9 +575,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>389 139 924 485 0 0 1440 877 </string>
+	<string>330 241 924 485 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>255 261 570 426 0 0 1440 877 </string>
+	<string>776 345 585 426 0 0 1440 877 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>183 68 585 426 0 0 1440 877 </string>
+	<key>NeverWarnAboutShortLivedSessions_951BE8C3-39A9-4BF3-9E9E-A63C76A197AF</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1316,7 +1320,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>456295832.31885397</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>456295832.31910598</real>
+	<real>461083444.95207798</real>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
 	<key>OpenArrangementAtStartup</key>
@@ -1383,11 +1387,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-06-18T04:50:02Z</date>
+	<date>2015-08-13T19:15:00Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>ShowBookmarkName</key>
 	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>
@@ -1399,7 +1405,7 @@
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
 	<key>TabViewType</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>ThreeFingerEmulates</key>
 	<false/>
 	<key>TmuxDashboardLimit</key>
