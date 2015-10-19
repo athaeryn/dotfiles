@@ -65,7 +65,7 @@ function set_prompt {
   }
   setopt PROMPT_SUBST
   PROMPT='%{$fg[green]%}%n%{$reset_color%} $(git_branch)%{$fg[blue]%}$(collapsed_pwd)
-%{$reset_color%}%% '
+%{$reset_color%}λ '
 }
 set_prompt
 
@@ -73,6 +73,7 @@ set_prompt
 path=(
   ~/bin
   ~/golang/bin
+  ~/.cabal/bin
   /usr/local/bin
   /usr/local/sbin
   /usr/local/opt/node
@@ -117,5 +118,5 @@ alias be="bundle exec"
 alias serv="python -m SimpleHTTPServer"
 
 
-export NVM_DIR="/Users/mike/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh

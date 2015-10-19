@@ -10,13 +10,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/goyo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
+Plug 'munshkr/vim-tidal'
 Plug 'mustache/vim-mode'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'pangloss/vim-javascript'
 Plug 'paradigm/TextObjectify'
 Plug 'rust-lang/rust.vim'
@@ -24,18 +27,17 @@ Plug 'sk1418/last256'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
+
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
-
-" Plug 'mhinz/vim-tmuxify'
 
 call plug#end()
 
@@ -144,6 +146,7 @@ endif
 " Use spacebar as leader.
 let mapleader = " "
 let g:mapleader = " "
+let g:maplocalleader = " "
 
 " Prevent Vim from clobbering the scrollback buffer.
 " http://www.shallowsky.com/linux/noaltscreen.html
@@ -205,6 +208,8 @@ augroup FileTypes
   autocmd FileType mustache setlocal syntax=html
 
   autocmd BufNewFile,BufRead *.md setl ft=markdown
+
+  autocmd BufNewFile,BufRead CMakeLists.txt set ft=cmake
 augroup END
 
 
@@ -247,6 +252,11 @@ endfunction
 function! Standard()
   set makeprg=./node_modules/.bin/standard
   autocmd! BufWritePost * Neomake!
+endfunction
+
+function! Rubocop()
+  set makeprg=./bin/rubocop
+  autocmd! BufWritePost * NeomakeFile
 endfunction
 
 function! Pep8()
@@ -316,6 +326,8 @@ nnoremap <c-g> :Ack<cr>
 
 " Redraw!
 nnoremap <leader>rd :redraw!<cr>
+
+nnoremap <leader>rw :StripWhitespace<cr>
 
 if has('nvim')
   " Escape!
