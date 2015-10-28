@@ -4,40 +4,41 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'benekastah/neomake'
+
+Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'chrisbra/NrrwRgn'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
-Plug 'munshkr/vim-tidal'
+Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'paradigm/TextObjectify'
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 Plug 'sk1418/last256'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
-
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' }
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 
 call plug#end()
 
