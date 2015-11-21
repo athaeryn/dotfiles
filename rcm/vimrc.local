@@ -4,7 +4,6 @@
 
 call plug#begin('~/.vim/plugged')
 
-
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'chrisbra/NrrwRgn'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -16,6 +15,7 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
+Plug 'mxw/vim-jsx'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'moll/vim-node', { 'for': 'javascript' }
@@ -28,10 +28,14 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 Plug 'sk1418/last256'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-leiningen'
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
@@ -333,6 +337,8 @@ nnoremap <leader>rw :StripWhitespace<cr>
 if has('nvim')
   " Escape!
   tnoremap <leader><esc> <c-\><c-n>
+
+  nnoremap <leader>irb :vsplit term://irb<cr>i
 endif
 
 
@@ -419,3 +425,5 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': [] }
 
+
+let g:jsx_ext_required = 0
