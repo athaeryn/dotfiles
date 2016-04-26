@@ -5,24 +5,28 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
+Plug 'guns/vim-sexp'
 Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
-Plug 'mxw/vim-jsx'
 Plug 'mileszs/ack.vim'
 Plug 'moll/vim-bbye'
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode'
+Plug 'mxw/vim-jsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'paradigm/TextObjectify'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -33,12 +37,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-Plug 'tpope/vim-leiningen'
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-leiningen'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
@@ -132,6 +135,8 @@ else
   "" TODO
   hi! Todo ctermbg=none ctermfg=11
 
+  " hi Comment cterm=italic
+
   "" NERDTree
   hi! link NERDTreeUp Comment
   hi! link NERDTreeDir Comment
@@ -215,6 +220,8 @@ augroup FileTypes
   autocmd BufNewFile,BufRead *.md setl ft=markdown
 
   autocmd BufNewFile,BufRead CMakeLists.txt set ft=cmake
+
+  autocmd FileType rust nnoremap <f4> :vsp \| te cargo run<cr>
 augroup END
 
 
@@ -268,6 +275,14 @@ function! Pep8()
   set makeprg=pep8\ ./**/*.py
   autocmd! BufWritePost * Neomake!
 endfunction
+
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
 
 
 "=========================================================="
@@ -354,6 +369,14 @@ command! Node % write ! node
 
 command! Anon /\vfunction\s*\(
 
+command! Standard call LintWithStandard()
+
+function! LintWithStandard()
+  set makeprg=./node_modules/.bin/standard
+  autocmd! BufWritePost * :Neomake!
+  Neomake!
+endfunction
+
 
 "=========================================================="
 " Plugins Settings
@@ -390,28 +413,33 @@ let g:netrw_winsize=20
 "" Startify
 "
 let g:startify_bookmarks = [
-            \ '~/.vimrc',
-            \ '~/.vimrc.local',
-            \ '~/.zshrc',
-            \ '/usr/local/etc/nginx/nginx.conf'
-            \]
-let g:startify_skiplist = ['COMMIT_EDITMSG', '^/usr/local/Cellar/vim', '^/usr/local/Cellar/macvim']
+  \ '~/.vimrc',
+  \ '~/.vimrc.local',
+  \ '~/.zshrc',
+  \ '/usr/local/etc/nginx/nginx.conf'
+\]
+let g:startify_skiplist = [
+  \ 'COMMIT_EDITMSG',
+  \ '^/usr/local/Cellar/vim',
+  \ '^/usr/local/Cellar/macvim'
+\]
 let g:startify_list_order = ['files', 'bookmarks', 'sessions']
 let g:startify_files_number = 10
 let g:startify_change_to_dir = 0
+let g:startify_relative_path = 1
 let g:startify_custom_header = [
-            \ '',
-            \ '    ░░░░░░░░░░░░░░░░░░░        ░   ░        ░░░░░░░░░░░░░░░░░░░░',
-            \ '        ░░░░░░░░░░░░░░░░       ░░░░░       ░░░░░░░░░░░░░░░░░',
-            \ '          ░░░░░░░░░░░░░░░▓░░░▓░▓▓▓▓▓░▓░░░▓░░░░░░░░░░░░░░░',
-            \ '           ░░░░░░░░░░░░░░▓░░░▓░░░▓░░░▓▓░▓▓░░░░░░░░░░░░░░',
-            \ '            ░░░░░░░░░░░░░░▓░▓░░░░▓░░░▓░▓░▓░░░░░░░░░░░░░',
-            \ '           ░░░░░░░░░░░░░░░░▓░░░▓▓▓▓▓░▓░░░▓░░░░░░░░░░░░░░',
-            \ '                            ░░░░░░░░░░░',
-            \ '                               ░░░░░',
-            \ '                                ░░░',
-            \ '                                 ░'
-            \ ]
+  \ '',
+  \ '    |||||||||||||||||||        |   |        ||||||||||||||||||||',
+  \ '        ||||||||||||||||       |||||       |||||||||||||||||',
+  \ '          |||||||||||||||$|||$|$$$$$|$|||$|||||||||||||||',
+  \ '           ||||||||||||||$|||$|||$|||$$|$$||||||||||||||',
+  \ '            ||||||||||||||$|$||||$|||$|$|$|||||||||||||',
+  \ '           ||||||||||||||||$|||$$$$$|$|||$||||||||||||||',
+  \ '                            |||||||||||',
+  \ '                               |||||',
+  \ '                                |||',
+  \ '                                 |'
+\]
 " Let NERDTree use the Startify buffer
 autocmd User Startified setlocal buftype=
 
@@ -425,5 +453,8 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': [] }
 
-
+"" JSX
 let g:jsx_ext_required = 0
+
+"" Elm-vim
+let g:elm_format_autosave = 1

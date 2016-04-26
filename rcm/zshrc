@@ -74,6 +74,7 @@ path=(
   ~/bin
   ~/golang/bin
   ~/.cabal/bin
+  ~/.cargo/bin
   /usr/local/bin
   /usr/local/sbin
   /usr/local/opt/node
@@ -84,11 +85,13 @@ path=(
 export VISUAL=vim
 export EDITOR=vim
 
-export NODE_PATH=/usr/local/lib/node
-export TERM=xterm-256color
 export LSCOLORS=exfxcxdxbxegedabagacad
 
+export NODE_PATH=/usr/local/lib/node
+export TERM=xterm-256color
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/local/lib/"
 export GOPATH=~/golang
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export LEAF_PATH=$HOME/code
 
