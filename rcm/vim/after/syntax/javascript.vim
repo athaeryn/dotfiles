@@ -1,16 +1,27 @@
-hi link jsBraces        Comment
-hi link jsFuncBraces    Comment
-hi link jsParens        Comment
-hi link jsFuncParens    Comment
-hi link jsFuncArgCommas Comment
-hi link jsReturn        Comment
-hi link jsFunction      Comment
-hi link jsStorageClass  Comment
-hi link jsNoise         Comment
+hi link javaScriptBraces        Subdued
+hi link javaScriptFuncBraces    Subdued
+hi link javaScriptParens        Subdued
+hi link javaScriptFuncParens    Subdued
+hi link javaScriptFuncArgCommas Subdued
+hi link javaScriptReturn        Subdued
+hi link javaScriptFunction      Subdued
+hi link javaScriptStorageClass  Subdued
+hi link javaScriptNoise         Subdued
+
+" wtf
+hi link jsBraces        Subdued
+hi link jsFuncBraces    Subdued
+hi link jsParens        Subdued
+hi link jsFuncParens    Subdued
+hi link jsFuncArgCommas Subdued
+hi link jsReturn        Subdued
+hi link jsFunction      Subdued
+hi link jsStorageClass  Subdued
+hi link jsNoise         Subdued
 
 " JSX
 
-hi link xmlTag    Comment
-hi link xmlEndTag Comment
+hi link xmlTag    Subdued
+hi link xmlEndTag Subdued
 hi link xmlAttrib Normal
-hi link xmlEqual  Comment
+hi link xmlEqual  Subdued

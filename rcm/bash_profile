@@ -1,0 +1,12 @@
+source ~/.bashrc
+
+if which rbenv > /dev/null; then eval "$(/usr/local/bin/rbenv init -)"; fi
+if which direnv > /dev/null; then eval "$(direnv hook $0)"; fi
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
+# Save history permanently.
+export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log; fi'

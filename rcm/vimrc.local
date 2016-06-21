@@ -4,31 +4,32 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Olical/vim-enmasse', { 'on': 'EnMasse' }
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'elzr/vim-json'
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
 Plug 'guns/vim-sexp'
 Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'lambdatoast/elm.vim', { 'for': 'elm' }
+Plug 'lambdatoast/elm.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
-Plug 'mileszs/ack.vim'
-Plug 'moll/vim-bbye'
+Plug 'mileszs/ack.vim', { 'on': 'Ack' }
+Plug 'moll/vim-bbye', { 'on': 'Bdelete' }
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode'
-Plug 'mxw/vim-jsx'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'paradigm/TextObjectify'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'samuelsimoes/vim-jsx-utils', { 'for' : 'javascript.jsx' }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 Plug 'sk1418/last256'
@@ -98,55 +99,41 @@ set statusline+=\ %P\ ""
 " Colorscheme/highlights
 "=========================================================="
 
-if has('gui_running')
-  set background=light
-  colorscheme seahorse
+set background=dark
+colorscheme last256
 
-  "" Startify
-  "
-  hi! StartifyBracket ctermfg=7
-  hi! StartifyFile    ctermfg=13
-  hi! StartifyNumber  ctermfg=3
-  hi! StartifyPath    ctermfg=11
-  hi! StartifySlash   ctermfg=11
-  hi! StartifySpecial ctermfg=11
-  hi! StartifyHeader  ctermfg=3
-else
-  set background=dark
-  colorscheme last256
+"" Startify
+"
+hi! StartifyBracket ctermfg=8
+hi! StartifyFile    ctermfg=3
+hi! StartifyNumber  ctermfg=15
+hi! StartifyPath    ctermfg=8
+hi! StartifySlash   ctermfg=7
+hi! StartifySpecial ctermfg=8
+hi! StartifyHeader  ctermfg=3
 
-  "" Startify
-  "
-  hi! StartifyBracket ctermfg=8
-  hi! StartifyFile    ctermfg=3
-  hi! StartifyNumber  ctermfg=15
-  hi! StartifyPath    ctermfg=8
-  hi! StartifySlash   ctermfg=7
-  hi! StartifySpecial ctermfg=8
-  hi! StartifyHeader  ctermfg=3
+"" Search
+hi! Search ctermfg=0 ctermbg=4
 
-  "" Search
-  hi! Search ctermfg=0 ctermbg=4
+"" Statusline
+hi! User1 ctermbg=10 ctermfg=15
+hi! User2 ctermbg=0 ctermfg=1
 
-  "" Statusline
-  hi! User1 ctermbg=10 ctermfg=15
-  hi! User2 ctermbg=0 ctermfg=1
+"" TODO
+hi! Todo ctermbg=none ctermfg=11
 
-  "" TODO
-  hi! Todo ctermbg=none ctermfg=11
+" hi! Comment cterm=italic
+hi! Subdued ctermfg=240
 
-  " hi Comment cterm=italic
+"" NERDTree
+hi! link NERDTreeUp Subdued
+hi! link NERDTreeDir Subdued
+hi! link NERDTreeDirSlash Subdued
 
-  "" NERDTree
-  hi! link NERDTreeUp Comment
-  hi! link NERDTreeDir Comment
-  hi! link NERDTreeDirSlash Comment
-
-  " Columns 'n' lines
-  hi ColorColumn ctermbg=0
-  hi CursorLine cterm=none ctermbg=0
-  hi VertSplit cterm=none ctermbg=8 ctermfg=8
-endif
+" Columns 'n' lines
+hi ColorColumn ctermbg=0
+hi CursorLine cterm=none ctermbg=0
+hi VertSplit cterm=none ctermbg=8 ctermfg=8
 
 
 "=========================================================="
@@ -163,7 +150,6 @@ let g:maplocalleader = " "
 " via Gary Bernhardt
 set t_ti= t_te=
 
-
 " Set fold method to indent.
 set foldmethod=indent
 
@@ -176,11 +162,9 @@ if has('gui_running')
   set guifont=Fira\ Mono:h12
 endif
 
-" Backup files.
+" Backup files, swapfiles, and undo files.
 set backupdir=~/.vim/backup
-" Swapfiles.
 set directory=~/.vim/backup
-" Undo files.
 set undodir=~/.vim/undo
 
 " Stop littering .swp files everywhere.
@@ -206,7 +190,7 @@ augroup FileTypes
   autocmd!
 
   " This makes editing crontab possible.
-  autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+  " autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
 
   autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
   autocmd FileType qf nnoremap <buffer> <cr> <cr>
@@ -222,6 +206,8 @@ augroup FileTypes
   autocmd BufNewFile,BufRead CMakeLists.txt set ft=cmake
 
   autocmd FileType rust nnoremap <f4> :vsp \| te cargo run<cr>
+
+  autocmd FileType elm setl shiftwidth=4
 augroup END
 
 
@@ -264,6 +250,7 @@ endfunction
 function! Standard()
   set makeprg=./node_modules/.bin/standard
   autocmd! BufWritePost * Neomake!
+  Neomake!
 endfunction
 
 function! Rubocop()
@@ -295,9 +282,6 @@ map <leader>tn :tabnew<cr>
 " Tab navigation.
 nnoremap <silent> <c-n> :tabnext<cr>
 nnoremap <silent> <c-p> :tabprev<cr>
-
-" Add a line below in normal mode and stay in normal mode.
-" nnoremap <c-o> o<esc>
 
 " Switch between the last two files.
 nnoremap <leader><leader> <c-^>
@@ -341,12 +325,6 @@ nmap <leader>cu <Plug>CommentaryUndo
 " Toggle NERDTree.
 nnoremap <leader>tr :NERDTreeToggle<cr>
 
-" Ack for word under cursor
-nnoremap <c-g> :Ack<cr>
-
-" Redraw!
-nnoremap <leader>rd :redraw!<cr>
-
 nnoremap <leader>rw :StripWhitespace<cr>
 
 if has('nvim')
@@ -361,21 +339,7 @@ endif
 " Commands
 "=========================================================="
 
-" Edit notes.
-command! Notes edit ~/notes
-
-" Run the buffer through node
-command! Node % write ! node
-
-command! Anon /\vfunction\s*\(
-
-command! Standard call LintWithStandard()
-
-function! LintWithStandard()
-  set makeprg=./node_modules/.bin/standard
-  autocmd! BufWritePost * :Neomake!
-  Neomake!
-endfunction
+command! Standard call Standard()
 
 
 "=========================================================="
@@ -415,7 +379,7 @@ let g:netrw_winsize=20
 let g:startify_bookmarks = [
   \ '~/.vimrc',
   \ '~/.vimrc.local',
-  \ '~/.zshrc',
+  \ '~/.bashrc',
   \ '/usr/local/etc/nginx/nginx.conf'
 \]
 let g:startify_skiplist = [
