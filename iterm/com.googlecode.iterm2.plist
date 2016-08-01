@@ -332,15 +332,21 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1417 198 445 77 0 0 1920 1200 </string>
+	<string>1135 430 445 77 0 0 1920 1200 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>354 727 606 456 0 0 1920 1200 </string>
+	<string>353 727 606 456 0 0 1920 1200 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>751 1047 400 129 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 607 620 392 0 0 1920 1200 </string>
+	<string>610 434 700 622 0 0 1920 1200 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>979 723 918 381 0 0 1920 1200 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>155 616 592 584 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 21 953 1179 0 0 1920 1200 </string>
+	<string>0 21 1017 1179 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 719 665 477 0 0 1920 1200 </string>
+	<string>967 723 665 477 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>289 91 650 452 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
@@ -502,12 +508,16 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.14267949759960175</real>
+				<real>0.084129750728607178</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.14267441630363464</real>
+				<real>0.084128305315971375</real>
 				<key>Red Component</key>
-				<real>0.14268314838409424</real>
+				<real>0.084130816161632538</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -1114,6 +1124,8 @@
 			<string>/Users/mike.anderson</string>
 		</dict>
 	</array>
+	<key>NoSyncConfirmBeta</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>B1BB6ECC-6042-4314-AE5D-57DDF439A6DD</string>
 	<key>NoSyncPermissionToShowTip</key>
@@ -1182,11 +1194,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing3.xml?shard=11</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=11</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-05-29T19:25:00Z</date>
+	<date>2016-07-16T03:28:08Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -1215,6 +1227,8 @@
 	<integer>10</integer>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1468640512</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -1238,7 +1252,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20160523</string>
+	<string>3.0.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>1</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
