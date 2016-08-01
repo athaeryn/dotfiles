@@ -4,7 +4,6 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Olical/vim-enmasse', { 'on': 'EnMasse' }
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
@@ -18,20 +17,21 @@ Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'lambdatoast/elm.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
 Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
-Plug 'mileszs/ack.vim', { 'on': 'Ack' }
 Plug 'moll/vim-bbye', { 'on': 'Bdelete' }
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'olical/vim-enmasse', { 'on': 'EnMasse' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'paradigm/TextObjectify'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'samuelsimoes/vim-jsx-utils', { 'for' : 'javascript.jsx' }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
+" Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 Plug 'sk1418/last256'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
