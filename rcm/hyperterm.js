@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     fontSize: 14,
-    fontFamily: '"Fira Mono", Menlo, "DejaVu Sans Mono", "Lucida Console", monospace',
+    fontFamily: '"Fira Code", "Fira Mono", Menlo, monospace',
 
     cursorColor: 'rgba(0, 255, 255, 0.5)',
     cursorShape: 'BLOCK',
@@ -13,7 +13,12 @@ module.exports = {
 
     // custom css
     css: ``,
-    termCSS: ``,
+    termCSS: `
+      * {
+        -webkit-font-feature-settings: "liga" on, "calt" on, "dlig" on !important;
+        text-rendering: optimizeLegibility !important;
+      }
+    `,
 
     padding: '0', // padding is for babies
 
@@ -37,6 +42,8 @@ module.exports = {
       lightWhite: '#dfd8c9'
     }
   },
+
+  bell: false,
 
   plugins: [],
   localPlugins: []

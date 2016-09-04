@@ -13,25 +13,25 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'godlygeek/tabular'
 Plug 'guns/vim-sexp'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'lambdatoast/elm.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
-Plug 'mhinz/vim-rfc'
 Plug 'mhinz/vim-startify'
 Plug 'moll/vim-bbye', { 'on': 'Bdelete' }
 Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'olical/vim-enmasse', { 'on': 'EnMasse' }
+Plug 'Olical/vim-enmasse', { 'on': 'EnMasse' }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'paradigm/TextObjectify'
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'samuelsimoes/vim-jsx-utils', { 'for' : 'javascript.jsx' }
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'scrooloose/syntastic', { 'on': ['SyntasticCheck', 'SyntasticToggleMode'] }
 Plug 'sk1418/last256'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -46,59 +46,15 @@ Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
-Plug 'vim-scripts/rfc-syntax', { 'for': 'rfc' }
 
 call plug#end()
 
 
 "=========================================================="
-" Statusline
-"=========================================================="
-
-" Clear the statusline.
-set statusline=
-
-" Buffer number.
-set statusline+=[%n]\ ""
-
-" User2 hilight.
-set statusline+=%2*
-
-" Flags (h, [+], RO).
-set statusline+=%(\ %m%h%r\ %)
-
-" User1 highlight.
-set statusline+=%1*
-
-" File name.
-set statusline+=\ %f\ ""
-
-" Back to default highlight.
-set statusline+=%*\ ""
-
-" Filetype.
-set statusline+=%<[%{strlen(&ft)?&ft:'none'},
-
-" Encoding.
-set statusline+=%{strlen(&fenc)?&fenc:&enc},
-
-" File format.
-set statusline+=%{&fileformat}]
-
-" Right align the rest.
-set statusline+=%=
-
-" Cursor line, column.
-set statusline+=%-14.(%l,%c%V%)
-
-" Percent through file.
-set statusline+=\ %P\ ""
-
-
-"=========================================================="
 " Colorscheme/highlights
 "=========================================================="
-
+"
+"
 set background=dark
 colorscheme last256
 
@@ -122,7 +78,6 @@ hi! User2 ctermbg=0 ctermfg=1
 "" TODO
 hi! Todo ctermbg=none ctermfg=11
 
-" hi! Comment cterm=italic
 hi! Subdued ctermfg=240
 
 "" NERDTree
@@ -134,7 +89,6 @@ hi! link NERDTreeDirSlash Subdued
 hi ColorColumn ctermbg=0
 hi CursorLine cterm=none ctermbg=0
 hi VertSplit cterm=none ctermbg=8 ctermfg=8
-
 
 "=========================================================="
 " Misc. Settings
@@ -180,6 +134,8 @@ set iskeyword+=-
 
 set conceallevel=2
 set concealcursor=nc
+
+set noshowmode
 
 
 "=========================================================="
@@ -249,7 +205,7 @@ endfunction
 
 function! Standard()
   set makeprg=./node_modules/.bin/standard
-  autocmd! BufWritePost * Neomake!
+  autocmd! BufWritePost * Neomake
   Neomake!
 endfunction
 
@@ -303,8 +259,9 @@ nnoremap <silent> <f7> :prev<cr>
 " Next.
 nnoremap <silent> <f9> :next<cr>
 
-" Ack.vim.
-nnoremap <leader>a :Ack<space>
+" Grepper
+nnoremap <leader>a :Grepper<cr>
+nnoremap <leader>w :Grepper -cword -noprompt<cr>
 
 " Copy and paste from system clipboard.
 noremap <leader>p "+p
@@ -408,17 +365,17 @@ let g:startify_custom_header = [
 autocmd User Startified setlocal buftype=
 
 
-"" Syntastic
-"
-" Enable syntastic error signs in the line number column.
-let g:syntastic_enable_signs = 1
-" Passive by default.
-let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': [],
-                            \ 'passive_filetypes': [] }
-
 "" JSX
 let g:jsx_ext_required = 0
 
 "" Elm-vim
 let g:elm_format_autosave = 1
+
+"" HACK to keep vim-javascript from complaining for now
+if !exists("b:undo_ftplugin") | let b:undo_ftplugin = '' | endif
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+      \ }
+      \ }

@@ -1,5 +1,7 @@
 source ~/.bashrc
 
+shopt -s globstar
+
 if which rbenv > /dev/null; then eval "$(/usr/local/bin/rbenv init -)"; fi
 if which direnv > /dev/null; then eval "$(direnv hook $0)"; fi
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
