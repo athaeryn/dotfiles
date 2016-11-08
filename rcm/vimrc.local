@@ -16,7 +16,7 @@ Plug 'guns/vim-sexp'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'lambdatoast/elm.vim'
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
 Plug 'mhinz/vim-startify'
@@ -71,10 +71,6 @@ hi! StartifyHeader  ctermfg=3
 "" Search
 hi! Search ctermfg=0 ctermbg=4
 
-"" Statusline
-hi! User1 ctermbg=10 ctermfg=15
-hi! User2 ctermbg=0 ctermfg=1
-
 "" TODO
 hi! Todo ctermbg=none ctermfg=11
 
@@ -89,6 +85,15 @@ hi! link NERDTreeDirSlash Subdued
 hi ColorColumn ctermbg=0
 hi CursorLine cterm=none ctermbg=0
 hi VertSplit cterm=none ctermbg=8 ctermfg=8
+
+
+hi WhiteOnBlue ctermfg=254 ctermbg=25 cterm=none
+hi PurpleOnBlack ctermfg=235 ctermbg=141 cterm=none
+
+hi! link Visual WhiteOnBlue
+
+hi! link Search PurpleOnBlack
+hi! link IncSearch Search
 
 "=========================================================="
 " Misc. Settings
@@ -205,7 +210,7 @@ endfunction
 
 function! Standard()
   set makeprg=./node_modules/.bin/standard
-  autocmd! BufWritePost * Neomake
+  autocmd! BufWritePost * Neomake!
   Neomake!
 endfunction
 
@@ -370,6 +375,7 @@ let g:jsx_ext_required = 0
 
 "" Elm-vim
 let g:elm_format_autosave = 1
+let g:elm_setup_keybindings = 0
 
 "" HACK to keep vim-javascript from complaining for now
 if !exists("b:undo_ftplugin") | let b:undo_ftplugin = '' | endif
@@ -379,3 +385,7 @@ let g:lightline = {
       \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
       \ }
       \ }
+
+
+
+set shortmess=a

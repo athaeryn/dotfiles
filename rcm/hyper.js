@@ -1,13 +1,13 @@
 module.exports = {
   config: {
-    fontSize: 14,
+    fontSize: 15,
     fontFamily: '"Fira Code", "Fira Mono", Menlo, monospace',
 
-    cursorColor: 'rgba(0, 255, 255, 0.5)',
+    cursorColor: 'rgba(255, 255, 255, 0.5)',
     cursorShape: 'BLOCK',
 
     foregroundColor: '#e7e3d9',
-    backgroundColor: '#1c1c1e',
+    backgroundColor: '#18181a',
 
     borderColor: 'black',
 
@@ -20,7 +20,7 @@ module.exports = {
       }
     `,
 
-    padding: '0', // padding is for babies
+    padding: '0',
 
     colors: {
       black: '#232323',

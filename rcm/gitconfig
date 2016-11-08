@@ -40,6 +40,8 @@
     mog = "!f() { git merge "$1" --no-ff --log; }; f"
     pad = "!f() { git add -p "$1"; }; f"
 
+    push-please = push --force-with-lease
+
     # Handy: search
     f = "!git ls-files | grep -i"
 
@@ -87,3 +89,9 @@
     added = yellow
     changed = green
     untracked = cyan
+
+[pull]
+  rebase = true
+
+[url "git@github.com:"]
+    insteadOf = gh:
