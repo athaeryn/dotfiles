@@ -11,6 +11,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'godlygeek/tabular'
 Plug 'guns/vim-sexp'
 Plug 'itchyny/lightline.vim'
@@ -273,10 +274,6 @@ nnoremap <silent> <f9> :next<cr>
 nnoremap <leader>a :Grepper<cr>
 nnoremap <leader>w :Grepper -cword -noprompt<cr>
 
-" Copy and paste from system clipboard.
-noremap <leader>p "+p
-noremap <leader>y "+y
-
 " Switch to last buffer.
 nnoremap <leader><leader> <c-^>
 
@@ -346,8 +343,7 @@ let g:netrw_winsize=20
 let g:startify_bookmarks = [
   \ '~/.vimrc',
   \ '~/.vimrc.local',
-  \ '~/.bashrc',
-  \ '/usr/local/etc/nginx/nginx.conf'
+  \ '~/.bashrc'
 \]
 let g:startify_skiplist = [
   \ 'COMMIT_EDITMSG',
@@ -394,3 +390,9 @@ let g:lightline = {
 
 
 set shortmess=a
+
+
+let g:neomake_javascript_enabled_makers = ['flow']
+let g:neomake_jsx_enabled_makers = ['flow']
+
+let g:flow#enable = 0
