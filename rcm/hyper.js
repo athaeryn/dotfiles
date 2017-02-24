@@ -1,7 +1,11 @@
 module.exports = {
   config: {
     fontSize: 16,
+
+    // retina screen:
     fontFamily: 'Iosevka-light, "Fira Code", "Fira Mono", Menlo, monospace',
+    // non-retina screen:
+    fontFamily: 'Iosevka, "Fira Code", "Fira Mono", Menlo, monospace',
 
     cursorColor: 'rgba(255, 255, 255, 0.5)',
     cursorShape: 'BLOCK',
@@ -17,6 +21,7 @@ module.exports = {
       * {
         -webkit-font-feature-settings: "liga" on, "calt" on, "dlig" on !important;
         text-rendering: optimizeLegibility !important;
+        -webkit-font-smoothing: antialiased;
       }
     `,
 
@@ -45,6 +50,6 @@ module.exports = {
 
   bell: false,
 
-  plugins: [],
+  plugins: ["hypertile"],
   localPlugins: []
 };

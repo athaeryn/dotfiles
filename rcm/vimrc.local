@@ -4,6 +4,7 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'w0rp/ale'
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/NrrwRgn'
@@ -11,7 +12,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'flowtype/vim-flow', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'godlygeek/tabular'
 Plug 'guns/vim-sexp'
 Plug 'itchyny/lightline.vim'
@@ -96,6 +97,8 @@ hi! link Search PurpleOnBlack
 hi! link IncSearch Search
 
 hi Comment cterm=italic
+
+let g:javascript_plugin_flow = 1
 
 "=========================================================="
 " Misc. Settings
@@ -196,6 +199,13 @@ augroup Markdown
   autocmd FileType markdown command! Html %! /usr/local/bin/markdown --html4tags <cr>
 augroup END
 
+if has('nvim')
+  augroup Terminal
+    autocmd!
+    autocmd TermOpen * set nohidden
+  augroup END
+endif
+
 
 "=========================================================="
 " Functions
@@ -214,22 +224,6 @@ function! NeatFoldText()
   return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
-function! Standard()
-  set makeprg=./node_modules/.bin/standard
-  autocmd! BufWritePost * Neomake!
-  Neomake!
-endfunction
-
-function! Rubocop()
-  set makeprg=./bin/rubocop
-  autocmd! BufWritePost * NeomakeFile
-endfunction
-
-function! Pep8()
-  set makeprg=pep8\ ./**/*.py
-  autocmd! BufWritePost * Neomake!
-endfunction
-
 function! CopyMatches(reg)
   let hits = []
   %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
@@ -238,6 +232,15 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
+function! Flow()
+  let filename = expand('%:p')
+  let already_flow = match(filename, ':flow') > 0
+  if already_flow
+    edit term://flow
+  else
+    vsplit term://flow
+  endif
+endfunction
 
 "=========================================================="
 " Mappings
@@ -298,12 +301,15 @@ if has('nvim')
   nnoremap <leader>irb :vsplit term://irb<cr>i
 endif
 
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
+
 
 "=========================================================="
 " Commands
 "=========================================================="
 
-command! Standard call Standard()
+command! Flow call Flow()
 
 
 "=========================================================="
@@ -356,17 +362,18 @@ let g:startify_change_to_dir = 0
 let g:startify_relative_path = 1
 let g:startify_custom_header = [
   \ '',
-  \ '    |||||||||||||||||||        |   |        ||||||||||||||||||||',
-  \ '        ||||||||||||||||       |||||       |||||||||||||||||',
-  \ '          |||||||||||||||$|||$|$$$$$|$|||$|||||||||||||||',
-  \ '           ||||||||||||||$|||$|||$|||$$|$$||||||||||||||',
-  \ '            ||||||||||||||$|$||||$|||$|$|$|||||||||||||',
-  \ '           ||||||||||||||||$|||$$$$$|$|||$||||||||||||||',
-  \ '                            |||||||||||',
-  \ '                               |||||',
-  \ '                                |||',
-  \ '                                 |'
+  \ '    ...................        .   .        ....................',
+  \ '        ................       .....       .................',
+  \ '          ...............|...|.|||||.|...|...............',
+  \ '           ..............|...|...|...||.||..............',
+  \ '            ..............|.|....|...|.|.|.............',
+  \ '           ................|...|||||.|...|..............',
+  \ '                            ...........',
+  \ '                               .....',
+  \ '                                ...',
+  \ '                                 .'
 \]
+
 " Let NERDTree use the Startify buffer
 autocmd User Startified setlocal buftype=
 
@@ -392,7 +399,17 @@ let g:lightline = {
 set shortmess=a
 
 
-let g:neomake_javascript_enabled_makers = ['flow']
-let g:neomake_jsx_enabled_makers = ['flow']
+" let g:neomake_javascript_enabled_makers = ['flow']
+" let g:neomake_jsx_enabled_makers = ['flow']
 
-let g:flow#enable = 0
+" let g:flow#enable = 0
+"
+let g:ale_sign_error = '->'
+let g:ale_sign_warning = '--'
+let g:ale_sign_column_always = 1
+let g:ale_echo_msg_format = '|%linter%| %s'
+
+let g:ale_linters = {
+\   'rust': [],
+\   'ruby': []
+\}
