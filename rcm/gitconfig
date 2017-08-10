@@ -76,6 +76,8 @@
     wd = diff --word-diff=color
     dst = diff --stat
 
+    duntoday = !me=$(git config user.email)&& git log --author="\"$me\"" --since="00:00:00" --oneline --no-merges
+
 [push]
     default = tracking
 [core]

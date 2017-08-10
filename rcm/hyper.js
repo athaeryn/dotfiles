@@ -5,7 +5,7 @@ module.exports = {
     // retina screen:
     fontFamily: 'Iosevka-light, "Fira Code", "Fira Mono", Menlo, monospace',
     // non-retina screen:
-    fontFamily: 'Iosevka, "Fira Code", "Fira Mono", Menlo, monospace',
+    // fontFamily: 'Iosevka, "Fira Code", "Fira Mono", Menlo, monospace',
 
     cursorColor: 'rgba(255, 255, 255, 0.5)',
     cursorShape: 'BLOCK',
@@ -50,6 +50,6 @@ module.exports = {
 
   bell: false,
 
-  plugins: ["hypertile"],
+  plugins: [],
   localPlugins: []
 };

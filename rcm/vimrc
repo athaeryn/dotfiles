@@ -1,0 +1,761 @@
+" Use UTF-8.
+set encoding=utf-8
+
+" Use syntax highlighting.
+syntax on
+
+" Enable filetype detections.
+filetype plugin indent on
+
+if has('gui_running')
+  set titlestring=
+  set titlestring+=%f\       " file name
+  set titlestring+=%h%m%r%w  " flags
+
+  set guioptions=gmtc
+  set antialias
+
+  if has('mac')
+    set macmeta
+    set fuoptions=maxvert,maxhorz
+  endif
+endif
+
+" Prevent Vim from clobbering the scrollback buffer.
+" http://www.shallowsky.com/linux/noaltscreen.html
+" via Gary Bernhardt
+set t_ti= t_te=
+
+
+"=========================================================="
+" Settings
+"=========================================================="
+
+" Keep a really long command/search history.
+set history=1000
+
+" More words.
+set dictionary=/usr/share/dict/words
+
+" Make command line 1 line tall.
+set cmdheight=1
+
+" Turn on auto-indentation.
+set autoindent
+set smartindent
+set cindent
+
+" Disable modelines.
+set modelines=0
+
+" Stop littering .swp files everywhere.
+set noswapfile
+
+" Reload a file that is modified from the outside.
+set autoread
+
+" Make tab completion a lot smarter (mostly works like zsh).
+set wildmode=list:longest,list:full
+set wildmenu
+set wildignore=*.dll,*.exe,*.pyc,*.pyo,*.egg
+set wildignore+=*.jpg,*.gif,*.png,*.o,*.obj,*.bak,*.rbc
+set wildignore+=Icon*,\.DS_Store,*.out,*.scssc,*.sassc
+set wildignore+=.git/*,.hg/*,.svn/*,*/swp/*,*/undo/*,Gemfile.lock
+
+" Don't redraw while executing macros.
+set lazyredraw
+
+" Backspace over things.
+set backspace=indent,eol,start
+
+" Stop littering .swp files everywhere.
+set noswapfile
+
+" Highlight the line the cursor is on.
+set cursorline
+
+" Softtabs, 2 spaces.
+set tabstop=2
+set shiftwidth=2
+set shiftround
+set expandtab
+
+" Mark the 81st column to make it obvious where 80 characters is.
+set colorcolumn=81
+
+" Don't drop buffers when no longer shown in a window.
+set hidden
+
+" Don't wrap text.
+set nowrap
+" Mark wrapped lines.
+set showbreak=\ »\ 
+
+" Show extra lines for context.
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=1
+
+" Show line numbers.
+set number
+" Don't take up more space than necessary.
+set numberwidth=1
+
+" Open new split panes to right and bottom, which feels more natural.
+set splitbelow
+set splitright
+
+" Searches should be case insensitive unless there's a capital letter.
+set ignorecase
+set smartcase
+
+" Start searching instantly.
+set incsearch
+set showmatch
+
+" Highlight all matches for the last used search pattern.
+set hlsearch
+
+" Enable mouse support in terminals that can handle it.
+set mouse=a
+
+" Please don't beep.
+set visualbell
+
+" Show the cursor position in the status line.
+set ruler
+
+" Show info about current command in bottom right.
+set showcmd
+
+" Display the current mode in the status line.
+set showmode
+
+" Always display the status line.
+set laststatus=2
+
+" Don't show the startup message.
+set shortmess=I
+
+" Improve session saving.
+set sessionoptions=blank,curdir,folds,help,tabpages,winpos
+
+
+"" The Silver Searcher
+"
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use ag over Grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in Ack.vim.
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore.
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache.
+  let g:ctrlp_use_caching = 0
+endif
+
+
+"=========================================================="
+" Functions
+"=========================================================="
+
+augroup SpaceVim
+
+  autocmd!
+
+  " Resize splits on window resize.
+  autocmd VimResized * exe "normal! \<c-w>="
+
+  " Jump to last position in buffer when opening.
+  autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+                            \ exe "normal g'\"" | endif
+
+  " For man pages:
+  "   - don't show listchars
+  "   - exit with q
+  autocmd FileType man set nolist | nnoremap q :q!<cr>
+
+  " This makes editing crontab possible.
+  autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+
+  " Don't show listchars in git commit view or gitconfig, it's annoying.
+  autocmd FileType gitcommit set nolist
+  autocmd FileType gitconfig set nolist
+
+  " Format json.
+  autocmd FileType json command! Format %!python -m json.tool
+
+augroup END
+
+augroup Markdown
+  autocmd!
+
+  " Treat all text files as markdown.
+  autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
+
+  " Wrap text for txt/markdown.
+  autocmd FileType markdown set wrap linebreak textwidth=80
+  autocmd FileType txt set wrap linebreak textwidth=80
+
+  " Don't showbreak for txt/markdown.
+  autocmd FileType markdown set showbreak=
+  autocmd FileType txt set showbreak=
+
+  " Enable spellcheck in Markdown.
+  autocmd FileType markdown set spell
+augroup END
+
+augroup Wax
+  autocmd!
+  autocmd BufNewFile,BufRead Waxfile set filetype=yaml
+augroup END
+
+
+
+"=========================================================="
+" Functions
+"=========================================================="
+
+" Use <tab> for indent if on a blank/whitespace line,
+" or completion if there is text entered.
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+
+" Rename current file (from Gary Bernhardt).
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
+
+"=========================================================="
+" Commands
+"=========================================================="
+
+" Concealerator.
+command! ConcealToggle let &conceallevel=&conceallevel==0?2:0
+
+" Search for todos with Ack.
+command! Todos Ack TODO
+
+
+"=========================================================="
+" Mappings
+"=========================================================="
+
+" Use comma as leader.
+let mapleader = ","
+let g:mapleader = ","
+
+" Easier split navigation.
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" Scroll up/down scroll faster.
+noremap <c-e> 5<c-e>
+noremap <c-y> 5<c-y>
+
+" Keep the selection when indenting.
+vnoremap < <gv
+vnoremap > >gv
+
+" Navigate wrapped lines.
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+
+" Inspect highlight under cursor.
+nnoremap <f10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+\ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
+
+" Remove trailing whitespace (except when escaped).
+nnoremap <leader>rw :%s/[^\\]\zs\s\+\ze$//e<cr>:noh<cr>
+
+" Repeat the last :! command.
+" *maybe
+nnoremap <c-c> :!!<cr>
+
+" InsertTabWrapper (autocomplete).
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+
+" Clear highlighted search.
+nnoremap <cr> :nohlsearch<cr>
+
+
+"=========================================================="
+" Bundles
+"=========================================================="
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'benekastah/neomake', { 'on': 'Neomake' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'chrisbra/NrrwRgn'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'godlygeek/tabular'
+Plug 'guns/vim-sexp'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
+Plug 'mhinz/vim-startify'
+Plug 'moll/vim-bbye', { 'on': 'Bdelete' }
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'mustache/vim-mode'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'Olical/vim-enmasse', { 'on': 'EnMasse' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'paradigm/TextObjectify'
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'reasonml-editor/vim-reason'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'sbdchd/neoformat'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'sk1418/last256'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-leiningen'
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-scripts/EasyGrep'
+
+call plug#end()
+
+
+"=========================================================="
+" Colorscheme/highlights
+"=========================================================="
+"
+"
+set background=dark
+colorscheme last256
+
+"" Startify
+"
+hi! StartifyBracket ctermfg=8
+hi! StartifyFile    ctermfg=3
+hi! StartifyNumber  ctermfg=15
+hi! StartifyPath    ctermfg=7
+hi! StartifySlash   ctermfg=8
+hi! StartifySpecial ctermfg=8
+hi! StartifyHeader  ctermfg=3
+
+"" TODO
+hi! Todo ctermbg=none ctermfg=3
+
+hi Normal ctermfg=7
+hi Constant ctermfg=11
+hi! String cterm=none ctermfg=2
+hi! Comment cterm=italic ctermfg=8
+hi! Subdued ctermfg=242
+hi Operator ctermfg=242
+
+
+"" NERDTree
+hi! link NERDTreeUp Subdued
+hi! link NERDTreeDir Subdued
+hi! link NERDTreeDirSlash Subdued
+
+" Columns 'n' lines
+hi! ColorColumn ctermbg=235
+hi! CursorLine ctermbg=235
+hi SignColumn ctermbg=235
+hi VertSplit cterm=bold ctermbg=none ctermfg=13
+hi LightlineMiddle_normal ctermbg=233
+hi LightlineMiddle_active ctermbg=235
+
+hi WhiteOnBlue ctermfg=254 ctermbg=25 cterm=none
+hi PurpleOnBlack ctermfg=235 ctermbg=141 cterm=none
+
+hi! link Visual WhiteOnBlue
+
+hi! link Search PurpleOnBlack
+hi! link IncSearch Search
+
+hi link Noise Subdued
+
+let g:javascript_plugin_flow = 1
+
+"=========================================================="
+" Misc. Settings
+"=========================================================="
+
+" Use spacebar as leader.
+let mapleader = " "
+let g:mapleader = " "
+let g:maplocalleader = " "
+
+" Prevent Vim from clobbering the scrollback buffer.
+" http://www.shallowsky.com/linux/noaltscreen.html
+" via Gary Bernhardt
+set t_ti= t_te=
+
+" Set fold method to indent.
+set foldmethod=indent
+
+" Don't fold by default.
+set nofoldenable
+set foldtext=NeatFoldText()
+
+if has('gui_running')
+  " Set font in GUI.
+  set guifont=Fira\ Mono:h12
+endif
+
+" Backup files, swapfiles, and undo files.
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+set undodir=~/.vim/undo
+
+" Stop littering .swp files everywhere.
+set noswapfile
+" Stores undo info in a file so that it persists after vim closes.
+set undofile
+
+" Show listchars.
+set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
+set list
+
+set iskeyword+=-
+
+" Use a taller character for vertical splits (for no gap)
+set fillchars+=vert:│
+
+set conceallevel=2
+set concealcursor=nc
+
+set noshowmode
+
+if has('nvim')
+  set inccommand=nosplit
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+endif
+
+set backupcopy=yes
+
+set updatetime=250
+
+
+"=========================================================="
+" Autocommands
+"=========================================================="
+
+augroup FileTypes
+  autocmd!
+
+  " This makes editing crontab possible.
+  " autocmd BufNewFile,BufRead crontab.* set nobackup | set nowritebackup
+
+  autocmd CmdwinEnter * nnoremap <buffer> <cr> <cr>
+  autocmd FileType qf nnoremap <buffer> <cr> <cr>
+
+  " No ColorColumn in Startify.
+  autocmd FileType startify setlocal colorcolumn=""
+  autocmd FileType startify setlocal nolist
+
+  autocmd BufNewFile,BufRead *.mustache setl ft=mustache
+  autocmd FileType mustache setlocal syntax=html
+
+  autocmd BufNewFile,BufRead *.md setl ft=markdown
+
+  autocmd BufNewFile,BufRead CMakeLists.txt set ft=cmake
+
+  autocmd FileType rust nnoremap <f4> :vsp \| te cargo run<cr>
+
+  autocmd FileType elm setl shiftwidth=4
+augroup END
+
+
+augroup Markdown
+  autocmd!
+
+  " Treat all text files as markdown.
+  autocmd BufNewFile,BufRead *.{txt,text} set filetype=markdown
+
+  " Wrap text for txt/markdown.
+  autocmd FileType markdown set wrap linebreak textwidth=0
+  autocmd FileType txt set wrap linebreak textwidth=0
+
+  " Don't showbreak for txt/markdown.
+  autocmd FileType markdown set showbreak=
+  autocmd FileType txt set showbreak=
+
+  " Convert Markdown to HTML (in place!).
+  autocmd FileType markdown command! Html %! /usr/local/bin/markdown --html4tags <cr>
+augroup END
+
+"=========================================================="
+" Functions
+"=========================================================="
+
+" From http://dhruvasagar.com/2013/03/28/vim-better-foldtext.
+function! NeatFoldText()
+  let regex = '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*'
+  let line = ' ' . substitute(getline(v:foldstart), regex, '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let fill = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(fill, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(fill, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(fill, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/ge
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
+
+function! Flow()
+  if filereadable(expand("./node_modules/.bin/flow"))
+    vsplit term://./node_modules/.bin/flow
+  else
+    vsplit term://flow
+  endif
+endfunction
+
+"=========================================================="
+" Mappings
+"=========================================================="
+
+" New tab.
+map <leader>tn :tabnew<cr>
+
+" Tab navigation.
+nnoremap <silent> <c-n> :tabnext<cr>
+nnoremap <silent> <c-p> :tabprev<cr>
+
+" Switch between the last two files.
+nnoremap <leader><leader> <c-^>
+
+" Copy and paste from system clipboard.
+noremap <leader>p "+p
+noremap <leader>y "+y
+noremap <leader>P "+P
+noremap <leader>Y "+Y
+
+" Write as root, when you forgot to sudo edit.
+cnoreabbrev w!! w !sudo tee % >/dev/null
+
+" Map <leader>f to open CtrlP in buffer mode.
+nnoremap <silent> <leader>f :CtrlPBuffer<cr>
+
+" Previous.
+nnoremap <silent> <f7> :prev<cr>
+" Next.
+nnoremap <silent> <f9> :next<cr>
+
+" Grepper
+nnoremap <leader>a :Grepper<cr>
+nnoremap <leader>w :Grepper -cword -noprompt<cr>
+
+" Switch to last buffer.
+nnoremap <leader><leader> <c-^>
+
+" Close a buffer without closing the window.
+nnoremap <silent> <leader>d :Bdelete<cr>
+
+" Commentary.
+xmap <leader>c <Plug>Commentary
+nmap <leader>c <Plug>Commentary
+nmap <leader>c<space> <Plug>CommentaryLine
+nmap <leader>cu <Plug>CommentaryUndo
+
+" Toggle NERDTree.
+nnoremap <leader>tr :NERDTreeToggle<cr>
+
+nnoremap <leader>rw :StripWhitespace<cr>
+
+if has('nvim')
+  " Escape!
+  tnoremap <leader><esc> <c-\><c-n>
+
+  nnoremap <leader>irb :vsplit term://irb<cr>i
+endif
+
+nmap <silent> <leader>k <Plug>(ale_previous_wrap)
+nmap <silent> <leader>j <Plug>(ale_next_wrap)
+
+"=========================================================="
+" Commands
+"=========================================================="
+
+command! Flow call Flow()
+
+
+"=========================================================="
+" Plugins Settings
+"=========================================================="
+
+"" CtrlP
+"
+" Open with <c-f>.
+let g:ctrlp_map = '<c-f>'
+
+" Increase file limit from 10,000 to 100,000.
+let g:ctrlp_max_files = 100000
+
+" Don't remember the last input.
+let g:ctrlp_persistent_input = 0
+
+" Don't change working directory.
+let g:ctrlp_working_path_mode = 0
+
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\v[\/]\.sass-cache'
+            \ }
+
+" Prevent opening a split beside the Startify buffer.
+let g:ctrlp_reuse_window = 'startify'
+
+"" Netrw
+"
+let g:netrw_liststyle=3
+let g:netrw_browse_split=3
+let g:netrw_preview=1
+let g:netrw_winsize=20
+
+"" Startify
+"
+let g:startify_bookmarks = [
+  \ '~/.vimrc',
+  \ '~/.bashrc'
+\]
+let g:startify_skiplist = [
+  \ 'COMMIT_EDITMSG',
+  \ '^/usr/local/Cellar/vim',
+  \ '^/usr/local/Cellar/macvim'
+\]
+let g:startify_list_order = ['files', 'bookmarks', 'sessions']
+let g:startify_files_number = 10
+let g:startify_change_to_dir = 0
+let g:startify_relative_path = 1
+" let g:startify_custom_header = [
+"   \ '',
+"   \ '    ...................        .   .        ....................',
+"   \ '        ................       .....       .................',
+"   \ '          ...............|...|.|||||.|...|...............',
+"   \ '           ..............|...|...|...||.||..............',
+"   \ '            ..............|.|....|...|.|.|.............',
+"   \ '           ................|...|||||.|...|..............',
+"   \ '                            ...........',
+"   \ '                               .....',
+"   \ '                                ...',
+"   \ '                                 .'
+" \]
+
+let g:startify_custom_header =
+            \ map(split(system('node ~/code/athaeryn/terrarium/terrarium'), '\n'), '"   ". v:val')
+
+" Let NERDTree use the Startify buffer
+autocmd User Startified setlocal buftype=
+
+let g:better_whitespace_filetypes_blacklist=[
+      \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
+      \ 'startify'
+      \]
+
+
+"" JSX
+let g:jsx_ext_required = 0
+
+"" Elm-vim
+let g:elm_format_autosave = 1
+let g:elm_setup_keybindings = 0
+
+"" HACK to keep vim-javascript from complaining for now
+if !exists("b:undo_ftplugin") | let b:undo_ftplugin = '' | endif
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
+      \ }
+      \ }
+
+
+
+set shortmess=a
+
+
+" let g:neomake_javascript_enabled_makers = ['flow']
+" let g:neomake_jsx_enabled_makers = ['flow']
+
+" let g:flow#enable = 0
+"
+let g:ale_sign_error = '->'
+let g:ale_sign_warning = '--'
+let g:ale_sign_column_always = 1
+let g:ale_echo_msg_format = '|%linter%| %s'
+
+let g:ale_linters = {
+\   'rust': [],
+\   'ruby': []
+\}
+
+let loaded_matchparen = 1
+
+let g:neoformat_only_msg_on_error = 1
+
+""
+" Override prettier with local prettier
+"
+if filereadable(expand("./node_modules/.bin/prettier"))
+  nnoremap <F12> :Neoformat<cr>
+
+  let g:neoformat_javascript_prettier_local = {
+        \ 'exe': './node_modules/.bin/prettier',
+        \ 'args': ['--stdin', '--no-semi', '--single-quote'],
+        \ 'stdin': 1,
+        \ }
+
+  let g:neoformat_enabled_javascript = ['prettier_local']
+
+  augroup prettier
+    autocmd!
+    autocmd BufWritePre *.js Neoformat
+  augroup END
+endif
+
+
+let g:gitgutter_sign_added = '░ '
+let g:gitgutter_sign_modified = '░ '
+let g:gitgutter_sign_removed = '░ '
+let g:gitgutter_sign_removed_first_line = '^^'
+let g:gitgutter_sign_modified_removed = '░ '
