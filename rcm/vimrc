@@ -300,6 +300,8 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 " Clear highlighted search.
 nnoremap <cr> :nohlsearch<cr>
 
+nnoremap <leader>uh :GitGutterUndoHunk<cr>
+
 
 "=========================================================="
 " Bundles
@@ -610,8 +612,8 @@ if has('nvim')
   nnoremap <leader>irb :vsplit term://irb<cr>i
 endif
 
-nmap <silent> <leader>k <Plug>(ale_previous_wrap)
-nmap <silent> <leader>j <Plug>(ale_next_wrap)
+nnoremap <silent> <leader>k <Plug>(ale_previous_wrap)
+nnoremap <silent> <leader>j <Plug>(ale_next_wrap)
 
 "=========================================================="
 " Commands
@@ -686,6 +688,7 @@ let g:startify_custom_header =
 
 " Let NERDTree use the Startify buffer
 autocmd User Startified setlocal buftype=
+let g:NERDTreeMinimalUI = 1
 
 let g:better_whitespace_filetypes_blacklist=[
       \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
@@ -754,8 +757,24 @@ if filereadable(expand("./node_modules/.bin/prettier"))
 endif
 
 
+if executable('refmt')
+  let g:neoformat_reason_refmt = {
+        \ 'exe': 'refmt',
+        \ 'stdin': 1,
+        \ }
+
+  let g:neoformat_enabled_reason = ['refmt']
+
+  augroup refmt
+    autocmd!
+    autocmd BufWritePre *.re Neoformat
+  augroup END
+endif
+
+
 let g:gitgutter_sign_added = '░ '
 let g:gitgutter_sign_modified = '░ '
 let g:gitgutter_sign_removed = '░ '
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = '░ '
+

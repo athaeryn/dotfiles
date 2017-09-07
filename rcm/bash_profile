@@ -2,10 +2,12 @@ source ~/.bashrc
 
 shopt -s globstar
 
-if which rbenv > /dev/null; then eval "$(/usr/local/bin/rbenv init -)"; fi
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+BIN="$(brew --prefix)/bin"
 
-if which direnv > /dev/null; then eval "$(direnv hook bash)"; fi
+if [ -f "$BIN/rbenv" ]; then eval "$($BIN/rbenv init -)"; fi
+if [ -f "$BIN/pyenv" ]; then eval "$($BIN/pyenv init -)"; fi
+if [ -f "$BIN/opam" ]; then eval "$($BIN/opam config env)"; fi
+if [ -f "$BIN/direnv" ]; then eval "$($BIN/direnv hook bash)"; fi
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
