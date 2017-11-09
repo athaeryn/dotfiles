@@ -1,0 +1,28 @@
+path=(		
+  ~/bin		
+  ~/golang/bin		
+  ~/.cabal/bin		
+  ~/.cargo/bin		
+  /usr/local/bin		
+  /usr/local/sbin		
+  /usr/local/opt/node		
+  /usr/local/share/npm/bin		
+  $path		
+)		
+		
+export VISUAL=vim		
+export EDITOR=vim		
+		
+export LSCOLORS=exfxcxdxbxegedabagacad		
+		
+export NODE_PATH=/usr/local/lib/node		
+export TERM=xterm-256color		
+export LIBRARY_PATH="$LIBRARY_PATH:/opt/local/lib/"		
+export GOPATH=~/golang		
+export ANDROID_HOME=/usr/local/opt/android-sdk		
+		
+export LEAF_PATH=$HOME/code		
+
+if which rbenv > /dev/null; then eval "$(/usr/local/bin/rbenv init -)"; fi		
+if which direnv > /dev/null; then eval "$(direnv hook $0)"; fi		
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
