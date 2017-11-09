@@ -9,6 +9,7 @@ $ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 ## 2. Install RCM
 
 ```sh
+brew tap thoughtbot/formulae
 brew install rcm
 ```
 
@@ -17,9 +18,9 @@ brew install rcm
 (Assuming this repo is at `~/code/athaeryn/dotfiles`)
 
 ```sh
-$ cd ~/code/athaeryn/dotfiles
-$ ln -s rcm ~/dotfiles/local
-$ cd && rcup -v
+$ cd
+$ ln -s code/athaeryn/dotfiles/rcrc .rcrc
+$ rcup -v
 ```
 
 
