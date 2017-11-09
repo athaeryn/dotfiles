@@ -1,3 +1,4 @@
+DOTFILES_DIRS="code/athaeryn/dotfiles/rcm"
 EXCLUDES="README.md Brewfile"
 EXCLUDES="vim/undo"
 SYMLINK_DIRS="vim zsh"
