@@ -16,8 +16,8 @@ env:
 # Window dimensions in character columns and lines
 # (changes require restart)
 dimensions:
-  columns: 80
-  lines: 24
+  columns: 84
+  lines: 32
 
 # Adds this many blank pixels of padding around the window
 # Units are physical pixels; this is not DPI aware.
@@ -40,22 +40,13 @@ draw_bold_text_with_bright_colors: false
 
 # Font configuration (changes require restart)
 font:
-  # The normal (roman) font face to use.
   normal:
     family: Iosevka
-    # Style can be specified to pick a specific face.
-    style: Light
-
-  # The bold font face
   bold:
     family: Iosevka
-    # Style can be specified to pick a specific face.
     style: Bold
-
-  # The italic font face
   italic:
     family: Iosevka
-    # Style can be specified to pick a specific face.
     style: Italic
 
   # Point size of the font
@@ -90,8 +81,8 @@ custom_cursor_colors: false
 colors:
   # Default colors
   primary:
-    background: '0x2d2932'
-    foreground: '0xeefff3'
+    background: '0x2c2338'
+    foreground: '0xd3d6d4'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
@@ -107,7 +98,7 @@ colors:
     blue: '0x54b2dd'
     magenta: '0xc792ea'
     cyan: '0x58b6a8'
-    white: '0xa3a6a4'
+    white: '0xc3c6c4'
 
   # Bright colors
   bright:

@@ -55,11 +55,12 @@ hi! jsFuncName cterm=bold ctermfg=15
 hi! jsGenerator cterm=bold ctermfg=15
 
 hi! Flow ctermfg=15 cterm=italic
-hi link jsFlowType          Flow
-" hi link jsFlowObjectKey     Flow
-hi link jsFlowObject        Flow
-hi link jsFlowGroup         Flow
-hi link jsFlowArgumentDef   Flow
-hi link jsFlowDefinition    Flow
-hi link jsFlowTypeStatement Flow
-hi link jsFlowImportType    Flow
+hi link jsFlowType             Flow
+" hi link jsFlowObjectKey        Flow
+hi link jsFlowObject           Flow
+hi link jsFlowGroup            Flow
+hi link jsFlowArgumentDef      Flow
+hi link jsFlowDefinition       Flow
+hi link jsFlowTypeStatement    Flow
+hi link jsFlowImportType       Flow
+hi link jsFlowParenAnnotation  Flow

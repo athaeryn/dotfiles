@@ -1,18 +1,19 @@
-# Source things only if they exist
-function try_source () {
-  if [ -f "$@" ]; then
-    source "$@"
-  fi
-}
+#    # Source things only if they exist
+#    function try_source () {
+#      if [ -f "$@" ]; then
+#        source "$@"
+#      fi
+#    }
+#
+#
+#    autoload -U colors zsh-mime-setup select-word-style
+#    colors                  # colors
+#    zsh-mime-setup          # run everything as if it's an executable
+#    select-word-style bash  # ctrl+w on words
 
-
-autoload -U colors zsh-mime-setup select-word-style
-colors                  # colors
-zsh-mime-setup          # run everything as if it's an executable
-select-word-style bash  # ctrl+w on words
 
 # Bind some keys
-bindkey -v # Vim mode
+# bindkey -v # Vim mode
 bindkey '^a' beginning-of-line
 bindkey '^d' delete-char
 bindkey '^e' end-of-line
@@ -20,30 +21,48 @@ bindkey '^r' history-incremental-search-backward
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
 
-# http://dougblack.io/words/zsh-vi-mode.html
-function zle-line-init zle-keymap-select {
-  VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
-  zle reset-prompt
-}
+# Prevent things like `git reset --hard HEAD^` failing because of the ^
+setopt NO_NOMATCH
 
-zle -N zle-line-init
-zle -N zle-keymap-select
-export KEYTIMEOUT=1
+#
+#    # http://dougblack.io/words/zsh-vi-mode.html
+#    function zle-line-init zle-keymap-select {
+#      VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+#      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}"
+#      zle reset-prompt
+#    }
+#
+#    zle -N zle-line-init
+#    zle -N zle-keymap-select
+#    export KEYTIMEOUT=1
 
 
-# 256 color stuff
-try_source ~/.zsh/spectrum.zsh
+fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
 
-
-# Completion
-autoload -U compinit
+autoload -Uz compinit colors add-zsh-hook
+colors
 compinit
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'   # ignore case
 
+# Colored auto completion
+zstyle ':completion:*' list-colors "di=34"
+# Case insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Stop zsh eating space before my pipe chars
+export ZLE_REMOVE_SUFFIX_CHARS=''
+
+# Allow extended glob like ^file, *~file (everything except file)
+setopt extended_glob
 
 # Enable using comments interactively (like Bash)
 setopt interactivecomments
+
+
+# HISTORY
+HISTFILE=~/.zhistory
+HISTSIZE=SAVEHIST=10000
+setopt sharehistory
+setopt extendedhistory
 
 
 # Function
@@ -54,54 +73,30 @@ function wordplay () {
   done
 }
 
-
-function set_prompt {
-  function collapsed_pwd {
-    echo $(pwd | sed -e "s,^$HOME,~,")
-  }
-  function git_branch () {
-    git branch >/dev/null 2>/dev/null && \
-    git branch | grep \* | awk '{printf "|%s| ", $2}'
-  }
-  setopt PROMPT_SUBST
-  PROMPT='%{$(git_branch)%{$fg[blue]%}$(collapsed_pwd)
-%{$reset_color%}> '
+set_prompt() {
+  local LEFT='▓'
+  local RIGHT='▓'
+  # Check if in a git folder
+  if [ -d '.git' ] || [[ $(command git rev-parse --is-inside-work-tree 2>/dev/null) == "true" ]]; then
+    # Check for uncommited changes, ignore untracked files
+    if [[ -n $(command git status --porcelain --untracked-files=no | tail -1) ]]; then
+      LEFT="%{$fg[yellow]%}$LEFT"
+      RIGHT="%{$fg[yellow]%}$RIGHT"
+    else
+      LEFT="%{$fg[green]%}$LEFT"
+      RIGHT="%{$fg[green]%}$RIGHT"
+    fi
+  else
+    LEFT="%{$fg[blue]%}$LEFT"
+    RIGHT="%{$fg[blue]%}$RIGHT"
+  fi
+  PROMPT="$LEFT %{$fg[blue]%}%2~ $RIGHT%{$reset_color%} "
 }
-set_prompt
 
-
-path=(
-  ~/bin
-  ~/golang/bin
-  ~/.cabal/bin
-  ~/.cargo/bin
-  /usr/local/bin
-  /usr/local/sbin
-  /usr/local/opt/node
-  /usr/local/share/npm/bin
-  $path
-)
-
-export VISUAL=vim
-export EDITOR=vim
-
-export LSCOLORS=exfxcxdxbxegedabagacad
-
-export NODE_PATH=/usr/local/lib/node
-export TERM=xterm-256color
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/local/lib/"
-export GOPATH=~/golang
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
-export LEAF_PATH=$HOME/code
-
-# Aliases
+add-zsh-hook precmd set_prompt
 
 # Show todos
 alias todos="ag TODO\:"
-
-# Get my IP
-alias my_ip="ifconfig | grep \"inet \" | grep -v 127.0.0.1 | cut -d\  -f2"
 
 # Use the best vim available.
 if which nvim >/dev/null ; then
@@ -116,15 +111,7 @@ alias ls="ls -G"
 # ls -la with trailing / for directories
 alias lsa="ls -lahp"
 
-# I don't wanna type bundle exec no more
-alias be="bundle exec"
-
-# Run a little server
-alias serv="python -m SimpleHTTPServer"
-
 # List repos
 alias repos="tree ~/code -L 2"
 
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+source ~/.zshenv
