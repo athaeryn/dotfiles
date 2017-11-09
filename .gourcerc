@@ -1,6 +1,0 @@
-[display]
-multi-sampling=true
-
-[gource]
-hide=filenames,progress
-
