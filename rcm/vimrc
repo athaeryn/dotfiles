@@ -355,7 +355,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
 Plug 'int3/vim-extradite', { 'on': 'Extradite' }
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+if has('nvim')
+  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+endif
 
 call plug#end()
 
@@ -790,10 +793,12 @@ augroup fmt
 augroup END
 
 
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
-    \ }
+if has('nvim')
+  let g:LanguageClient_serverCommands = {
+      \ 'reason': ['ocaml-language-server', '--stdio'],
+      \ 'ocaml': ['ocaml-language-server', '--stdio'],
+      \ }
+endif
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1

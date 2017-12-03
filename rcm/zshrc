@@ -98,11 +98,13 @@ add-zsh-hook precmd set_prompt
 # Show todos
 alias todos="ag TODO\:"
 
+export VISUAL=vim
+export EDITOR=vim
+
 # Use the best vim available.
 if which nvim >/dev/null ; then
   alias vim="nvim"
-elif which mvim >/dev/null ; then
-  alias vim="mvim -v"
+  export EDITOR=nvim
 fi
 
 # Always use LSCOLORS
