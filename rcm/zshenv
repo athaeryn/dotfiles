@@ -14,7 +14,7 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 
 export NODE_PATH=/usr/local/lib/node
 export TERM=xterm-256color
-export LIBRARY_PATH="$LIBRARY_PATH:/opt/local/lib/"
+export LIBRARY_PATH="/opt/local/lib/:$LIBRARY_PATH"
 export GOPATH=~/golang
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
