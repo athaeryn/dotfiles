@@ -44,3 +44,17 @@ the_silver_searcher
 tree
 ```
 
+# ZSH
+
+After installing `zsh` with Homebrew, add `/usr/local/bin/zsh` to `/etc/shells`, then:
+
+```sh
+chsh -s /usr/local/bin/zsh
+```
+
+After opening a new terminal:
+
+```sh
+compaudit | xargs chmod g-w
+```
+
