@@ -158,6 +158,8 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+let g:grepper = {}
+let g:grepper.highlight = 1
 
 "=========================================================="
 " Functions
@@ -309,55 +311,89 @@ nnoremap <leader>uh :GitGutterUndoHunk<cr>
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'w0rp/ale'
+" colorschemes
+" Plug 'KKPMW/oldbook-vim'
+" Plug 'pgdouyon/vim-yin-yang'
+" Plug 'athaeryn/vim-seahorse'
+" Plug 'owickstrom/vim-colors-paramount'
+Plug 'sk1418/last256'
+" Plug 'huyvohcmc/atlas.vim'
+
+Plug 'thaerkh/vim-indentguides'
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake', { 'on': 'Neomake' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'chrisbra/NrrwRgn'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'godlygeek/tabular'
-Plug 'guns/vim-sexp'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/goyo.vim'
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'ElmCast/elm-vim', { 'for': 'elm' }
-Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-grepper', { 'on': 'Grepper' }
+Plug 'w0rp/ale'
+" Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'mhinz/vim-grepper'
+Plug 'chrisbra/NrrwRgn'
+" Plug 'junegunn/vim-slash'
+" Plug 'godlygeek/tabular'
+Plug 'guns/vim-sexp'
+Plug 'junegunn/goyo.vim'
+Plug 'majutsushi/tagbar'
 Plug 'moll/vim-bbye', { 'on': 'Bdelete' }
-Plug 'moll/vim-node', { 'for': 'javascript' }
-Plug 'mustache/vim-mode'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Olical/vim-enmasse', { 'on': 'EnMasse' }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'paradigm/TextObjectify'
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'reasonml-editor/vim-reason-plus'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sbdchd/neoformat'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'sk1418/last256'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-leiningen'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/EasyGrep'
 Plug 'int3/vim-extradite', { 'on': 'Extradite' }
+Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
 
+" Languages
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'tpope/vim-leiningen' " clojure
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'moll/vim-node', { 'for': 'javascript' }
+Plug 'mustache/vim-mode', { 'for': 'mustache' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'reasonml-editor/vim-reason-plus'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'jparise/vim-graphql' " graphql
+Plug 'tikhomirov/vim-glsl' " glsl
+Plug 'leafgarland/typescript-vim'
+" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+
+" LanguageClient
 if has('nvim')
-  Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+  " (Optional) Multi-entry selection UI.
+  Plug 'junegunn/fzf'
+
+  Plug 'ncm2/ncm2'
+  " ncm2 requires nvim-yarp
+  Plug 'roxma/nvim-yarp'
+
+  " enable ncm2 for all buffer
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+
+  " note that must keep noinsert in completeopt, the others is optional
+  set completeopt=noinsert,menuone,noselect
 endif
 
 call plug#end()
@@ -370,6 +406,9 @@ call plug#end()
 "
 set background=dark
 colorscheme last256
+" colorscheme atlas
+" colorscheme yin
+" colorscheme oldbook
 
 "" Startify
 "
@@ -411,8 +450,6 @@ hi! Search ctermfg=254 ctermbg=56 cterm=none
 hi! link IncSearch Search
 
 hi link Noise Subdued
-
-let g:javascript_plugin_flow = 1
 
 "=========================================================="
 " Misc. Settings
@@ -547,14 +584,6 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
-function! Flow()
-  if filereadable(expand("./node_modules/.bin/flow"))
-    vsplit term://./node_modules/.bin/flow
-  else
-    vsplit term://flow
-  endif
-endfunction
-
 "=========================================================="
 " Mappings
 "=========================================================="
@@ -587,8 +616,12 @@ nnoremap <silent> <f7> :prev<cr>
 nnoremap <silent> <f9> :next<cr>
 
 " Grepper
-nnoremap <leader>a :Grepper<cr>
-nnoremap <leader>w :Grepper -cword -noprompt<cr>
+" search all files
+nnoremap <leader>a :Grepper -tool ag<cr>
+" search only open buffers
+nnoremap <leader>A :Grepper -tool ag -buffers<cr>
+" search for word under cursor
+nnoremap <leader>w :Grepper -tool ag -cword -noprompt<cr>
 
 " Switch to last buffer.
 nnoremap <leader><leader> <c-^>
@@ -616,12 +649,6 @@ endif
 
 nnoremap <silent> <leader>k <Plug>(ale_previous_wrap)
 nnoremap <silent> <leader>j <Plug>(ale_next_wrap)
-
-"=========================================================="
-" Commands
-"=========================================================="
-
-command! Flow call Flow()
 
 
 "=========================================================="
@@ -671,19 +698,20 @@ let g:startify_list_order = ['files', 'bookmarks', 'sessions']
 let g:startify_files_number = 10
 let g:startify_change_to_dir = 0
 let g:startify_relative_path = 1
-let g:startify_custom_header = [
-  \ '',
-  \ '    ...................        .   .        ....................',
-  \ '        ................       .....       .................',
-  \ '          ...............|...|.|||||.|...|...............',
-  \ '           ..............|...|...|...||.||..............',
-  \ '            ..............|.|....|...|.|.|.............',
-  \ '           ................|...|||||.|...|..............',
-  \ '                            ...........',
-  \ '                               .....',
-  \ '                                ...',
-  \ '                                 .'
-\]
+let g:startify_custom_header = ['']
+" let g:startify_custom_header = [
+"   \ '',
+"   \ '    ...................        .   .        ....................',
+"   \ '        ................       .....       .................',
+"   \ '          ...............|...|.|||||.|...|...............',
+"   \ '           ..............|...|...|...||.||..............',
+"   \ '            ..............|.|....|...|.|.|.............',
+"   \ '           ................|...|||||.|...|..............',
+"   \ '                            ...........',
+"   \ '                               .....',
+"   \ '                                ...',
+"   \ '                                 .'
+" \]
 
 " let g:startify_custom_header =
 "             \ map(split(system('node ~/code/athaeryn/terrarium/terrarium'), '\n'), '"   ". v:val')
@@ -710,20 +738,21 @@ if !exists("b:undo_ftplugin") | let b:undo_ftplugin = '' | endif
 
 let g:lightline = {
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ]
-      \ }
+      \   'left':  [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+      \   'right': [ [ 'lineinfo' ],
+      \            [ 'percent' ],
+      \            [ 'format' ],
+      \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'format': 'LightineFormattingEnabled'
+      \ },
       \ }
 
 
 
 set shortmess=a
 
-
-" let g:neomake_javascript_enabled_makers = ['flow']
-" let g:neomake_jsx_enabled_makers = ['flow']
-
-" let g:flow#enable = 0
-"
 let g:ale_sign_error = '->'
 let g:ale_sign_warning = '--'
 let g:ale_sign_column_always = 1
@@ -746,33 +775,12 @@ if filereadable(expand("./node_modules/.bin/prettier"))
 
   let g:neoformat_javascript_prettier_local = {
         \ 'exe': './node_modules/.bin/prettier',
-        \ 'args': ['--stdin', '--no-semi', '--single-quote'],
-        \ 'stdin': 1,
+        \ 'args': ['--write'],
+        \ 'replace': 1
         \ }
 
   let g:neoformat_enabled_javascript = ['prettier_local']
-
-  " augroup prettier
-  "   autocmd!
-  "   autocmd BufWritePre *.js Neoformat
-  " augroup END
 endif
-
-
-if executable('refmt')
-  let g:neoformat_reason_refmt = {
-        \ 'exe': 'refmt',
-        \ 'stdin': 1,
-        \ }
-
-  let g:neoformat_enabled_reason = ['refmt']
-
-  augroup refmt
-    autocmd!
-    autocmd BufWritePre *.re Neoformat
-  augroup END
-endif
-
 
 let g:gitgutter_sign_added = '░ '
 let g:gitgutter_sign_modified = '░ '
@@ -780,24 +788,45 @@ let g:gitgutter_sign_removed = '░ '
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = '░ '
 
-let g:neoformat_reason_refmtt = {
-      \ 'exe': expand('~/.nodenv/shims/refmt'),
+let g:neoformat_reason_refmt = {
+      \ 'exe': expand('./node_modules/.bin/bsrefmt'),
       \ 'stdin': 1,
       \ }
 
-let g:neoformat_enabled_reason = ['refmtt']
+let g:neoformat_enabled_reason = ['refmt']
+let g:neoformat_enabled_ruby = ['']
+
+let g:format_on_save = 1
+function! FormatToggle()
+  if g:format_on_save == 1
+    let g:format_on_save = 0
+  else
+    let g:format_on_save = 1
+  endif
+endfunction
+
+function! FormatOnSave()
+  if g:format_on_save == 1
+    exec ":Neoformat"
+  endif
+endfunction
+
+command! FormatToggle call FormatToggle()
+
+function! LightineFormattingEnabled()
+  return g:format_on_save == 1 ? 'format on' : 'format off'
+endfunction
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * Neoformat
+  autocmd BufWritePre * call FormatOnSave()
 augroup END
-
 
 if has('nvim')
   let g:LanguageClient_serverCommands = {
-      \ 'reason': ['ocaml-language-server', '--stdio'],
-      \ 'ocaml': ['ocaml-language-server', '--stdio'],
+      \ 'reason': ['/Users/mikeanderson/bin/reason-language-server'],
       \ }
+      "\ 'ocaml': ['ocaml-language-server', '--stdio'],
 endif
 
 " Automatically start language servers.
@@ -806,3 +835,8 @@ let g:LanguageClient_autoStart = 1
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+let NERDTreeIgnore=['\~$', '\.bs\.js$']
+
+nnoremap <c-b> :vsplit term://yarn bs:build<cr>
+nnoremap <silent> <leader>bd :bd!<cr>

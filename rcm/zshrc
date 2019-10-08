@@ -96,7 +96,7 @@ set_prompt() {
 add-zsh-hook precmd set_prompt
 
 # Show todos
-alias todos="ag TODO\:"
+alias todos="ag (TODO|FIXME)\:?"
 
 export VISUAL=vim
 export EDITOR=vim
@@ -117,3 +117,29 @@ alias lsa="ls -lahp"
 alias repos="tree ~/code -L 2"
 
 source ~/.zshenv
+
+alias did="vim +'normal Go' +'r!date' +'normal Go' ~/did.txt"
+
+alias https-server="http-server --ssl --cert ~/ssl/server.crt --key ~/ssl/server.key "
+
+
+# Background color stuff
+export BACKGROUND=256
+export BACKGROUND_MIN=233
+export BACKGROUND_MAX=256
+
+function backgroundLighter() {
+  if [ "$BACKGROUND" -lt "$BACKGROUND_MAX" ]; then
+    export BACKGROUND=$((BACKGROUND+1))
+  fi
+  echo "$BACKGROUND"
+}
+
+function backgroundDarker() {
+  if [ "$BACKGROUND" -gt "$BACKGROUND_MIN" ]; then
+    export BACKGROUND=$((BACKGROUND-1))
+  fi
+  echo "$BACKGROUND"
+}
+
+

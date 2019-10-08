@@ -16,15 +16,15 @@ env:
 # Window dimensions in character columns and lines
 # (changes require restart)
 dimensions:
-  columns: 84
+  columns: 100
   lines: 32
 
 # Adds this many blank pixels of padding around the window
 # Units are physical pixels; this is not DPI aware.
 # (change requires restart)
 padding:
-  x: 2
-  y: 2
+  x: 0
+  y: 0
 
 # The FreeType rasterizer needs to know the device DPI for best results
 # (changes require restart)
@@ -41,16 +41,19 @@ draw_bold_text_with_bright_colors: false
 # Font configuration (changes require restart)
 font:
   normal:
-    family: Iosevka
+    family: Iosevka Light
+    # family: IBM Plex Mono
   bold:
     family: Iosevka
+    # family: IBM Plex Mono
     style: Bold
   italic:
     family: Iosevka
+    # family: IBM Plex Mono
     style: Italic
 
   # Point size of the font
-  size: 14.0
+  size: 13.0
 
   # Offset is the extra space around each character. offset.y can be thought of
   # as modifying the linespacing, and offset.x as modifying the letter spacing.
@@ -81,7 +84,8 @@ custom_cursor_colors: false
 colors:
   # Default colors
   primary:
-    background: '0x2c2338'
+    # background: '0x2c2338'
+    background: '0x1d172f'
     foreground: '0xd3d6d4'
 
   # Colors the cursor will use if `custom_cursor_colors` is true
@@ -98,7 +102,8 @@ colors:
     blue: '0x54b2dd'
     magenta: '0xc792ea'
     cyan: '0x58b6a8'
-    white: '0xc3c6c4'
+    # white: '0xc3c6c4'
+    white: '0xe2e4e3'
 
   # Bright colors
   bright:
@@ -110,6 +115,35 @@ colors:
     magenta: '0x856389'
     cyan: '0x5f8f8b'
     white: '0xdfd8c9'
+
+
+
+# # Colors (Pencil Light)
+# colors:
+#  # Default Colors
+#  primary:
+#    background: '0xf1f1f1'
+#    foreground: '0x424242'
+#  # Normal colors
+#  normal:
+#    black:   '0x212121'
+#    red:     '0xc30771'
+#    green:   '0x10a778'
+#    yellow:  '0xa89c14'
+#    blue:    '0x008ec4'
+#    magenta: '0x523c79'
+#    cyan:    '0x20a5ba'
+#    white:   '0xe0e0e0'
+#  # Bright colors
+#  bright:
+#    black:   '0x212121'
+#    red:     '0xfb007a'
+#    green:   '0x5fd7af'
+#    yellow:  '0xf3e430'
+#    blue:    '0x20bbfc'
+#    magenta: '0x6855de'
+#    cyan:    '0x4fb8cc'
+#    white:   '0xf1f1f1'
 
 # Visual Bell
 #

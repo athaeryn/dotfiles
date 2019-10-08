@@ -7,6 +7,8 @@ path=(
   /usr/local/sbin
   /usr/local/opt/node
   /usr/local/share/npm/bin
+  /opt/local/USD/bin
+  ~/flutter/bin
   $path
 )
 
@@ -14,11 +16,13 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 
 export NODE_PATH=/usr/local/lib/node
 export TERM=xterm-256color
-export LIBRARY_PATH="/opt/local/lib/:$LIBRARY_PATH"
+# export LIBRARY_PATH="/opt/local/lib/:$LIBRARY_PATH"
+export LIBRARY_PATH=""
 export GOPATH=~/golang
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
 export LEAF_PATH=$HOME/code
+export PYTHONPATH="~/python:/opt/local/USD/lib/python:$PYTHONPATH"
 
 if which rbenv > /dev/null; then eval "$(/usr/local/bin/rbenv init -)"; fi
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
