@@ -374,7 +374,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'jparise/vim-graphql' " graphql
 Plug 'tikhomirov/vim-glsl' " glsl
 Plug 'leafgarland/typescript-vim'
-" Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " LanguageClient
 if has('nvim')
@@ -720,6 +720,8 @@ let g:startify_custom_header = ['']
 autocmd User Startified setlocal buftype=
 let g:NERDTreeMinimalUI = 1
 
+"" Better Whitespace
+let g:better_whitespace_enabled=0
 let g:better_whitespace_filetypes_blacklist=[
       \ 'diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown',
       \ 'startify'
@@ -822,21 +824,43 @@ augroup fmt
   autocmd BufWritePre * call FormatOnSave()
 augroup END
 
-if has('nvim')
-  let g:LanguageClient_serverCommands = {
-      \ 'reason': ['/Users/mikeanderson/bin/reason-language-server'],
-      \ }
-      "\ 'ocaml': ['ocaml-language-server', '--stdio'],
-endif
+"if has('nvim')
+"  let g:LanguageClient_serverCommands = {
+"      \ 'reason': ['/Users/mikeanderson/bin/reason-language-server'],
+"      \ }
+"      "\ 'ocaml': ['ocaml-language-server', '--stdio'],
+"endif
 
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 let NERDTreeIgnore=['\~$', '\.bs\.js$']
 
 nnoremap <c-b> :vsplit term://yarn bs:build<cr>
 nnoremap <silent> <leader>bd :bd!<cr>
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction

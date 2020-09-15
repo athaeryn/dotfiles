@@ -142,4 +142,4 @@ function backgroundDarker() {
   echo "$BACKGROUND"
 }
 
-
+eval `opam config env`
