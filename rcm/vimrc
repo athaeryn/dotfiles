@@ -190,6 +190,7 @@ augroup SpaceVim
 
   " Format json.
   autocmd FileType json command! Format %!python -m json.tool
+  autocmd FileType json set conceallevel=0
 
 augroup END
 
@@ -224,14 +225,14 @@ augroup END
 
 " Use <tab> for indent if on a blank/whitespace line,
 " or completion if there is text entered.
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
 
 " Rename current file (from Gary Bernhardt).
 function! RenameFile()
@@ -254,7 +255,6 @@ command! ConcealToggle let &conceallevel=&conceallevel==0?2:0
 
 " Search for todos with Ack.
 command! Todos Ack TODO
-
 
 "=========================================================="
 " Mappings
@@ -297,7 +297,7 @@ nnoremap <leader>rw :%s/[^\\]\zs\s\+\ze$//e<cr>:noh<cr>
 nnoremap <c-c> :!!<cr>
 
 " InsertTabWrapper (autocomplete).
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+" inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 " Clear highlighted search.
 nnoremap <cr> :nohlsearch<cr>
@@ -374,6 +374,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'jparise/vim-graphql' " graphql
 Plug 'tikhomirov/vim-glsl' " glsl
 Plug 'leafgarland/typescript-vim'
+Plug 'rescript-lang/vim-rescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " LanguageClient
@@ -429,6 +430,8 @@ hi! String cterm=none ctermfg=2
 hi! Comment cterm=italic ctermfg=8
 hi! Subdued ctermfg=8
 hi Operator ctermfg=8
+
+hi Pmenu ctermbg=233
 
 "" NERDTree
 hi! link NERDTreeUp Subdued
@@ -491,12 +494,12 @@ set undofile
 set listchars=nbsp:¬,tab:>-,extends:»,precedes:«,trail:·
 set list
 
-set iskeyword+=-
+" set iskeyword+=-
 
 " Use a taller character for vertical splits (for no gap)
 set fillchars+=vert:│
 
-set conceallevel=2
+set conceallevel=0
 set concealcursor=nc
 
 set noshowmode
@@ -694,7 +697,7 @@ let g:startify_skiplist = [
   \ '^/usr/local/Cellar/vim',
   \ '^/usr/local/Cellar/macvim'
 \]
-let g:startify_list_order = ['files', 'bookmarks', 'sessions']
+let g:startify_list_order = ['dir', 'bookmarks', 'sessions']
 let g:startify_files_number = 10
 let g:startify_change_to_dir = 0
 let g:startify_relative_path = 1
@@ -772,17 +775,17 @@ let g:neoformat_only_msg_on_error = 1
 ""
 " Override prettier with local prettier
 "
-if filereadable(expand("./node_modules/.bin/prettier"))
-  nnoremap <F12> :Neoformat<cr>
+" if filereadable(expand("./node_modules/.bin/prettier"))
+"   nnoremap <F12> :Neoformat<cr>
 
-  let g:neoformat_javascript_prettier_local = {
-        \ 'exe': './node_modules/.bin/prettier',
-        \ 'args': ['--write'],
-        \ 'replace': 1
-        \ }
+"   let g:neoformat_javascript_prettier_local = {
+"         \ 'exe': './node_modules/.bin/prettier',
+"         \ 'args': ['--write'],
+"         \ 'replace': 1
+"         \ }
 
-  let g:neoformat_enabled_javascript = ['prettier_local']
-endif
+"   let g:neoformat_enabled_javascript = ['prettier_local']
+" endif
 
 let g:gitgutter_sign_added = '░ '
 let g:gitgutter_sign_modified = '░ '
@@ -843,6 +846,32 @@ let NERDTreeIgnore=['\~$', '\.bs\.js$']
 nnoremap <c-b> :vsplit term://yarn bs:build<cr>
 nnoremap <silent> <leader>bd :bd!<cr>
 
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -864,3 +893,4 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
