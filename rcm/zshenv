@@ -1,5 +1,6 @@
 path=(
   ~/bin
+  ~/bin/google-cloud-sdk/bin
   ~/golang/bin
   ~/.cabal/bin
   ~/.cargo/bin

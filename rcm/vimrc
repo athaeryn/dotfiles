@@ -379,10 +379,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " LanguageClient
 if has('nvim')
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+"   Plug 'autozimu/LanguageClient-neovim', {
+"       \ 'branch': 'next',
+"       \ 'do': 'bash install.sh',
+"       \ }
+"
   " (Optional) Multi-entry selection UI.
   Plug 'junegunn/fzf'
 
@@ -798,7 +799,16 @@ let g:neoformat_reason_refmt = {
       \ 'stdin': 1,
       \ }
 
+
+let g:neoformat_rescript_rescript = {
+      \ 'exe': expand('./node_modules/.bin/rescript'),
+      \ 'args': ['format', '-stdin', '.res'],
+      \ 'stdin': 1,
+      \ 'try_node_exe': 1,
+      \ }
+
 let g:neoformat_enabled_reason = ['refmt']
+let g:neoformat_enabled_rescript = ['rescript']
 let g:neoformat_enabled_ruby = ['']
 
 let g:format_on_save = 1
@@ -812,7 +822,8 @@ endfunction
 
 function! FormatOnSave()
   if g:format_on_save == 1
-    exec ":Neoformat"
+    " exec \":Neoformat\"
+    exec ":CocCommand editor.action.formatDocument"
   endif
 endfunction
 

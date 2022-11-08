@@ -1,3 +1,4 @@
+eval $(/opt/homebrew/bin/brew shellenv)
 #    # Source things only if they exist
 #    function try_source () {
 #      if [ -f "$@" ]; then
@@ -142,4 +143,13 @@ function backgroundDarker() {
   echo "$BACKGROUND"
 }
 
-eval `opam config env`
+if which opam >/dev/null ; then
+  eval `opam config env`
+fi
+
+# Fast Node Manager
+if which fnm >/dev/null ; then
+  eval "$(fnm env --use-on-cd)"
+fi
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
