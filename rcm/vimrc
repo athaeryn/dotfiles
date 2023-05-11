@@ -135,7 +135,7 @@ set showmode
 set laststatus=2
 
 " Don't show the startup message.
-set shortmess=I
+set shortmess=Iac
 
 " Improve session saving.
 set sessionoptions=blank,curdir,folds,help,tabpages,winpos
@@ -321,7 +321,7 @@ Plug 'sk1418/last256'
 
 Plug 'thaerkh/vim-indentguides'
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 " Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -367,7 +367,6 @@ Plug 'moll/vim-node', { 'for': 'javascript' }
 Plug 'mustache/vim-mode', { 'for': 'mustache' }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'reasonml-editor/vim-reason-plus'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -642,17 +641,12 @@ nmap <leader>cu <Plug>CommentaryUndo
 " Toggle NERDTree.
 nnoremap <leader>tr :NERDTreeToggle<cr>
 
-nnoremap <leader>rw :StripWhitespace<cr>
-
 if has('nvim')
   " Escape!
   tnoremap <leader><esc> <c-\><c-n>
 
   nnoremap <leader>irb :vsplit term://irb<cr>i
 endif
-
-nnoremap <silent> <leader>k <Plug>(ale_previous_wrap)
-nnoremap <silent> <leader>j <Plug>(ale_next_wrap)
 
 
 "=========================================================="
@@ -724,6 +718,12 @@ let g:startify_custom_header = ['']
 autocmd User Startified setlocal buftype=
 let g:NERDTreeMinimalUI = 1
 
+let NERDTreeIgnore=[
+      \ '\~$',
+      \ '\.bs\.js$',
+      \ '\.bs\.mjs$'
+      \ ]
+
 "" Better Whitespace
 let g:better_whitespace_enabled=0
 let g:better_whitespace_filetypes_blacklist=[
@@ -756,37 +756,9 @@ let g:lightline = {
       \ }
 
 
-
-set shortmess=a
-
-let g:ale_sign_error = '->'
-let g:ale_sign_warning = '--'
-let g:ale_sign_column_always = 1
-let g:ale_echo_msg_format = '|%linter%| %s'
-
-let g:ale_linters = {
-\   'rust': [],
-\   'ruby': []
-\}
-
-let loaded_matchparen = 1
+let g:loaded_matchparen = 1
 
 let g:neoformat_only_msg_on_error = 1
-
-""
-" Override prettier with local prettier
-"
-" if filereadable(expand("./node_modules/.bin/prettier"))
-"   nnoremap <F12> :Neoformat<cr>
-
-"   let g:neoformat_javascript_prettier_local = {
-"         \ 'exe': './node_modules/.bin/prettier',
-"         \ 'args': ['--write'],
-"         \ 'replace': 1
-"         \ }
-
-"   let g:neoformat_enabled_javascript = ['prettier_local']
-" endif
 
 let g:gitgutter_sign_added = '░ '
 let g:gitgutter_sign_modified = '░ '
@@ -794,23 +766,9 @@ let g:gitgutter_sign_removed = '░ '
 let g:gitgutter_sign_removed_first_line = '^^'
 let g:gitgutter_sign_modified_removed = '░ '
 
-let g:neoformat_reason_refmt = {
-      \ 'exe': expand('./node_modules/.bin/bsrefmt'),
-      \ 'stdin': 1,
-      \ }
-
-
-let g:neoformat_rescript_rescript = {
-      \ 'exe': expand('./node_modules/.bin/rescript'),
-      \ 'args': ['format', '-stdin', '.res'],
-      \ 'stdin': 1,
-      \ 'try_node_exe': 1,
-      \ }
-
-let g:neoformat_enabled_reason = ['refmt']
-let g:neoformat_enabled_rescript = ['rescript']
-let g:neoformat_enabled_ruby = ['']
-
+"
+" Formatting on save
+"
 let g:format_on_save = 1
 function! FormatToggle()
   if g:format_on_save == 1
@@ -823,7 +781,7 @@ endfunction
 function! FormatOnSave()
   if g:format_on_save == 1
     " exec \":Neoformat\"
-    exec ":CocCommand editor.action.formatDocument"
+    exec ":silent call CocAction('format')"
   endif
 endfunction
 
@@ -838,28 +796,6 @@ augroup fmt
   autocmd BufWritePre * call FormatOnSave()
 augroup END
 
-"if has('nvim')
-"  let g:LanguageClient_serverCommands = {
-"      \ 'reason': ['/Users/mikeanderson/bin/reason-language-server'],
-"      \ }
-"      "\ 'ocaml': ['ocaml-language-server', '--stdio'],
-"endif
-
-" Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
-
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-let NERDTreeIgnore=['\~$', '\.bs\.js$']
-
-nnoremap <c-b> :vsplit term://yarn bs:build<cr>
-nnoremap <silent> <leader>bd :bd!<cr>
-
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -870,13 +806,15 @@ else
 endif
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
