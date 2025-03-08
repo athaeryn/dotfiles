@@ -595,7 +595,7 @@ let g:netrw_winsize=20
 "" Startify
 "
 let g:startify_bookmarks = [
-  \ '~/.vimrc',
+  \ '~/.config/nvim/init.vim',
   \ '~/.zshrc'
 \]
 let g:startify_skiplist = [
