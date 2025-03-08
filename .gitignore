@@ -1,6 +1,6 @@
-# Vim things
-rcm/vim/undo/
-rcm/vim/backup/
-rcm/vim/plugged/
+# Neovim things
+rcm/config/nvim/undo
+rcm/config/nvim/backup
+rcm/local/share/nvim/site/plugged/
 
 rcm/vim/.netrwhist

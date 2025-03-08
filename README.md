@@ -3,53 +3,48 @@
 ## 1. Install Homebrew
 
 ```sh
-$ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 ## 2. Install RCM
 
 ```sh
-brew tap thoughtbot/formulae
 brew install rcm
 ```
 
 ## 3. RCM
 
-(Assuming this repo is at `~/code/athaeryn/dotfiles`)
+(Assuming this repo is at `~/.dotfiles`)
 
 ```sh
 $ cd
-$ ln -s code/athaeryn/dotfiles/rcrc .rcrc
+$ ln -s .dotfiles/rcrc .rcrc
 $ rcup -v
 ```
 
-
-# Also install these with Homebrew
+# Install packages with Homebrew
 
 ```
-bash
-git
-vim
+zsh
 neovim
-
 tmux
 reattach-to-user-namespace
 
-rbenv
-ruby-build
-
+git
 ccrypt
+ctags
 direnv
+fzf
 the_silver_searcher
 tree
 ```
 
 # ZSH
 
-After installing `zsh` with Homebrew, add `/usr/local/bin/zsh` to `/etc/shells`, then:
+After installing `zsh` with Homebrew, add `/opt/homebrew/bin/zsh` to `/etc/shells`, then:
 
 ```sh
-chsh -s /usr/local/bin/zsh
+chsh -s /opt/homebrew/bin/zsh
 ```
 
 After opening a new terminal:
@@ -57,4 +52,3 @@ After opening a new terminal:
 ```sh
 compaudit | xargs chmod g-w
 ```
-
