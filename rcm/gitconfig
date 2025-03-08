@@ -83,6 +83,7 @@
 [core]
     autocrlf = input
     excludesfile = ~/.gitignore_global
+	editor = nvim
 [diff]
   companionHeuristic = true
 [color]
