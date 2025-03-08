@@ -36,6 +36,16 @@ direnv
 fzf
 the_silver_searcher
 tree
+python3
+```
+
+# Set up Python support for Neovim
+
+```
+$ cd
+$ python3 -m venv .venv
+$ source .venv/bin/activate
+$ pip3 install --upgrade pynvim
 ```
 
 # ZSH
