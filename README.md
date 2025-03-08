@@ -14,10 +14,9 @@ brew install rcm
 
 ## 3. RCM
 
-(Assuming this repo is at `~/.dotfiles`)
-
 ```sh
 $ cd
+$ git clone git@github.com:athaeryn/dotfiles.git .dotfiles
 $ ln -s .dotfiles/rcrc .rcrc
 $ rcup -v
 ```
