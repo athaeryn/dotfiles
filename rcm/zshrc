@@ -153,3 +153,9 @@ if which fnm >/dev/null ; then
 fi
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
+alias trunk='tree -L 1'
+alias branches='tree -L 2 -d'
+
+# moonbit
+export PATH="$HOME/.moon/bin:$PATH"
