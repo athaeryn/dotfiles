@@ -1,5 +1,5 @@
-custom_cursor_colors = false
-hide_cursor_when_typing = false
+# custom_cursor_colors = false
+# hide_cursor_when_typing = false
 
 [colors]
 draw_bold_text_with_bright_colors = false
@@ -289,13 +289,13 @@ yellow = "0xffcb6b"
 background = "0x1d172f"
 foreground = "0xd3d6d4"
 
-[dimensions]
-columns = 100
-lines = 32
+# [dimensions]
+# columns = 100
+# lines = 32
 
-[dpi]
-x = 96.0
-y = 96.0
+# [dpi]
+# x = 96.0
+# y = 96.0
 
 [env]
 TERM = "xterm-256color"
@@ -322,21 +322,15 @@ family = "Iosevka Term Light"
 x = 0
 y = 0
 
-[mouse.double_click]
-threshold = 300
-
-[mouse.triple_click]
-threshold = 300
-
-[padding]
-x = 0
-y = 0
+# [padding]
+# x = 0
+# y = 0
 
 [selection]
 semantic_escape_chars = ''',│`|:"' ()[]{}<>'''
 
-[visual_bell]
-animation = "EaseOutExpo"
-duration = 0
+# [visual_bell]
+# animation = "EaseOutExpo"
+# duration = 0
 
 [keyboard]
