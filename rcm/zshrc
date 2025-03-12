@@ -149,7 +149,7 @@ fi
 
 # Fast Node Manager
 if which fnm >/dev/null ; then
-  eval "$(fnm env --use-on-cd)"
+  eval "$(fnm env --use-on-cd --shell zsh)"
 fi
 
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
