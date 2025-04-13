@@ -159,3 +159,9 @@ alias branches='tree -L 2 -d'
 
 # moonbit
 export PATH="$HOME/.moon/bin:$PATH"
+
+# Python venv
+if [ -e ~/.venv/bin/activate ]
+then
+	source ~/.venv/bin/activate
+fi
